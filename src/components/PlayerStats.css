@@ -1,0 +1,12 @@
+.playerStats {
+    display: flex;
+    position: absolute;
+    width: 200px;
+    height: 300px;
+    top: 200px;
+    left: 50%;
+    flex-direction: column;
+    /* z-index: 1; */
+    color: rgb(0, 0, 0);
+    background-color: rgba(240, 248, 255, 0.5);
+}
