@@ -12,11 +12,11 @@ const HeroModel2d = () => {
       </Canvas>
 
       {/* Изображение ниже 3D-модели */}
-      <img className='heroModelBox'
+      {/* <img className='heroModelBox'
         src="/PlayerModel/hero.webp"
         alt="Player Model"
         // style={{ width: '1000px', height: '1000px', marginTop: '20px' }}
-      />
+      /> */}
     </div>
   );
 };
