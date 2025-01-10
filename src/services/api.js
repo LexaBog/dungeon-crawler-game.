@@ -18,21 +18,11 @@ export const fetchPlayers = async () => {
 // Функция для добавления нового игрока
 export const updatePlayerData = async (player) => {
   try {
-
-    console.log("Sending data to server:", {
-      Id: String(player.id), // Проверяем, что передаётся строка
-      ...player,
-    })
-
-    const response = await axios.put("http://localhost:5000/api/player", player);
+    const response = await axios.put(`${API_URL}/player`, player);
     console.log("Player updated:", response.data);
-    return response.data; // Возвращаем данные от сервера, включая userId
+    return response.data; // Возвращаем данные от сервера
   } catch (error) {
     console.error("Error updating player:", error);
-    return null; // Возвращаем null, если ошибка
+    return null; // Возвращаем null в случае ошибки
   }
-
-  
-    // console.log("Response from server:", response.data);
-  
 };
