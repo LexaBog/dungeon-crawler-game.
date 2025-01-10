@@ -1,22 +1,35 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { updatePlayerData } from "../services/api"; // Убедись, что путь корректен
-import './PlayerStats.css'
+import './PlayerStats.css';
 
 const PlayerStats = ({ player, onPlayerUpdate }) => {
+  // Пересчёт силы игрока
   const playerPowerCalc = () => {
     const calculatedPower = player.armor + player.damage + player.xp + player.level;
-    onPlayerUpdate({ ...player, power: calculatedPower }); // Обновляем родительское состояние
+    onPlayerUpdate({ ...player, power: calculatedPower }); // Обновляем состояние
   };
 
+  // Сохранение данных игрока на сервере
+  const savePlayerData = async () => {
+    const updatedData = await updatePlayerData(player); // Отправляем данные на сервер
+    if (updatedData?.userId) {
+      // Если сервер вернул userId, сохраняем его в состояние
+      onPlayerUpdate({ ...player, userId: updatedData.userId });
+    }
+  };
+
+  // Хук для обработки изменения характеристик игрока
   useEffect(() => {
-    playerPowerCalc(); // Пересчёт силы игрока при изменении характеристик
-    updatePlayerData(player); // Передаём обновлённые данные на сервер
+    playerPowerCalc(); // Пересчитываем силу
+    savePlayerData(); // Сохраняем данные на сервер
   }, [player.armor, player.damage, player.xp, player.level]);
 
+  // Обработчик повышения уровня
   const levelUp = () => {
     onPlayerUpdate({ ...player, level: player.level + 1, xp: player.xp + 50 });
   };
 
+  // Обработчик улучшения брони
   const increaseArmor = () => {
     onPlayerUpdate({ ...player, armor: player.armor + 5 });
   };

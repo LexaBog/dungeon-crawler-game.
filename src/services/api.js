@@ -1,6 +1,7 @@
 // api.js
 import axios from "axios";
 
+
 const API_URL = "http://localhost:5000/api";  // или путь к твоему API
 
 // Функция для получения списка игроков
@@ -23,13 +24,15 @@ export const updatePlayerData = async (player) => {
       ...player,
     })
 
-
-    const response = await axios.put("http://localhost:5000/api/player", {
-      userId: String(player.Id), // Преобразуем id в строку
-      ...player, // Передаём остальные данные
-    });
-    console.log("Response from server:", response.data);
+    const response = await axios.put("http://localhost:5000/api/player", player);
+    console.log("Player updated:", response.data);
+    return response.data; // Возвращаем данные от сервера, включая userId
   } catch (error) {
     console.error("Error updating player:", error);
+    return null; // Возвращаем null, если ошибка
   }
+
+  
+    // console.log("Response from server:", response.data);
+  
 };
