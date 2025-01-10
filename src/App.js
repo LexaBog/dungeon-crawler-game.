@@ -57,7 +57,7 @@ function App() {
   return (
     <div className="ollGameBody">
       <nav>
-        <Link to="/">Главная</Link>
+        <Link to="/:username">Главная</Link>
         <Link to="/dungeons">Данжи</Link>
       </nav>
 
