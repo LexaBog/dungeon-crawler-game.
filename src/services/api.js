@@ -28,11 +28,13 @@ export const createNewPlayer = async (name) => {
 // Обновление данных игрока
 export const updatePlayerData = async (player) => {
   try {
+    console.log("Updating player data:", player); // Лог данных
     const response = await axios.put(`${API_URL}/player`, player);
     console.log("Player updated:", response.data);
-    return response.data; // Возвращаем данные от сервера
+    return response.data;
   } catch (error) {
     console.error("Ошибка при обновлении данных игрока:", error);
-    return null; // Возвращаем null в случае ошибки
+    return null;
   }
 };
+

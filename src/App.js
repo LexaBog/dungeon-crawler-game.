@@ -6,7 +6,7 @@ import HeroModel2d from './components/HeroModel2d';
 import Dungeon from './components/Dungen';
 import './App.css';
 
-const API_URL = "https://your-backend-url/api"; // Укажи URL своего API
+const API_URL = "http://localhost:5000/api"; // Укажи URL своего API
 
 function App() {
   const [player, setPlayer] = useState(() => {
@@ -57,13 +57,13 @@ function App() {
   return (
     <div className="ollGameBody">
       <nav>
-        <Link to="/">Главная</Link>
+        <Link to="/:username">Главная</Link>
         <Link to="/dungeons">Данжи</Link>
       </nav>
 
       <Routes>
         <Route
-          path="/"
+          path="/:username"
           element={
             <div>
               <h1>Главная страница</h1>
