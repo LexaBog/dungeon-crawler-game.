@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import { updatePlayerData } from "../services/api"; // Убедись, что путь корректен
 import './PlayerStats.css'
 
 const PlayerStats = ({ player, onPlayerUpdate }) => {
@@ -9,6 +10,7 @@ const PlayerStats = ({ player, onPlayerUpdate }) => {
 
   useEffect(() => {
     playerPowerCalc(); // Пересчёт силы игрока при изменении характеристик
+    updatePlayerData(player); // Передаём обновлённые данные на сервер
   }, [player.armor, player.damage, player.xp, player.level]);
 
   const levelUp = () => {
@@ -23,7 +25,7 @@ const PlayerStats = ({ player, onPlayerUpdate }) => {
     <div className="playerStats">
       <h2>Player Stats</h2>
       <p><strong>Player Power:</strong> {player.power}</p>
-      <p><strong>ID:</strong> {player.id}</p>
+      <p><strong>ID:</strong> {player.userId}</p>
       <p><strong>XP:</strong> {player.xp}</p>
       <p><strong>Armor:</strong> {player.armor}</p>
       <p><strong>Damage:</strong> {player.damage}</p>
