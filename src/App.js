@@ -63,7 +63,7 @@ function App() {
 
       <Routes>
         <Route
-          path="/"
+           path="/:username"
           element={
             <div>
               <h1>Главная страница</h1>
