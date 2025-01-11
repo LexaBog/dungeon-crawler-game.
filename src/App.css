@@ -6,14 +6,61 @@ html, body {
     height: 100%;
 }
 
+h1 {
+    font-family: 'Cinzel', serif;
+}
+
+.menu-button {
+    font-family: 'MedievalSharp', cursive;
+}
+
+.story-text {
+    font-family: 'Uncial Antiqua', cursive;
+}
+
 .ollGameBody {
     margin: 0; /* Убирает внешние отступы */
     padding: 0; /* Убирает внутренние отступы */
     box-sizing: border-box;
-    width: 100%; /* Ширина элемента */
+    max-width: 430px;
+    /* width: 100vh; */
     height: 100vh; /* Высота элемента (100% высоты экрана) */
     background-image: url('../public/backGroundFon/background.webp');
     background-size: cover;
     background-position: center;
     position: relative;
+}
+
+.header {
+    height: 200px;
+    width: 100%;
+    background: linear-gradient(to bottom, black, transparent);
+    /* background-color: rgba(0, 0, 0, 0.699); */
+    position: absolute;
+    top: -20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(206, 91, 25);
+}
+
+.butonDangen {
+    background-image: url('../public/button/dungeons.webp');
+    background-size: cover;
+    background-position: center;
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    z-index: 2;
+    position: absolute;
+    bottom: 50px;
+    right: 10px;
+}
+
+.futer {
+    position: absolute;
+    bottom: 0;
+    background: linear-gradient(to top, black, transparent);
+    width: 100%;
+    height: 400px;
 }

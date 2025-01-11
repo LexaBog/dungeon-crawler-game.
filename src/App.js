@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import axios from 'axios'; // Импортируем axios
 import PlayerStats from './components/PlayerStats.tsx';
-import HeroModel2d from './components/HeroModel2d';
+// import HeroModel2d from './components/HeroModel2d';
 import Dungeon from './components/Dungen';
 import './App.css';
 
@@ -58,25 +58,29 @@ function App() {
     <div className="ollGameBody">
       <nav>
         <Link to="/:username">Главная</Link>
-        <Link to="/dungeons">Данжи</Link>
       </nav>
-
+        <div>
+          <Link className="butonDangen" to="/dungeons"></Link>
+        </div>
+            <div>
+              <h1 className='header'>Dungeons s Heroes</h1>
+            </div>
       <Routes>
         <Route
           path="/:username"
           element={
             <div>
-              <h1>Главная страница</h1>
               <PlayerStats player={player} onPlayerUpdate={setPlayer} />
-              <HeroModel2d onPlayerUpdate={setPlayer} />
+              {/* <HeroModel2d onPlayerUpdate={setPlayer} /> */}
             </div>
           }
         />
-        <Route
+        <Route 
           path="/dungeons"
           element={<Dungeon player={player} onPlayerUpdate={setPlayer} />}
         />
       </Routes>
+      <div className='futer'></div>
     </div>
   );
 }
