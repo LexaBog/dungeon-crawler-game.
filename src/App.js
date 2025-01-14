@@ -6,7 +6,8 @@ import CharacterCreationForm from './components/CharacterCreationForm.js'
 // import Dungeon from './components/Dungen';
 import './App.css';
 
-const API_URL = "http://localhost:5001/api"; // Укажи URL своего API
+// const API_URL = "http://localhost:5001/api"; // локальный АПИ
+const API_URL = "https://dangeon-db-beck.onrender.com/api"; // локальный АПИ
 
 function App() {
 

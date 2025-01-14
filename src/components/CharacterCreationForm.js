@@ -13,7 +13,7 @@ const CharacterCreationForm = () => {
         e.preventDefault();
         console.log('Данные для отправки:', { name });
         try {
-            await axios.post('http://localhost:5021/api/characters', { name });
+            await axios.post('https://dangeon-db-beck.onrender.com/api/characters', { name });
             // alert(`Персонаж "${response.data.character.name}" успешно создан!`);
             setName(''); // Очистить поле ввода
             setIsVisible(false); // Скрыть форму
