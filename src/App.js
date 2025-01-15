@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import CharacterCreationForm from './components/CharacterCreationForm.js'
-
+import Game  from './components/Game.js';
 
 // import Dungeon from './components/Dungen';
 import './App.css';
@@ -18,7 +18,7 @@ function App() {
             </div>
             <Routes>
                 <Route path="/" element={<CharacterCreationForm />} />
-                {/* <Route path="/game" element={<Game />} /> */}
+                <Route path="/game" element={<Game />} />
             </Routes>         
       <div className='futer'></div>
     </div>
