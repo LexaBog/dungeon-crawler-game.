@@ -1,28 +1,42 @@
-import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
-import CharacterCreationForm from './components/CharacterCreationForm.js'
-import Game  from './components/Game.js';
+import React, { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import CharacterInfo from "./components/CharacterInfo.js";
+import Game from "./components/Game.js";
+import "./App.css";
 
-// import Dungeon from './components/Dungen';
-import './App.css';
+function App({ telegramId }) {
+    const [character, setCharacter] = useState(null);
 
-// const API_URL = "http://localhost:5001/api"; // локальный АПИ
-const API_URL = "https://dangeon-db-beck.onrender.com/api"; // локальный АПИ
+    const handleCharacterLoaded = (data) => {
+        setCharacter(data); // Сохраняем данные персонажа
+    };
 
-function App() {
-
-  return (
-    <div className="ollGameBody">
+    return (
+        <div className="ollGameBody">
             <div>
-              <h1 className='header'>Dungeons s Heroes</h1>
+                <h1 className="header">Dungeons s Heroes</h1>
             </div>
+
+            {/* Передача данных через маршруты */}
             <Routes>
-                <Route path="/" element={<CharacterCreationForm />} />
-                <Route path="/game" element={<Game />} />
-            </Routes>         
-      <div className='futer'></div>
-    </div>
-  );
+                <Route
+                    path="/"
+                    element={
+                        <CharacterInfo
+                            telegramId={telegramId}
+                            onCharacterLoaded={handleCharacterLoaded}
+                        />
+                    }
+                />
+                <Route
+                    path="/game"
+                    element={<Game character={character} />}
+                />
+            </Routes>
+
+            <div className="futer"></div>
+        </div>
+    );
 }
 
 export default App;
