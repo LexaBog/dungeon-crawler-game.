@@ -7,19 +7,20 @@ const CharacterInfo = ({ onCharacterLoaded }) => {
 
     useEffect(() => {
         const loadCharacter = async () => {
-            try {
-                const data = await fetchCharacter(); // Получаем данные персонажа через сервис
-                setCharacter(data);
-                onCharacterLoaded(data);
-            } catch (error) {
-                console.error("Ошибка загрузки персонажа:", error);
-            } finally {
-                setLoading(false);
-            }
+          try {
+            // Загрузка данных персонажа
+            const data = await fetchCharacter(); // Токен уже передается через fetchCharacter
+            setCharacter(data);
+          } catch (error) {
+            console.error("Ошибка загрузки персонажа:", error);
+          } finally {
+            setLoading(false);
+          }
         };
-
+      
         loadCharacter();
-    }, [onCharacterLoaded]);
+    }, []); // Убираем зависимости, так как они не нужны
+      
 
     if (loading) return <p>Загрузка...</p>;
 
@@ -36,3 +37,20 @@ const CharacterInfo = ({ onCharacterLoaded }) => {
 };
 
 export default CharacterInfo;
+// const handleLogin = async () => {
+//   try {
+//       // Авторизация и получение токена
+//       const user = await authenticateUser(telegramId, username);
+
+//       // Получение данных персонажа
+//       const character = await fetchCharacter();
+//       console.log("Данные персонажа:", character);
+//       setCharacter(character); // Сохраняем данные персонажа в состоянии
+//   } catch (error) {
+//       console.error("Ошибка входа:", error);
+//   }
+// };
+
+// useEffect(() => {
+//   handleLogin();
+// }, []);
