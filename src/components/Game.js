@@ -22,7 +22,7 @@ const Game = ({ character }) => {
             <p>Базовое уклонение: {character.baseEvasion}</p>
             <p>Базовая атака: {character.baseAttack}</p>
             <h3>Экипированные предметы:</h3>
-            {character.equippedItems && character.equippedItems.length > 0 ? (
+            {/* {character.equippedItems && character.equippedItems.length > 0 ? (
                 <ul>
                     {character.equippedItems.map((item, index) => (
                         <li key={index}>{item}</li>
@@ -40,7 +40,7 @@ const Game = ({ character }) => {
                 </ul>
             ) : (
                 <p>Инвентарь пуст</p>
-            )}
+            )} */}
         </div>
     );
 };

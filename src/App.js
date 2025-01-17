@@ -23,7 +23,6 @@ function App({ telegramId }) {
                     path="/"
                     element={
                         <CharacterInfo
-                            telegramId={telegramId}
                             onCharacterLoaded={handleCharacterLoaded}
                         />
                     }
