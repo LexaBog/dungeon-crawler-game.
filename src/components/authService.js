@@ -39,6 +39,20 @@ import axios from "axios";
 // };
 
 
+export const fetchCharacter = async () => {
+  try {
+    const response = await axios.get("http://localhost:5021/api/characters", {
+      withCredentials: true, // Обязательно для передачи сессионного cookie
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Ошибка при загрузке персонажа:", error.response?.data || error.message);
+    throw error;
+  }
+};
+
+
 // import axios from "axios";
 
 export const authenticateUser = async () => {
@@ -64,24 +78,24 @@ export const getAccessToken = () => {
 };
 
 // Функция для запроса данных персонажа
-export const fetchCharacter = async () => {
-  const token = getAccessToken(); // Получаем токен из localStorage
+// export const fetchCharacter = async () => {
+//   const token = getAccessToken(); // Получаем токен из localStorage
 
-  if (!token) {
-    throw new Error("Токен не найден. Пожалуйста, авторизуйтесь.");
-  }
+//   if (!token) {
+//     throw new Error("Токен не найден. Пожалуйста, авторизуйтесь.");
+//   }
 
-  try {
-    const response = await axios.get("http://localhost:5021/api/characters", {
-      headers: {
-        Authorization: `Bearer ${token}`, // Передаем токен в заголовке
-      },
-    });
+//   try {
+//     const response = await axios.get("http://localhost:5021/api/characters", {
+//       headers: {
+//         Authorization: `Bearer ${token}`, // Передаем токен в заголовке
+//       },
+//     });
 
-    console.log("Ответ сервера с данными персонажа:", response.data);
-    return response.data; // Возвращаем данные персонажа
-  } catch (error) {
-    console.error("Ошибка при запросе персонажа:", error.response?.data || error.message);
-    throw error;
-  }
-};
+//     console.log("Ответ сервера с данными персонажа:", response.data);
+//     return response.data; // Возвращаем данные персонажа
+//   } catch (error) {
+//     console.error("Ошибка при запросе персонажа:", error.response?.data || error.message);
+//     throw error;
+//   }
+// };

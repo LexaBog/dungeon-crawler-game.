@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { authenticateUser } from "../components/authService";
+import { fetchCharacter } from "./authService";
 
 const CharacterInfo = () => {
   const [character, setCharacter] = useState(null);
@@ -8,11 +8,8 @@ const CharacterInfo = () => {
   useEffect(() => {
     const loadCharacter = async () => {
       try {
-        // Авторизация и получение данных пользователя
-        const user = await authenticateUser(); 
-        console.log("Данные пользователя:", user);
-
-        setCharacter(user.characterId); // Сохраняем данные персонажа
+        const data = await fetchCharacter();
+        setCharacter(data);
       } catch (error) {
         console.error("Ошибка загрузки персонажа:", error);
       } finally {
@@ -24,9 +21,8 @@ const CharacterInfo = () => {
   }, []);
 
   if (loading) return <p>Загрузка...</p>;
-
   if (!character) return <p>Персонаж не найден</p>;
-
+  
   return (
     <div>
       <h2>Информация о персонаже</h2>
