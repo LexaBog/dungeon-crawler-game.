@@ -4,7 +4,7 @@ import CharacterInfo from "./components/CharacterInfo.js";
 import Game from "./components/Game.js";
 import "./App.css";
 
-function App({ telegramId }) {
+function App({ telegramId, username }) {
     const [character, setCharacter] = useState(null);
 
     const handleCharacterLoaded = (data) => {
@@ -23,7 +23,7 @@ function App({ telegramId }) {
                     path="/"
                     element={
                         <CharacterInfo
-                            onCharacterLoaded={handleCharacterLoaded}
+                            telegramId={telegramId} username={username}
                         />
                     }
                 />
