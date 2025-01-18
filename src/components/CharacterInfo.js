@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { authenticateUser } from "../components/authService.js";
+import { authenticateUser } from "../components/authService";
 
 const CharacterInfo = () => {
   const [character, setCharacter] = useState(null);
@@ -8,10 +8,8 @@ const CharacterInfo = () => {
   useEffect(() => {
     const loadCharacter = async () => {
       try {
-        // const telegramId = "123456"; // Замените тестовыми данными или реальными значениями
-        // const username = "TestUser"; // Тестовые данные
-
-        const user = await authenticateUser(telegramId, username);
+        // Авторизация и получение данных пользователя
+        const user = await authenticateUser(); 
         console.log("Данные пользователя:", user);
 
         setCharacter(user.characterId); // Сохраняем данные персонажа
