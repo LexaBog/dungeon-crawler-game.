@@ -1,28 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { fetchCharacter } from "./authService";
+import axios from "axios";
 
 const CharacterInfo = () => {
   const [character, setCharacter] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadCharacter = async () => {
+    const fetchCharacter = async () => {
       try {
-        const data = await fetchCharacter();
-        setCharacter(data);
+        const response = await axios.get("http://localhost:5021/api/characters", {
+          withCredentials: true, // Важно для работы с сессиями
+        });
+        setCharacter(response.data);
       } catch (error) {
-        console.error("Ошибка загрузки персонажа:", error);
+        console.error("Ошибка загрузки персонажа:", error.response?.data || error.message);
       } finally {
         setLoading(false);
       }
     };
 
-    loadCharacter();
+    fetchCharacter();
   }, []);
 
   if (loading) return <p>Загрузка...</p>;
   if (!character) return <p>Персонаж не найден</p>;
-  
+
+
   return (
     <div>
       <h2>Информация о персонаже</h2>
