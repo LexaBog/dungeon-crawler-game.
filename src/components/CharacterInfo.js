@@ -8,18 +8,19 @@ const CharacterInfo = (telegramId, username) => {
 
   useEffect(() => {
     const loadCharacter = async () => {
-      try {
-        const user = await authenticateUser(telegramId, username);
-        const character = await fetchCharacter(user.characterId);
-        setCharacter(character);
-      } catch (error) {
-        console.error("Ошибка загрузки персонажа:", error);
-      }
+        console.log("Проверка данных перед запросом:", { telegramId, username });
+        try {
+            const user = await authenticateUser(telegramId, username);
+            const character = await fetchCharacter(user.characterId);
+            setCharacter(character);
+        } catch (error) {
+            console.error("Ошибка загрузки персонажа:", error);
+        }
     };
-    
-    console.log( 'первая проветка', telegramId, username)
+
     loadCharacter();
-  }, []);
+}, []);
+
 
   if (loading) return <p>Загрузка...</p>;
   if (!character) return <p>Персонаж не найден</p>;
