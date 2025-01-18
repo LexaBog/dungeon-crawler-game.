@@ -21,6 +21,7 @@ import axios from "axios";
 
 // Функция для авторизации пользователя и получения данных
 export const authenticateUser = async (telegramId, username) => {
+  console.log(username, telegramId)
   try {
     if (!telegramId || !username) {
       throw new Error("telegramId или username не переданы");
