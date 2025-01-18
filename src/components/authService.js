@@ -47,8 +47,8 @@ export const authenticateUser = async () => {
 
     const user = response.data.user; // Получаем данные пользователя
     console.log("Данные пользователя:", user);
-
-    return user;
+    return response.data.user;
+    // return user;
   } catch (error) {
     console.error("Ошибка авторизации:", error.response?.data || error.message);
     throw error;
