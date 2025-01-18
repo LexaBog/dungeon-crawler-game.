@@ -22,7 +22,7 @@ const CharacterInfo = () => {
 
   if (loading) return <p>Загрузка...</p>;
   if (!character) return <p>Персонаж не найден</p>;
-
+  console.log(character)
 
   return (
     <div >

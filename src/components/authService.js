@@ -4,8 +4,9 @@ import axios from "axios";
 export const authenticateUser = async (telegramId, username) => {
   try {
     const response = await axios.post("https://dangeon-db-beck.onrender.com/api/auth", { telegramId, username });
+    // const response = await axios.post("http://localhost:5021/api/auth", { telegramId, username });
     return response.data.user;
-    console.log("Данные пользователя:", user);
+    console.log("Данные пользователя:", response.data.user);
   } catch (error) {
     console.error("Ошибка авторизации:", error.response?.data || error.message);
     throw error;
@@ -16,6 +17,7 @@ export const authenticateUser = async (telegramId, username) => {
 export const fetchCharacter = async (telegramId) => {
   try {
     const response = await axios.post("https://dangeon-db-beck.onrender.com/api/characters", { telegramId });
+    // const response = await axios.post("http://localhost:5021/api/characters", { telegramId });
     return response.data;
   } catch (error) {
     console.error("Ошибка при запросе персонажа:", error.response?.data || error.message);
