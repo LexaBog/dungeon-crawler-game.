@@ -9,20 +9,14 @@ const CharacterInfo = () => {
   useEffect(() => {
     const loadCharacter = async () => {
       try {
-        // Авторизация и получение данных пользователя
-        const user = await authenticateUser("123456", "TestUser");
-        console.log("Данные пользователя:", user);
-
-        // Получение данных персонажа
-        const characterData = await fetchCharacter("123456");
-        setCharacter(characterData);
+        const user = await authenticateUser(telegramId, username);
+        const character = await fetchCharacter(user.characterId);
+        setCharacter(character);
       } catch (error) {
         console.error("Ошибка загрузки персонажа:", error);
-      } finally {
-        setLoading(false);
       }
     };
-
+    
     loadCharacter();
   }, []);
 
