@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { authenticateUser, fetchCharacter } from "./authService";
+import './characterInfo.css'
 
 const CharacterInfo = () => {
   const [character, setCharacter] = useState(null);
@@ -30,11 +31,12 @@ const CharacterInfo = () => {
 
 
   return (
-    <div>
-      <h2>Информация о персонаже</h2>
-      <p>Имя: {character.name}</p>
-      <p>Уровень: {character.level}</p>
-      <p>Опыт: {character.experience}</p>
+    <div >
+      <div className="boxNameUndLavel">
+        <p>{character.name}</p>
+        <p className="texStyleHeader">{character.level} level </p>
+        <p className="texStyleHeader"> Опыт: {character.experience}</p>
+      </div>
       <p>Здоровье: {character.health}</p>
       <p>Мана: {character.mana}</p>
       <p>Сила: {character.strength}</p>

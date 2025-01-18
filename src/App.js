@@ -13,8 +13,8 @@ function App({ telegramId, username }) {
 
     return (
         <div className="ollGameBody">
-            <div>
-                <h1 className="header">Dungeons s Heroes</h1>
+            <div className="header">
+                <h1 className="headerText">Dungeons s Heroes</h1>
             </div>
 
             {/* Передача данных через маршруты */}

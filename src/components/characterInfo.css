@@ -1,0 +1,16 @@
+.boxNameUndLavel {
+    background: linear-gradient(to top, black, transparent);
+    width: 100%;
+    height: auto;
+    color: aliceblue;
+    position: absolute;
+    top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    word-spacing: 20px; 
+}
+
+.texStyleHeader {
+    padding-left: 30px;
+}

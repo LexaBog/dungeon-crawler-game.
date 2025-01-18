@@ -44,6 +44,11 @@ h1 {
     color: rgb(206, 91, 25);
 }
 
+.headerText {
+    position: absolute;
+    top: 20px;
+}
+
 .futer {
     position: absolute;
     bottom: 0;
