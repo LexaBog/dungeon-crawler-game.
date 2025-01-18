@@ -5,6 +5,7 @@ export const authenticateUser = async (telegramId, username) => {
   try {
     const response = await axios.post("https://dangeon-db-beck.onrender.com/api/auth", { telegramId, username });
     return response.data.user;
+    console.log("Данные пользователя:", user);
   } catch (error) {
     console.error("Ошибка авторизации:", error.response?.data || error.message);
     throw error;
