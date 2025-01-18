@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { authenticateUser, fetchCharacter } from "./authService";
 import './characterInfo.css'
 
-const CharacterInfo = () => {
+const CharacterInfo = (telegramId, username) => {
   const [character, setCharacter] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -17,12 +17,12 @@ const CharacterInfo = () => {
       }
     };
     
+    console.log( 'первая проветка', telegramId, username)
     loadCharacter();
   }, []);
 
   if (loading) return <p>Загрузка...</p>;
   if (!character) return <p>Персонаж не найден</p>;
-  console.log(character)
 
   return (
     <div >
