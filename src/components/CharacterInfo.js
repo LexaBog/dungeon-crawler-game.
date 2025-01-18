@@ -1,28 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { authenticateUser, fetchCharacter } from "./authService.js"; // Проверьте путь
+import { authenticateUser, fetchCharacter } from "./authService";
 
 const CharacterInfo = () => {
-    const [character, setCharacter] = useState(null);
-    const [loading, setLoading] = useState(true);
+  const [character, setCharacter] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const loadCharacter = async () => {
-            try {
-                await authenticateUser("123456", "TestUser");
-                const data = await fetchCharacter();
-                setCharacter(data);
-            } catch (error) {
-                console.error("Ошибка загрузки персонажа:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
+  useEffect(() => {
+    const loadCharacter = async () => {
+      try {
+        // Авторизация и получение данных пользователя
+        const user = await authenticateUser("123456", "TestUser");
+        console.log("Данные пользователя:", user);
 
-        loadCharacter();
-    }, []);
+        // Получение данных персонажа
+        const characterData = await fetchCharacter("123456");
+        setCharacter(characterData);
+      } catch (error) {
+        console.error("Ошибка загрузки персонажа:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    if (loading) return <p>Загрузка...</p>;
-    if (!character) return <p>Персонаж не найден</p>;
+    loadCharacter();
+  }, []);
+
+  if (loading) return <p>Загрузка...</p>;
+  if (!character) return <p>Персонаж не найден</p>;
 
 
   return (
