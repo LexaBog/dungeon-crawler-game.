@@ -1,16 +1,34 @@
 import axios from "axios";
 
 // Функция для авторизации пользователя и получения токенов
-export const authenticateUser = async () => {
+// export const authenticateUser = async () => {
+//   try {
+//     const response = await axios.post("http://localhost:5021/api/auth", {});
+//     const { accessToken, refreshToken } = response.data.tokens;
+
+//     // Сохраняем токены в localStorage
+//     localStorage.setItem("accessToken", accessToken);
+//     localStorage.setItem("refreshToken", refreshToken);
+
+//     console.log("Токены успешно сохранены:", { accessToken, refreshToken });
+
+//     return response.data.user; // Возвращаем данные пользователя
+//   } catch (error) {
+//     console.error("Ошибка авторизации:", error.response?.data || error.message);
+//     throw error;
+//   }
+// };
+
+// Функция для авторизации пользователя и получения данных
+export const authenticateUser = async (telegramId, username) => {
   try {
-    const response = await axios.post("http://localhost:5021/api/auth", {});
-    const { accessToken, refreshToken } = response.data.tokens;
+    if (!telegramId || !username) {
+      throw new Error("telegramId или username не переданы");
+    }
 
-    // Сохраняем токены в localStorage
-    localStorage.setItem("accessToken", accessToken);
-    localStorage.setItem("refreshToken", refreshToken);
+    const response = await axios.post("http://localhost:5021/api/auth", { telegramId, username });
 
-    console.log("Токены успешно сохранены:", { accessToken, refreshToken });
+    console.log("Данные пользователя:", response.data.user);
 
     return response.data.user; // Возвращаем данные пользователя
   } catch (error) {
@@ -18,6 +36,7 @@ export const authenticateUser = async () => {
     throw error;
   }
 };
+
 
 // Функция для получения токена из localStorage
 export const getAccessToken = () => {
