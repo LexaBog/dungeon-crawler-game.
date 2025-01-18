@@ -30,6 +30,7 @@ const CharacterInfo = (telegramId, username) => {
         <p>{character.name}</p>
         <p className="texStyleHeader">{character.level} level </p>
         <p className="texStyleHeader"> Опыт: {character.experience}</p>
+        {console.log(character.name,)}
       </div>
       <p>Здоровье: {character.health}</p>
       <p>Мана: {character.mana}</p>
