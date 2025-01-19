@@ -25,7 +25,7 @@ function App({ username }) {
           if (telegramId && username) {
             setTelegramId(telegramId); // Сохраняем telegramId в состояние
             setUsername(username);
-            
+
             authenticateUser(telegramId, username)
               .then((user) => {
                 console.log("Пользователь успешно авторизован:", user);
@@ -51,7 +51,7 @@ function App({ username }) {
 
   // Отображение ошибок или загрузки
   if (error) return <p>{error}</p>;
-  if (!telegramId) return <p>Загрузка...</p>;
+  if (!telegramId|| !username) return <p>Загрузка...</p>;
 
   return (
     <div className="ollGameBody">
