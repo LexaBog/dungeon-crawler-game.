@@ -8,18 +8,18 @@ function App({ username }) {
   const [telegramId, setTelegramId] = useState(null);
   const [error, setError] = useState(null);
 
-  console.log("Имя пользователя:", username);
-
+  
   // Используем useEffect для получения токена из URL и проверки на сервере
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get("token");
     console.log("Токен из URL:", token);
-
+    
     if (token) {
       // Вызываем validateToken и обрабатываем результат
       validateToken(token)
-        .then(({ telegramId, username }) => { // Деструктуризация данных
+      .then(({ telegramId, username }) => { // Деструктуризация данных
+          // console.log("Имя пользователя:", username);
           console.log("Полученные данные:", { telegramId, username });
           if (telegramId && username) {
             setTelegramId(telegramId); // Сохраняем telegramId в состояние
@@ -39,12 +39,12 @@ function App({ username }) {
           console.error("Ошибка при валидации токена:", err);
           setError("Ошибка при валидации токена. Попробуйте позже.");
         });
-    } else {
-      setError("Токен отсутствует. Перейдите по ссылке от бота.");
-    }
+      } else {
+        setError("Токен отсутствует. Перейдите по ссылке от бота.");
+      }
+      console.log("Проверка telegramId в App:", telegramId);
   }, []); // Пустой массив зависимостей, чтобы эффект выполнялся только при монтировании компонента
 
-  console.log("Проверка telegramId в App:", telegramId);
 
   // Отображение ошибок или загрузки
   if (error) return <p>{error}</p>;
