@@ -6,7 +6,7 @@ export const validateToken = async (token) => {
     const response = await axios.post("http://localhost:5021/api/validate-token", { token });
     console.log("Ответ от сервера:", response.data.data, token);
     
-    console.log("Проверка данных перед возвратом:", response.data);
+    console.log("Проверка данных перед возвратом:", response.data.data.telegramId);
 
     return { ...response.data.data, token };// Возвращаем данные
   } catch (error) {
