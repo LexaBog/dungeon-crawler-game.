@@ -6,7 +6,7 @@ const CharacterInfo = ({ telegramId, username }) => {
   const [character, setCharacter] = useState(null);
   const [loading, setLoading] = useState(true);
   
-  console.log("Пропсы в CharacterInfo:", { telegramId, username });
+  // console.log("Пропсы в CharacterInfo:", { telegramId, username });
 
 
   useEffect(() => {
