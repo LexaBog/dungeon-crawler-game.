@@ -4,17 +4,18 @@ import axios from "axios";
 export const validateToken = async (token) => {
   try {
     const response = await axios.post("http://localhost:5021/api/validate-token", { token });
-    console.log("Ответ от сервера:", response.data.data, token);
+    console.log("Ответ от сервера:", response.data.data);
 
     const { telegramId, username } = response.data.data;
     console.log("Проверка данных перед возвратом:", { telegramId, username });
 
-    return { telegramId, username }; // Возвращаем объект с telegramId и username
+    return { telegramId, username };
   } catch (error) {
     console.error("Ошибка при валидации токена:", error.response?.data || error.message);
-    throw error; // Пробрасываем ошибку
+    throw error;
   }
 };
+
 
 
 

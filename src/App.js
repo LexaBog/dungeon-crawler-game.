@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import CharacterInfo from "./components/CharacterInfo.js";
-// import authService from "./components/authService.js"
-import {authenticateUser, validateToken} from "./components/authService.js"
-// import axios from 'axios';
-// import Game from "./components/Game.js";
+import { authenticateUser, validateToken } from "./components/authService.js";
 import "./App.css";
 
+function App({ username }) {
+  const [telegramId, setTelegramId] = useState(null);
+  const [error, setError] = useState(null);
 
-function App({ username,}) {
-    const [telegramId, setTelegramId] = useState(null);
-    const [error, setError] = useState(null);
-    console.log("Имя пользователя:", username);
-    
-    
+  console.log("Имя пользователя:", username);
+
   // Используем useEffect для получения токена из URL и проверки на сервере
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -21,61 +17,58 @@ function App({ username,}) {
     console.log("Токен из URL:", token);
 
     if (token) {
-      // Вызываем validateToken и сохраняем результат
+      // Вызываем validateToken и обрабатываем результат
       validateToken(token)
-        .then((telegramId, username ) => {
-            console.log("Полученный telegramId:", telegramId, username );
-        if (telegramId && username) {
-         setTelegramId(telegramId); // Устанавливаем telegramId в состояние
-         authenticateUser(telegramId, username)
-        } else {
+        .then(({ telegramId, username }) => { // Деструктуризация данных
+          console.log("Полученные данные:", { telegramId, username });
+          if (telegramId && username) {
+            setTelegramId(telegramId); // Сохраняем telegramId в состояние
+            authenticateUser(telegramId, username)
+              .then((user) => {
+                console.log("Пользователь успешно авторизован:", user);
+              })
+              .catch((err) => {
+                console.error("Ошибка авторизации пользователя:", err);
+                setError("Не удалось авторизовать пользователя.");
+              });
+          } else {
             setError("Ошибка при валидации токена. Проверьте ссылку.");
-        }
-    })
-     .catch((err) => {
-        console.error("Ошибка при валидации токена:", err);
-        setError("Ошибка при валидации токена. Попробуйте позже.");
-  });
+          }
+        })
+        .catch((err) => {
+          console.error("Ошибка при валидации токена:", err);
+          setError("Ошибка при валидации токена. Попробуйте позже.");
+        });
     } else {
       setError("Токен отсутствует. Перейдите по ссылке от бота.");
     }
-  }, []);
+  }, []); // Пустой массив зависимостей, чтобы эффект выполнялся только при монтировании компонента
+
   console.log("Проверка telegramId в App:", telegramId);
+
+  // Отображение ошибок или загрузки
   if (error) return <p>{error}</p>;
   if (!telegramId) return <p>Загрузка...</p>;
 
-    return (
-        <div className="ollGameBody">
-            <div className="header">
-                <h1 className="headerText">Dungeons s Heroes</h1>
-            </div>
+  return (
+    <div className="ollGameBody">
+      <div className="header">
+        <h1 className="headerText">Dungeons s Heroes</h1>
+      </div>
 
-            <div>
-                {/* <h2>Добро пожаловать, {character.name}!</h2> */}
-                {/* <p>Ваш уровень: {character.level}</p> */}
-                {/* Отображайте остальные данные персонажа */}
-            </div>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <CharacterInfo telegramId={telegramId} username={username} />
+          }
+        />
+        <Route path="/game" />
+      </Routes>
 
-            Передача данных через маршруты
-            {/* <authService takeIDfromChold={takeIDfromChold}/> */}
-            <Routes>
-                <Route
-                    path="/"
-                    element={
-                        <CharacterInfo
-                            telegramId={telegramId} username={username}
-                        />
-                    }
-                />
-                <Route
-                    path="/game"
-                    // element={<Game character={character} />}
-                />
-            </Routes>
-
-            <div className="futer"></div>
-        </div>
-    );
+      <div className="futer"></div>
+    </div>
+  );
 }
 
 export default App;

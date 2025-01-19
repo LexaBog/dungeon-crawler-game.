@@ -2,37 +2,36 @@ import React, { useEffect, useState } from "react";
 import { authenticateUser, fetchCharacter } from "./authService";
 import './characterInfo.css'
 
-const CharacterInfo = (telegramId, username) => {
+const CharacterInfo = ({ telegramId, username }) => {
   const [character, setCharacter] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadCharacter = async () => {
       try {
-          console.log("Запрос авторизации:", { telegramId, username });
-          const user = await authenticateUser(telegramId, username);
-          console.log("Ответ от авторизации:", user);
-  
-          if (user?.characterId) {
-              console.log("Запрос персонажа для characterId:", user.characterId);
-              const character = await fetchCharacter(user.characterId);
-              setCharacter(character);
-          } else {
-              console.error("Нет characterId в данных пользователя");
-          }
+        console.log("Запрос авторизации:", { telegramId, username });
+        const user = await authenticateUser(telegramId, username);
+        console.log("Ответ от авторизации:", user);
+
+        if (user?.characterId) {
+          console.log("Запрос персонажа для characterId:", user.characterId);
+          const character = await fetchCharacter(user.characterId);
+          setCharacter(character);
+        } else {
+          console.error("Нет characterId в данных пользователя");
+        }
       } catch (error) {
-          console.error("Ошибка загрузки персонажа:", error);
+        console.error("Ошибка загрузки персонажа:", error);
+      } finally {
+        setLoading(false); // Отключаем загрузку
       }
-  };
-  
+    };
 
     loadCharacter();
-}, []);
-
+  }, [telegramId, username]); // telegramId и username как зависимости
 
   if (loading) return <p>Загрузка...</p>;
   if (!character) return <p>Персонаж не найден</p>;
-
   return (
     <div >
       <div className="boxNameUndLavel">
