@@ -12,7 +12,7 @@ function App({ username,}) {
     const [telegramId, setTelegramId] = useState(null);
     const [error, setError] = useState(null);
     
-    console.log("Проверка telegramId в App:", telegramId);
+    
   // Используем useEffect для получения токена из URL и проверки на сервере
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -36,7 +36,7 @@ function App({ username,}) {
       setError("Токен отсутствует. Перейдите по ссылке от бота.");
     }
   }, []);
-
+  console.log("Проверка telegramId в App:", telegramId);
   if (error) return <p>{error}</p>;
   if (!telegramId) return <p>Загрузка...</p>;
 
