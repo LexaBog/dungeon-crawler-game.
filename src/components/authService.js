@@ -4,9 +4,11 @@ import axios from "axios";
 export const validateToken = async (token) => {
   try {
     const response = await axios.post("http://localhost:5021/api/validate-token", { token });
-    console.log("Ответ от сервера:", response.data, token);
+    console.log("Ответ от сервера:", response.data.data, token);
     
-    return { ...response.data, token };// Возвращаем данные
+    console.log("Проверка данных перед возвратом:", response.data);
+
+    return { ...response.data.data, token };// Возвращаем данные
   } catch (error) {
     console.error("Ошибка при валидации токена:", error.response?.data || error.message);
     throw error; // Пробрасываем ошибку
