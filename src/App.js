@@ -1,50 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import CharacterInfo from "./components/CharacterInfo.js";
+import authService from "./components/authService.js"
 import {fetchCharacter} from "./components/authService.js"
 import axios from 'axios';
 import Game from "./components/Game.js";
 import "./App.css";
 
-// const host = 'https://dangeon-db-beck.onrender.com';
-// const host = 'http://localhost:5021'
 
 function App({ telegramId, username,}) {
-    // const [character, setCharacter] = useState(null);
-    // const [error, setError] = useState(null);
-  
-    // useEffect(() => {
-    //   // Извлечение токена из URL
-    //   const urlParams = new URLSearchParams(window.location.search);
-    //   const token = urlParams.get('token');
-  
-    //   if (token) {
-    //     // Отправка токена на сервер для проверки
-    //     axios.post('http://localhost:5021/api/validate-token', { token })
-    //         .then(response => fetchCharacter(response.data.telegramId)) 
-    //         console.log(response.data.telegramId)
-    //       .then((response) => {
-    //         setCharacter(response.data.character); // Сохраняем данные персонажа
-    //       })
-    //       .catch((err) => {
-    //         console.error('Ошибка при валидации токена:', err.response?.data || err.message);
-    //         setError('Ошибка при входе в игру. Попробуйте снова.');
-    //       });
-    //   } else {
-    //     setError('Токен отсутствует. Перейдите по ссылке от бота.');
-    //   }
-    // }, []);
-  
-    // if (error) return <p>{error}</p>;
-    // if (!character) return <p>Загрузка...</p>;
-    // console.log(telegramId, username)
+    const [telegramId, setTelegramId] = useState(null);
+    console.log('проверка айди в апп', telegramId)
 
-    // // const [character, setCharacter] = useState(null);
-
-    // const handleCharacterLoaded = (data) => {
-    //     setCharacter(data); // Сохраняем данные персонажа
-    // };
-
+    //вытягиваю айди из дочернего компонента
+    const takeIDfromChold =(data) => {
+        setTelegramId(data.telegramId);
+    }
+   
     return (
         <div className="ollGameBody">
             <div className="header">
@@ -58,6 +30,7 @@ function App({ telegramId, username,}) {
             </div>
 
             Передача данных через маршруты
+            <authService takeIDfromChold={takeIDfromChold}/>
             <Routes>
                 <Route
                     path="/"
