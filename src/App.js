@@ -22,7 +22,7 @@ function App({ username,}) {
     if (token) {
       // Вызываем validateToken и сохраняем результат
       validateToken(token)
-      console.log('смотрю токен в апп',token)
+    //   console.log('смотрю токен в апп',token)
         .then((data) => {
             console.log("Полученные данные от validateToken:", data);
           if (data && data.telegramId) {
