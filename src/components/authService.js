@@ -30,16 +30,17 @@ export const authenticateUser = async (telegramId, username) => {
 
 
 // Получение данных персонажа
-export const fetchCharacter = async (telegramId) => {
+export const fetchCharacter = async (characterId) => {
   try {
-    // const response = await axios.post("${host}/api/characters", { telegramId });
-    const response = await axios.post("http://localhost:5021/api/characters", { telegramId });
+    const response = await axios.post("http://localhost:5021/api/characters", { characterId });
+    console.log("Ответ сервера на запрос персонажа:", response.data);
     return response.data;
   } catch (error) {
     console.error("Ошибка при запросе персонажа:", error.response?.data || error.message);
     throw error;
   }
 };
+
 
 
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { authenticateUser, fetchCharacter } from "./authService";
 import './characterInfo.css'
 
-const CharacterInfo = ({ telegramId, username }) => {
+const CharacterInfo = ({ telegramId, username, characterId }) => {
   const [character, setCharacter] = useState(null);
   const [loading, setLoading] = useState(true);
   
@@ -12,18 +12,9 @@ const CharacterInfo = ({ telegramId, username }) => {
   useEffect(() => {
     const loadCharacter = async () => {
       try {
-        console.log("Запрос авторизации:", { telegramId, username });
-        const user = await authenticateUser(telegramId, username);
-  
-        console.log("Ответ от авторизации:", user);
-        console.log("Запрос персонажа для characterId:", user.characterId);
-  
-        if (user?.characterId) {
-          const character = await fetchCharacter(user.characterId);
-          setCharacter(character);
-        } else {
-          console.error("Нет characterId в данных пользователя");
-        }
+        console.log("Запрос персонажа для characterId:", characterId);
+        const character = await fetchCharacter(characterId); // Используем переданный в пропсах characterId
+        setCharacter(character);
       } catch (error) {
         console.error("Ошибка загрузки персонажа:", error);
       } finally {
@@ -32,7 +23,8 @@ const CharacterInfo = ({ telegramId, username }) => {
     };
   
     loadCharacter();
-  }, [telegramId, username]); // telegramId и username как зависимости
+  }, [characterId]); // Следим за пропсом characterId
+  
 
   if (loading) return <p>Загрузка...</p>;
   if (!character) return <p>Персонаж не найден</p>;
