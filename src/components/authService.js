@@ -16,10 +16,6 @@ export const validateToken = async (token) => {
   }
 };
 
-
-
-
-
 // Авторизация пользователя
 export const authenticateUser = async (telegramId, username) => {
   try {
@@ -27,6 +23,7 @@ export const authenticateUser = async (telegramId, username) => {
     console.log("Данные пользователя:", response.data.user.username);
     // const user = await authenticateUser(telegramId, username);
     // Возвращаем telegramId и username из данных пользователя
+    console.log('имя и айди для отображения в authenticateUser',{telegramId: response.data.user.telegramId, username: response.data.user.username} )
     return { telegramId: response.data.user.telegramId, username: response.data.user.username };
   } catch (error) {
     console.error("Ошибка авторизации:", error.response?.data || error.message);
