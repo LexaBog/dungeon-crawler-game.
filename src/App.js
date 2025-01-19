@@ -11,23 +11,26 @@ import "./App.css";
 function App({ telegramId, username,}) {
     const [telegramId, setTelegramId] = useState(null);
     const [error, setError] = useState(null);
-
-  console.log("Проверка telegramId в App:", telegramId);
-
+    
+    console.log("Проверка telegramId в App:", telegramId);
+  // Используем useEffect для получения токена из URL и проверки на сервере
   useEffect(() => {
-    // Извлечение токена из URL
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get("token");
 
     if (token) {
-      // Вызов validateToken с передачей функции обратного вызова
+      // Вызываем validateToken и сохраняем результат
       validateToken(token)
         .then((data) => {
-          setTelegramId(data.telegramId); // Устанавливаем telegramId
+          if (data && data.telegramId) {
+            setTelegramId(data.telegramId); // Сохраняем telegramId в состояние
+          } else {
+            setError("Ошибка при валидации токена. Проверьте ссылку.");
+          }
         })
         .catch((err) => {
-          console.error("Ошибка валидации токена:", err);
-          setError("Ошибка при валидации токена. Попробуйте снова.");
+          console.error("Ошибка при валидации токена:", err);
+          setError("Ошибка при валидации токена. Попробуйте позже.");
         });
     } else {
       setError("Токен отсутствует. Перейдите по ссылке от бота.");
@@ -35,6 +38,7 @@ function App({ telegramId, username,}) {
   }, []);
 
   if (error) return <p>{error}</p>;
+  if (!telegramId) return <p>Загрузка...</p>;
 
     return (
         <div className="ollGameBody">
@@ -49,7 +53,7 @@ function App({ telegramId, username,}) {
             </div>
 
             Передача данных через маршруты
-            <authService takeIDfromChold={takeIDfromChold}/>
+            {/* <authService takeIDfromChold={takeIDfromChold}/> */}
             <Routes>
                 <Route
                     path="/"
