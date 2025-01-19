@@ -14,9 +14,10 @@ const CharacterInfo = ({ telegramId, username }) => {
       try {
         console.log("Запрос авторизации:", { telegramId, username });
         const user = await authenticateUser(telegramId, username);
+  
         console.log("Ответ от авторизации:", user);
         console.log("Запрос персонажа для characterId:", user.characterId);
-
+  
         if (user?.characterId) {
           const character = await fetchCharacter(user.characterId);
           setCharacter(character);
@@ -26,10 +27,10 @@ const CharacterInfo = ({ telegramId, username }) => {
       } catch (error) {
         console.error("Ошибка загрузки персонажа:", error);
       } finally {
-        setLoading(false); // Отключаем загрузку
+        setLoading(false);
       }
     };
-
+  
     loadCharacter();
   }, [telegramId, username]); // telegramId и username как зависимости
 
