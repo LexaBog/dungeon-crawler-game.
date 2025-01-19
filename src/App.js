@@ -10,13 +10,32 @@ import "./App.css";
 
 function App({ telegramId, username,}) {
     const [telegramId, setTelegramId] = useState(null);
-    console.log('проверка айди в апп', telegramId)
+    const [error, setError] = useState(null);
 
-    //вытягиваю айди из дочернего компонента
-    const takeIDfromChold =(data) => {
-        setTelegramId(data.telegramId);
+  console.log("Проверка telegramId в App:", telegramId);
+
+  useEffect(() => {
+    // Извлечение токена из URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get("token");
+
+    if (token) {
+      // Вызов validateToken с передачей функции обратного вызова
+      validateToken(token)
+        .then((data) => {
+          setTelegramId(data.telegramId); // Устанавливаем telegramId
+        })
+        .catch((err) => {
+          console.error("Ошибка валидации токена:", err);
+          setError("Ошибка при валидации токена. Попробуйте снова.");
+        });
+    } else {
+      setError("Токен отсутствует. Перейдите по ссылке от бота.");
     }
-   
+  }, []);
+
+  if (error) return <p>{error}</p>;
+
     return (
         <div className="ollGameBody">
             <div className="header">

@@ -1,5 +1,17 @@
 import axios from "axios";
 
+// Функция для проверки токена
+export const validateToken = async (token) => {
+  try {
+    const response = await axios.post("http://localhost:5021/api/validate-token", { token });
+    console.log("Ответ от сервера:", response.data);
+    return response.data; // Возвращаем данные
+  } catch (error) {
+    console.error("Ошибка при валидации токена:", error.response?.data || error.message);
+    throw error; // Пробрасываем ошибку
+  }
+};
+
 // Авторизация пользователя
 export const authenticateUser = async (telegramId, username, ) => {
   try {
@@ -27,19 +39,6 @@ export const fetchCharacter = async (telegramId) => {
   }
 };
 
-const validateToken = async (token, takeIDfromChold) => {
-  try {
-    const response = await axios.post('http://localhost:5021/api/validate-token', { token });
-    // const response = await axios.post("${host}/api/validate-token", { token });
-    console.log('Ответ от сервера:', response.data);
-    // const telegramId = response.data.telegramId
-    // console.log('репонс дата из сервера ', telegramId)
-    takeIDfromChold(response.data)
-    return response.data;
-  } catch (error) {
-    console.error('Ошибка при валидации токена:', error.response?.data || error.message);
-  }
-};
 
 
 
