@@ -21,6 +21,7 @@ export const authenticateUser = async (telegramId, username) => {
   try {
     const response = await axios.post("http://localhost:5021/api/auth", { telegramId, username });
     console.log("Данные пользователя:", response.data.user.username);
+    console.log("Данные пользователя имя и айди", telegramId, username);
     // const user = await authenticateUser(telegramId, username);
     // Возвращаем telegramId и username из данных пользователя
     console.log('имя и айди для отображения в authenticateUser',{telegramId: response.data.user.telegramId, username: response.data.user.username} )
