@@ -7,7 +7,7 @@ import Game from "./components/Game.js";
 import "./App.css";
 
 // const host = 'https://dangeon-db-beck.onrender.com';
-const host = 'http://localhost:5021/api/characters'
+const host = 'http://localhost:5021'
 
 function App({ telegramId, username,}) {
     const [character, setCharacter] = useState(null);
@@ -21,7 +21,7 @@ function App({ telegramId, username,}) {
       if (token) {
         // Отправка токена на сервер для проверки
         axios.post('${host}/api/validate-token', { token })
-            .then(response => fetchCharacter(response.data.telegramId)) 
+            // .then(response => fetchCharacter(response.data.telegramId)) 
           .then((response) => {
             setCharacter(response.data.character); // Сохраняем данные персонажа
           })
