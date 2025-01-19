@@ -25,6 +25,7 @@ function App({ username }) {
           if (telegramId && username) {
             setTelegramId(telegramId); // Сохраняем telegramId в состояние
             setUsername(username);
+            
             authenticateUser(telegramId, username)
               .then((user) => {
                 console.log("Пользователь успешно авторизован:", user);

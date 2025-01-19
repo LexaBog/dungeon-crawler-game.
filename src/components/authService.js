@@ -7,7 +7,7 @@ export const validateToken = async (token) => {
     // console.log("Ответ от сервера:", response.data.data);
 
     const { telegramId, username } = response.data.data;
-    console.log("Проверка данных перед возвратом:", { telegramId, username });
+    // console.log("Проверка данных перед возвратом:", { telegramId, username });
 
     return { telegramId, username };
   } catch (error) {
@@ -25,13 +25,15 @@ export const authenticateUser = async (telegramId, username) => {
   try {
     const response = await axios.post("http://localhost:5021/api/auth", { telegramId, username });
     console.log("Данные пользователя:", response.data.user);
-    console.log('проверка в аутх', telegramId, username)
-    return response.data.user;
+
+    // Возвращаем telegramId и username из данных пользователя
+    return { telegramId: response.data.user.telegramId, username: response.data.user.username };
   } catch (error) {
     console.error("Ошибка авторизации:", error.response?.data || error.message);
-    throw error;
+    throw error; // Пробрасываем ошибку для обработки в вызывающем коде
   }
 };
+
 
 
 // Получение данных персонажа
