@@ -32,15 +32,15 @@ const validateToken = async (token) => {
     const response = await axios.post('http://localhost:5021/api/validate-token', { token });
     // const response = await axios.post("${host}/api/validate-token", { token });
     console.log('Ответ от сервера:', response.data);
-    const telegramId = response.data.telegramId
-    console.log('репонс дата из сервера ', telegramId)
+    // const telegramId = response.data.telegramId
+    // console.log('репонс дата из сервера ', telegramId)
     return response.data;
   } catch (error) {
     console.error('Ошибка при валидации токена:', error.response?.data || error.message);
   }
 };
-console.log('айди  все функции ', telegramId)
-с
+console.log('айди  все функции ', response.data)
+
 
 // Используйте токен из URL
 const urlParams = new URLSearchParams(window.location.search);
