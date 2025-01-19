@@ -19,8 +19,8 @@ export const authenticateUser = async (telegramId, username) => {
   try {
     const response = await axios.post("http://localhost:5021/api/auth", { telegramId, username });
    
-    // return response.data.user;
-    return { telegramId: response.data.user.telegramId, username: response.data.user.username };
+    return response.data.user;
+    // return { telegramId: response.data.user.telegramId, username: response.data.user.username };
   } catch (error) {
     console.error("Ошибка авторизации:", error.response?.data || error.message);
     throw error; // Пробрасываем ошибку для обработки в вызывающем коде
