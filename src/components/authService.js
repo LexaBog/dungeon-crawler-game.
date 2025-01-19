@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Авторизация пользователя
-export const authenticateUser = async (telegramId, username, host) => {
+export const authenticateUser = async (telegramId, username, ) => {
   try {
     // const user = await authenticateUser(telegramId, username);
 
@@ -32,11 +32,15 @@ const validateToken = async (token) => {
     const response = await axios.post('http://localhost:5021/api/validate-token', { token });
     // const response = await axios.post("${host}/api/validate-token", { token });
     console.log('Ответ от сервера:', response.data);
+    const telegramId = response.data.telegramId
+    console.log('репонс дата из сервера ', telegramId)
     return response.data;
   } catch (error) {
     console.error('Ошибка при валидации токена:', error.response?.data || error.message);
   }
 };
+console.log('айди  все функции ', telegramId)
+с
 
 // Используйте токен из URL
 const urlParams = new URLSearchParams(window.location.search);
