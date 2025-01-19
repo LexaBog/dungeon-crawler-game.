@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import CharacterInfo from "./components/CharacterInfo.js";
 import authService from "./components/authService.js"
-import {fetchCharacter} from "./components/authService.js"
+import {fetchCharacter, validateToken} from "./components/authService.js"
 import axios from 'axios';
 import Game from "./components/Game.js";
 import "./App.css";
@@ -47,8 +47,8 @@ function App({ username,}) {
             </div>
 
             <div>
-                <h2>Добро пожаловать, {character.name}!</h2>
-                <p>Ваш уровень: {character.level}</p>
+                {/* <h2>Добро пожаловать, {character.name}!</h2> */}
+                {/* <p>Ваш уровень: {character.level}</p> */}
                 {/* Отображайте остальные данные персонажа */}
             </div>
 
@@ -65,7 +65,7 @@ function App({ username,}) {
                 />
                 <Route
                     path="/game"
-                    element={<Game character={character} />}
+                    // element={<Game character={character} />}
                 />
             </Routes>
 
