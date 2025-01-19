@@ -6,7 +6,7 @@ export const validateToken = async (token) => {
     const response = await axios.post("http://localhost:5021/api/validate-token", { token });
     console.log("Ответ от сервера:", response.data, token);
     
-    return response.data, token; // Возвращаем данные
+    return response.data; // Возвращаем данные
   } catch (error) {
     console.error("Ошибка при валидации токена:", error.response?.data || error.message);
     throw error; // Пробрасываем ошибку
