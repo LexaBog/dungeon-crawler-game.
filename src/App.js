@@ -13,14 +13,14 @@ function App({ username }) {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get("token");
-    console.log("Токен из URL:", token);
+    // console.log("Токен из URL:", token);
     
     if (token) {
       // Вызываем validateToken и обрабатываем результат
       validateToken(token)
       .then(({ telegramId, username }) => { // Деструктуризация данных
+        console.log("Полученные данные:", { telegramId, username });
           // console.log("Имя пользователя:", username);
-          console.log("Полученные данные:", { telegramId, username });
           if (telegramId && username) {
             setTelegramId(telegramId); // Сохраняем telegramId в состояние
             authenticateUser(telegramId, username)
