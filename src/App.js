@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import CharacterInfo from "./components/CharacterInfo.js";
+import {fetchCharacter} from "./components/authService.js"
 import axios from 'axios';
 import Game from "./components/Game.js";
 import "./App.css";
 
-function App({ telegramId, username }) {
+// const host = 'https://dangeon-db-beck.onrender.com';
+const host = 'http://localhost:5021/api/characters'
+
+function App({ telegramId, username,}) {
     const [character, setCharacter] = useState(null);
     const [error, setError] = useState(null);
   
@@ -16,7 +20,8 @@ function App({ telegramId, username }) {
   
       if (token) {
         // Отправка токена на сервер для проверки
-        axios.post('https://dangeon-db-beck.onrender.com/api/validate-token', { token })
+        axios.post('${host}/api/validate-token', { token })
+            .then(response => fetchCharacter(response.data.telegramId)) 
           .then((response) => {
             setCharacter(response.data.character); // Сохраняем данные персонажа
           })
@@ -57,7 +62,7 @@ function App({ telegramId, username }) {
                     path="/"
                     element={
                         <CharacterInfo
-                            telegramId={telegramId} username={username}
+                           host={host} telegramId={telegramId} username={username}
                         />
                     }
                 />
