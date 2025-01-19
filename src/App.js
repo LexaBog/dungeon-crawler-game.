@@ -23,9 +23,9 @@ function App({ username,}) {
     if (token) {
       // Вызываем validateToken и сохраняем результат
       validateToken(token)
-        .then((telegramId) => {
-            console.log("Полученный telegramId:", telegramId);
-        if (telegramId) {
+        .then((telegramId, username ) => {
+            console.log("Полученный telegramId:", telegramId, username );
+        if (telegramId && username) {
          setTelegramId(telegramId); // Устанавливаем telegramId в состояние
          authenticateUser(telegramId, username)
         } else {
