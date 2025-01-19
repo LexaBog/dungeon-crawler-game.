@@ -6,14 +6,16 @@ export const validateToken = async (token) => {
     const response = await axios.post("http://localhost:5021/api/validate-token", { token });
     console.log("Ответ от сервера:", response.data.data, token);
     
-    console.log("Проверка данных перед возвратом:", response.data.data.telegramId);
+    const telegramId = response.data.data.telegramId;
+    console.log("Проверка данных перед возвратом:", telegramId);
 
-    return { ...response.data.data, token };// Возвращаем данные
+    return telegramId; // Возвращаем только telegramId
   } catch (error) {
     console.error("Ошибка при валидации токена:", error.response?.data || error.message);
     throw error; // Пробрасываем ошибку
   }
 };
+
 
 // Авторизация пользователя
 export const authenticateUser = async (telegramId, username, ) => {

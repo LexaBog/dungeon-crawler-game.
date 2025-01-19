@@ -22,19 +22,18 @@ function App({ username,}) {
     if (token) {
       // Вызываем validateToken и сохраняем результат
       validateToken(token)
-    //   console.log('смотрю токен в апп',token)
-        .then((data) => {
-            console.log("Полученные данные от validateToken:", data);
-          if (data && data.telegramId) {
-            setTelegramId(data.telegramId); // Сохраняем telegramId в состояние
-          } else {
+        .then((telegramId) => {
+            console.log("Полученный telegramId:", telegramId);
+        if (telegramId) {
+         setTelegramId(telegramId); // Устанавливаем telegramId в состояние
+        } else {
             setError("Ошибка при валидации токена. Проверьте ссылку.");
-          }
-        })
-        .catch((err) => {
-          console.error("Ошибка при валидации токена:", err);
-          setError("Ошибка при валидации токена. Попробуйте позже.");
-        });
+     }
+    })
+     .catch((err) => {
+        console.error("Ошибка при валидации токена:", err);
+        setError("Ошибка при валидации токена. Попробуйте позже.");
+  });
     } else {
       setError("Токен отсутствует. Перейдите по ссылке от бота.");
     }
