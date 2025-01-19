@@ -4,7 +4,7 @@ import CharacterInfo from "./components/CharacterInfo.js";
 import { authenticateUser, validateToken } from "./components/authService.js";
 import "./App.css";
 
-function App({ username }) {
+function App() {
   const [telegramId, setTelegramId] = useState(null);
   const [username, setUsername] = useState(null);
   const [error, setError] = useState(null);
