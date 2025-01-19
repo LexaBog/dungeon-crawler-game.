@@ -28,7 +28,7 @@ function App({ username,}) {
          setTelegramId(telegramId); // Устанавливаем telegramId в состояние
         } else {
             setError("Ошибка при валидации токена. Проверьте ссылку.");
-     }
+        }
     })
      .catch((err) => {
         console.error("Ошибка при валидации токена:", err);
