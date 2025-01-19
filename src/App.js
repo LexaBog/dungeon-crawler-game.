@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import CharacterInfo from "./components/CharacterInfo.js";
-import authService from "./components/authService.js"
-import {fetchCharacter, validateToken} from "./components/authService.js"
-import axios from 'axios';
-import Game from "./components/Game.js";
+// import authService from "./components/authService.js"
+import {authenticateUser, validateToken} from "./components/authService.js"
+// import axios from 'axios';
+// import Game from "./components/Game.js";
 import "./App.css";
 
 
 function App({ username,}) {
     const [telegramId, setTelegramId] = useState(null);
     const [error, setError] = useState(null);
+    console.log("Имя пользователя:", username);
     
     
   // Используем useEffect для получения токена из URL и проверки на сервере
@@ -26,6 +27,7 @@ function App({ username,}) {
             console.log("Полученный telegramId:", telegramId);
         if (telegramId) {
          setTelegramId(telegramId); // Устанавливаем telegramId в состояние
+         authenticateUser(telegramId, username)
         } else {
             setError("Ошибка при валидации токена. Проверьте ссылку.");
         }
