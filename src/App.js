@@ -6,6 +6,7 @@ import "./App.css";
 
 function App({ username }) {
   const [telegramId, setTelegramId] = useState(null);
+  const [username, setUsername] = useState(null);
   const [error, setError] = useState(null);
 
   
@@ -23,6 +24,7 @@ function App({ username }) {
           // console.log("Имя пользователя:", username);
           if (telegramId && username) {
             setTelegramId(telegramId); // Сохраняем telegramId в состояние
+            setUsername(username);
             authenticateUser(telegramId, username)
               .then((user) => {
                 console.log("Пользователь успешно авторизован:", user);
