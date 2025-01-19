@@ -8,7 +8,7 @@ import Game from "./components/Game.js";
 import "./App.css";
 
 
-function App({ telegramId, username,}) {
+function App({ username,}) {
     const [telegramId, setTelegramId] = useState(null);
     const [error, setError] = useState(null);
     
