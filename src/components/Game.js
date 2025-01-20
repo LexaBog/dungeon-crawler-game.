@@ -9,7 +9,7 @@ const Game = ({ character }) => {
     return (
         <div>
             <h2>Информация о персонаже</h2>
-            <p>Telegram ID: {character.telegramId}</p>
+            {/* <p>Telegram ID: {character.telegramId}</p> */}
             <p>Имя: {character.name}</p>
             <p>Уровень: {character.level}</p>
             <p>Опыт: {character.experience}</p>
