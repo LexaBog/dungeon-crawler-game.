@@ -83,7 +83,7 @@ h3 {
   
   /* Фон страницы */
 .ollGameBody {
-    background-image: url('./background.jpg'); /* Замените на ваш фон */
+    /* background-image: url('./background.jpg'); Замените на ваш фон */
     background-size: cover;
     background-position: center;
     color: white;
