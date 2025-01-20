@@ -4,29 +4,10 @@ import './characterInfo.css'
 
 const CharacterInfo = ({ telegramId, username, characterId }) => {
   const [character, setCharacter] = useState(null);
-  // const [loading, setLoading] = useState(true);
+  
   
   console.log("Пропсы в CharacterInfo:", { characterId });
 
-
-  // useEffect(() => {
-  //   const loadCharacter = async (characterId) => {
-  //     try {
-  //       console.log("Запрос персонажа для characterId:", characterId);
-  //       const character = await fetchCharacter(characterId); // Используем переданный в пропсах characterId
-  //       setCharacter(character);
-  //     } catch (error) {
-  //       console.error("Ошибка загрузки персонажа:", error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  
-  //   loadCharacter();
-  // }, [characterId]); // Следим за пропсом characterId
-  
-
-  // if (loading) return <p>Загрузка...</p>;
   if (!characterId) return <p>Персонаж не найден</p>;
   return (
     <div >
