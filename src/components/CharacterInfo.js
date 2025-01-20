@@ -4,9 +4,9 @@ import './characterInfo.css'
 
 const CharacterInfo = ({ telegramId, username, characterId }) => {
   const [character, setCharacter] = useState(null);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   
-  // console.log("Пропсы в CharacterInfo:", { telegramId, username });
+  console.log("Пропсы в CharacterInfo:", { characterId });
 
 
   // useEffect(() => {
@@ -26,7 +26,7 @@ const CharacterInfo = ({ telegramId, username, characterId }) => {
   // }, [characterId]); // Следим за пропсом characterId
   
 
-  if (loading) return <p>Загрузка...</p>;
+  // if (loading) return <p>Загрузка...</p>;
   if (!characterId) return <p>Персонаж не найден</p>;
   return (
     <div >
