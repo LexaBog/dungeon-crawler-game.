@@ -3,8 +3,8 @@ import axios from "axios";
 // Функция для проверки токена
 export const validateToken = async (token) => {
   try {
-    // const response = await axios.post("http://localhost:5021/api/validate-token", { token });
-    const response = await axios.post("https://dangeon-db-beck.onrender.com/api/validate-token", { token });
+    const response = await axios.post("http://localhost:5021/api/validate-token", { token });
+    // const response = await axios.post("https://dangeon-db-beck.onrender.com/api/validate-token", { token });
 
     const { telegramId, username } = response.data.data;
 
@@ -18,8 +18,8 @@ export const validateToken = async (token) => {
 // Авторизация пользователя
 export const authenticateUser = async (telegramId, username) => {
   try {
-    // const response = await axios.post("http://localhost:5021/api/auth", { telegramId, username });
-    const response = await axios.post("https://dangeon-db-beck.onrender.com/api/auth", { telegramId, username });
+    const response = await axios.post("http://localhost:5021/api/auth", { telegramId, username });
+    // const response = await axios.post("https://dangeon-db-beck.onrender.com/api/auth", { telegramId, username });
     return response.data.user;
     // return { telegramId: response.data.user.telegramId, username: response.data.user.username };
   } catch (error) {
@@ -33,8 +33,8 @@ export const authenticateUser = async (telegramId, username) => {
 // Получение данных персонажа
 export const fetchCharacter = async (characterId) => {
   try {
-    // const response = await axios.post("http://localhost:5021/api/characters", { characterId });
-    const response = await axios.post("https://dangeon-db-beck.onrender.com/api/characters", { characterId });
+    const response = await axios.post("http://localhost:5021/api/characters", { characterId });
+    // const response = await axios.post("https://dangeon-db-beck.onrender.com/api/characters", { characterId });
     console.log("Ответ сервера на запрос персонажа:", characterId);
     return response.data;
   } catch (error) {

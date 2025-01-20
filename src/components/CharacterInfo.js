@@ -17,34 +17,41 @@ const CharacterInfo = ({ telegramId, username, characterId }) => {
         <p className="texStyleHeader"> Опыт: {characterId.experience}</p>
         {/* {console.log(character.name,)} */}
       </div>
-      <p>Здоровье: {characterId.health}</p>
-      <p>Мана: {characterId.mana}</p>
-      <p>Сила: {characterId.strength}</p>
-      <p>Ловкость: {characterId.agility}</p>
-      <p>Интеллект: {characterId.intelligence}</p>
-      <p>Базовая броня: {characterId.baseArmor}</p>
-      <p>Базовое уклонение: {characterId.baseEvasion}</p>
-      <p>Базовая атака: {characterId.baseAttack}</p>
-      <h3>Экипированные предметы:</h3>
-      {characterId.equippedItems && characterId.equippedItems.length > 0 ? (
-        <ul>
-          {characterId.equippedItems.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </ul>
-      ) : (
-        <p>Нет экипированных предметов</p>
-      )}
-      <h3>Инвентарь:</h3>
-      {characterId.inventory && characterId.inventory.length > 0 ? (
-        <ul>
-          {characterId.inventory.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </ul>
-      ) : (
-        <p>Инвентарь пуст</p>
-      )}
+      <div className="character-stats">
+        <p>Здоровье: {characterId.health}</p>
+        <p>Мана: {characterId.mana}</p>
+        <p>Сила: {characterId.strength}</p>
+        <p>Ловкость: {characterId.agility}</p>
+        <p>Интеллект: {characterId.intelligence}</p>
+        <p>Базовая броня: {characterId.baseArmor}</p>
+        <p>Базовое уклонение: {characterId.baseEvasion}</p>
+        <p>Базовая атака: {characterId.baseAttack}</p>
+        <h3>Экипированные предметы:</h3>
+      </div>
+      <div className="equipped-items">
+        <h3>Экипированные предметы:</h3>
+        {characterId.equippedItems && characterId.equippedItems.length > 0 ? (
+          <ul>
+            {characterId.equippedItems.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
+        ) : (
+          <p>Нет экипированных предметов</p>
+        )}
+      </div>
+      <div className="inventory">
+        <h3>Инвентарь:</h3>
+        {characterId.inventory && characterId.inventory.length > 0 ? (
+          <ul>
+            {characterId.inventory.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
+        ) : (
+          <p>Инвентарь пуст</p>
+        )}
+      </div>
     </div>
   );
 };
