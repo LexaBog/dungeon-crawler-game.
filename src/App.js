@@ -62,7 +62,7 @@ function App() {
         <Route
           path="/"
           element={
-            <CharacterInfo telegramId={telegramId} username={username} />
+            <CharacterInfo telegramId={telegramId} username={username} characterId={user.characterId} />
           }
         />
         <Route path="/game" />
