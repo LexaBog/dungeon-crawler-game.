@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import CharacterInfo from "./components/CharacterInfo.js";
-import { authenticateUser, validateToken, fetchCharacter } from "./components/authService.js";
+import { authenticateUser, validateToken,} from "./components/authService.js";
 import "./App.css";
 
 function App() {

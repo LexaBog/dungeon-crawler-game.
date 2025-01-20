@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { authenticateUser, fetchCharacter } from "./authService";
+// import { authenticateUser, fetchCharacter } from "./authService";
 import './characterInfo.css'
 
 const CharacterInfo = ({ telegramId, username, characterId }) => {
@@ -9,45 +9,45 @@ const CharacterInfo = ({ telegramId, username, characterId }) => {
   // console.log("Пропсы в CharacterInfo:", { telegramId, username });
 
 
-  useEffect(() => {
-    const loadCharacter = async () => {
-      try {
-        console.log("Запрос персонажа для characterId:", characterId);
-        const character = await fetchCharacter(characterId); // Используем переданный в пропсах characterId
-        setCharacter(character);
-      } catch (error) {
-        console.error("Ошибка загрузки персонажа:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const loadCharacter = async (characterId) => {
+  //     try {
+  //       console.log("Запрос персонажа для characterId:", characterId);
+  //       const character = await fetchCharacter(characterId); // Используем переданный в пропсах characterId
+  //       setCharacter(character);
+  //     } catch (error) {
+  //       console.error("Ошибка загрузки персонажа:", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
   
-    loadCharacter();
-  }, [characterId]); // Следим за пропсом characterId
+  //   loadCharacter();
+  // }, [characterId]); // Следим за пропсом characterId
   
 
   if (loading) return <p>Загрузка...</p>;
-  if (!character) return <p>Персонаж не найден</p>;
+  if (!characterId) return <p>Персонаж не найден</p>;
   return (
     <div >
       <div className="boxNameUndLavel">
-        <p>{character.name}</p>
-        <p className="texStyleHeader">{character.level} level </p>
-        <p className="texStyleHeader"> Опыт: {character.experience}</p>
+        <p>{characterId.name}</p>
+        <p className="texStyleHeader">{characterId.level} level </p>
+        <p className="texStyleHeader"> Опыт: {characterId.experience}</p>
         {/* {console.log(character.name,)} */}
       </div>
-      <p>Здоровье: {character.health}</p>
-      <p>Мана: {character.mana}</p>
-      <p>Сила: {character.strength}</p>
-      <p>Ловкость: {character.agility}</p>
-      <p>Интеллект: {character.intelligence}</p>
-      <p>Базовая броня: {character.baseArmor}</p>
-      <p>Базовое уклонение: {character.baseEvasion}</p>
-      <p>Базовая атака: {character.baseAttack}</p>
+      <p>Здоровье: {characterId.health}</p>
+      <p>Мана: {characterId.mana}</p>
+      <p>Сила: {characterId.strength}</p>
+      <p>Ловкость: {characterId.agility}</p>
+      <p>Интеллект: {characterId.intelligence}</p>
+      <p>Базовая броня: {characterId.baseArmor}</p>
+      <p>Базовое уклонение: {characterId.baseEvasion}</p>
+      <p>Базовая атака: {characterId.baseAttack}</p>
       <h3>Экипированные предметы:</h3>
-      {character.equippedItems && character.equippedItems.length > 0 ? (
+      {characterId.equippedItems && characterId.equippedItems.length > 0 ? (
         <ul>
-          {character.equippedItems.map((item, index) => (
+          {characterId.equippedItems.map((item, index) => (
             <li key={index}>{item}</li>
           ))}
         </ul>
@@ -55,9 +55,9 @@ const CharacterInfo = ({ telegramId, username, characterId }) => {
         <p>Нет экипированных предметов</p>
       )}
       <h3>Инвентарь:</h3>
-      {character.inventory && character.inventory.length > 0 ? (
+      {characterId.inventory && characterId.inventory.length > 0 ? (
         <ul>
-          {character.inventory.map((item, index) => (
+          {characterId.inventory.map((item, index) => (
             <li key={index}>{item}</li>
           ))}
         </ul>
