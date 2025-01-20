@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 // import { authenticateUser, fetchCharacter } from "./authService";
 import './characterInfo.css'
 
 const CharacterInfo = ({ telegramId, username, characterId }) => {
-  const [character, setCharacter] = useState(null);
+  // const [character, setCharacter] = useState(null);
   
   
   console.log("Пропсы в CharacterInfo:", { characterId });
