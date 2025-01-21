@@ -22,14 +22,14 @@ function App() {
     if (token) {
       // Вызываем validateToken и обрабатываем результат
       validateToken(token)
-      fetchCharacter(characterId)
+      // fetchCharacter(characterId)
       .then(({ telegramId, username }) => { // Деструктуризация данных
         console.log("Полученные данные:", { telegramId, username });
           // console.log("Имя пользователя:", username);
           if (telegramId && username) {
             setTelegramId(telegramId); // Сохраняем telegramId в состояние
             setUsername(username);
-            setCharacter(characterId)
+            // setCharacter(characterId)
 
             authenticateUser(telegramId, username)
               .then((user) => {
