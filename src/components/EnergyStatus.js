@@ -25,15 +25,15 @@ const EnergyStatus = ({ characterId }) => {
   // Логика восстановления здоровья с интервалом
   useEffect(() => {
     const healthRegenInterval = setInterval(() => {
-      setHealth((prev) => Math.min(prev + 1, maxHealth)); // Восстанавливает 1 HP
+      setHealth((prev) => Math.min(prev + 1, characterId.maxHealth)); // Восстанавливает 1 HP
     }, 5000); // Восстановление каждые 5 секунд
 
     return () => clearInterval(healthRegenInterval); // Очистка таймера
-  }, [maxHealth]);
+  }, [characterId.maxHealth]);
 
   // Функция для использования зелья здоровья
   const useHealthPotion = () => {
-    setHealth((prev) => Math.min(prev + 10, maxHealth)); // Восстанавливает 20 HP
+    setHealth((prev) => Math.min(prev + 10, characterId.maxHealth)); // Восстанавливает 20 HP
   };
 
   return (
