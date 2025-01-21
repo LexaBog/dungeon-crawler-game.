@@ -4,32 +4,23 @@ import EnergyStatus from "./EnergyStatus";
 import { authenticateUser, fetchCharacter } from "./authService";
 import './characterInfo.css'
 
-const CharacterInfo = ({ characterId}) => {
-  // const [characterId, setCharacterId] = useState(null);
-  
-  // useEffect(() => {
-  //   // Мокированные данные персонажа для тестирования
-  //   const mockCharacter = {
-  //     name: "AlexBelei",
-  //     level: 5,
-  //     experience: 1200,
-  //     health: 100,
-  //     maxHealth: 100,
-  //     mana: 50,
-  //     maxMana: 50,
-  //     strength: 15,
-  //     agility: 10,
-  //     intelligence: 12,
-  //     baseArmor: 5,
-  //     baseEvasion: 3,
-  //     baseAttack: 20,
-  //     equippedItems: ["Меч рыцаря", "Шлем гладиатора"],
-  //     inventory: ["Зелье здоровья", "Зелье маны", "Кинжал новичка"],
-  //   };
-  //   setCharacterId(mockCharacter);
-  // }, []);
+const CharacterInfo = ({ characterId, setCharacterId }) => {
 
-  console.log("Пропсы в CharacterInfo:", { characterId });
+  useEffect(() => {
+    const loadCharacter = async () => {
+      try {
+        const fetchedCharacter = await fetchCharacter(characterId);
+        setCharacterId(fetchedCharacter); // Обновляем состояние персонажа
+      } catch (error) {
+        console.error("Ошибка загрузки персонажа:", error);
+      }
+    };
+
+    if (characterId) {
+      loadCharacter();
+    }
+  }, [characterId, setCharacterId]);
+
 
   if (!characterId) return <p>Персонаж не найден</p>;
   return (
@@ -44,6 +35,7 @@ const CharacterInfo = ({ characterId}) => {
         {/* <h1>Ваш персонаж</h1> */}
         <EnergyStatus
           characterId={characterId}  
+          setCharacterId={setCharacterId}
           />
       </div>
       <div className="character-avatar">

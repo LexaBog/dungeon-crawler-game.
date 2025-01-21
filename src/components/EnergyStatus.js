@@ -18,11 +18,11 @@ const ProgressBar = ({ label, value, max, color }) => (
   </div>
 );
 
-const EnergyStatus = ({ characterId }) => {
+const EnergyStatus = ({ characterId, setCharacterId }) => {
   const saveUpdates = async (updates) => {
     try {
-      const updatedCharacter = await updateCharacter(characterId._id, updates);
-      Object.assign(characterId, updatedCharacter); // Обновляем объект персонажа
+      const updatedCharacter = await updateCharacter(characterId.telegramId, updates);
+      setCharacterId((prev) => ({ ...prev, ...updatedCharacter })); // Обновляем состояние
     } catch (error) {
       console.error("Ошибка сохранения данных персонажа:", error);
     }
@@ -32,16 +32,16 @@ const EnergyStatus = ({ characterId }) => {
     const healthRegenInterval = setInterval(() => {
       if (characterId.health < characterId.maxHealth) {
         const newHealth = Math.min(characterId.health + 1, characterId.maxHealth);
-        saveUpdates({ health: newHealth }); // Универсальный вызов для обновления здоровья
+        saveUpdates({ health: newHealth });
       }
     }, 5000);
 
     return () => clearInterval(healthRegenInterval);
-  }, [characterId]);
+  }, [characterId, setCharacterId]);
 
   const useHealthPotion = () => {
     const newHealth = Math.min(characterId.health + 10, characterId.maxHealth);
-    saveUpdates({ health: newHealth }); // Универсальный вызов для зелья здоровья
+    saveUpdates({ health: newHealth });
   };
 
   return (

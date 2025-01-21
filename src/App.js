@@ -58,6 +58,7 @@ function App() {
               telegramId={telegramId}
               username={username}
               characterId={characterId}
+              setCharacterId={setCharacterId}
             />
           }
         />
