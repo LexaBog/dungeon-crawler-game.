@@ -44,8 +44,19 @@ export const fetchCharacter = async (characterId) => {
 };
 
 
-
-
+export const updateCharacter = async (characterId, updates) => {
+  try {
+    const response = await axios.post("http://localhost:5021/api/characters/update", {
+      characterId,
+      updates, // Передаём объект изменений
+    });
+    console.log("Обновление персонажа успешно:", response.data.character);
+    return response.data.character;
+  } catch (error) {
+    console.error("Ошибка при обновлении персонажа:", error.response?.data || error.message);
+    throw error;
+  }
+};
 
 
 // Используйте токен из URL

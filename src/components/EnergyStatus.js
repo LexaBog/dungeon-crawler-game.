@@ -1,6 +1,6 @@
-
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "./energyStatus.css";
+import { updateCharacter } from "./authService";
 
 const ProgressBar = ({ label, value, max, color }) => (
   <div className="progress-bar">
@@ -18,34 +18,41 @@ const ProgressBar = ({ label, value, max, color }) => (
   </div>
 );
 
-const EnergyStatus = ({ characterId }) => {
-    // Логика восстановления здоровья с интервалом
-    useEffect(() => {
-      const healthRegenInterval = setInterval(() => {
-        if (characterId.health < characterId.maxHealth) {
-            characterId.health = Math.min(characterId.health + 1, characterId.maxHealth);
-        }
-      }, 5000); // Восстановление каждые 5 секунд
-  
-      console.log('смотрю хп',characterId.health)
-      return () => clearInterval(healthRegenInterval); // Очистка таймера
-    }, [characterId]);
-  
-    // Функция для использования зелья здоровья
-    const useHealthPotion = () => {
-        characterId.health = Math.min(characterId.health + 10, characterId.maxHealth); // Восстанавливает 10 HP
-        console.log("хп", characterId.health );
-      };
-  
-    return (
-      <div className="energy-status">
-        <ProgressBar label="Здоровье" value={characterId.health} max={characterId.maxHealth} color="#b22222" />
-        <ProgressBar label="Мана" value={characterId.mana} max={characterId.maxMana} color="blue" />
-        <button onClick={useHealthPotion} className="use-potion-button">
-          Использовать зелье здоровья
-        </button>
-      </div>
-    );
+const EnergyStatus = ({ character }) => {
+  const saveUpdates = async (updates) => {
+    try {
+      const updatedCharacter = await updateCharacter(character._id, updates);
+      Object.assign(character, updatedCharacter); // Обновляем объект персонажа
+    } catch (error) {
+      console.error("Ошибка сохранения данных персонажа:", error);
+    }
   };
-  
-  export default EnergyStatus;
+
+  useEffect(() => {
+    const healthRegenInterval = setInterval(() => {
+      if (character.health < character.maxHealth) {
+        const newHealth = Math.min(character.health + 1, character.maxHealth);
+        saveUpdates({ health: newHealth }); // Универсальный вызов для обновления здоровья
+      }
+    }, 5000);
+
+    return () => clearInterval(healthRegenInterval);
+  }, [character]);
+
+  const useHealthPotion = () => {
+    const newHealth = Math.min(character.health + 10, character.maxHealth);
+    saveUpdates({ health: newHealth }); // Универсальный вызов для зелья здоровья
+  };
+
+  return (
+    <div className="energy-status">
+      <ProgressBar label="Здоровье" value={character.health} max={character.maxHealth} color="#b22222" />
+      <ProgressBar label="Мана" value={character.mana} max={character.maxMana} color="blue" />
+      <button onClick={useHealthPotion} className="use-potion-button">
+        Использовать зелье здоровья
+      </button>
+    </div>
+  );
+};
+
+export default EnergyStatus;
