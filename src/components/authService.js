@@ -48,16 +48,18 @@ export const fetchCharacter = async (characterId) => {
 export const updateCharacter = async (telegramId, updates) => {
   try {
     const response = await axios.post("http://localhost:5021/api/characters/update", {
-      telegramId,
-      updates,
+      telegramId, // Telegram ID персонажа
+      updates,    // Объект с обновляемыми полями
     });
-    console.log("Персонаж обновлён:", response.data.character);
-    return response.data.character;
+
+    console.log("Персонаж успешно обновлён:", response.data.character);
+    return response.data.character; // Возвращаем обновлённого персонажа
   } catch (error) {
-    console.error("Ошибка при обновлении персонажа:", error.message);
-    throw error;
+    console.error("Ошибка при обновлении персонажа:", error.response?.data || error.message);
+    throw error; // Пробрасываем ошибку для обработки
   }
 };
+
 
 
 // Используйте токен из URL

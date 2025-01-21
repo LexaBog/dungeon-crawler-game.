@@ -32,7 +32,8 @@ const EnergyStatus = ({ characterId, setCharacterId }) => {
     const healthRegenInterval = setInterval(() => {
       if (characterId.health < characterId.maxHealth) {
         const newHealth = Math.min(characterId.health + 1, characterId.maxHealth);
-        saveUpdates({ health: newHealth });
+        setCharacterId((prev) => ({ ...prev, health: newHealth })); // Локальное обновление
+        saveUpdates({ health: newHealth }); // Отправляем на сервер
       }
     }, 5000);
 
