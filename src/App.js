@@ -1,62 +1,48 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import CharacterInfo from "./components/CharacterInfo.js";
-import { authenticateUser, validateToken,fetchCharacter} from "./components/authService.js";
+import { authenticateUser, validateToken, fetchCharacter } from "./components/authService.js";
 import "./App.css";
 
 function App() {
   const [telegramId, setTelegramId] = useState(null);
   const [username, setUsername] = useState(null);
-  const [characterId, setCharacter] = useState(null);
+  const [characterId, setCharacterId] = useState(null);
   const [error, setError] = useState(null);
-  // const telegramId = "834322218"; // ID, который есть в вашей базе
-  // const username = "AlexBelei"; // Имя, которое есть в вашей базе
-  // const characterId = "678d5ae9841d1fd7369816b8"
 
-  // Используем useEffect для получения токена из URL и проверки на сервере
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get("token");
     console.log("Токен из URL:", token);
-    
-    if (token) {
-      // Вызываем validateToken и обрабатываем результат
-      validateToken(token)
-      // fetchCharacter(characterId)
-      .then(({ telegramId, username }) => { // Деструктуризация данных
-        console.log("Полученные данные:", { telegramId, username });
-          // console.log("Имя пользователя:", username);
-          if (telegramId && username) {
-            setTelegramId(telegramId); // Сохраняем telegramId в состояние
-            setUsername(username);
-            // setCharacter(characterId)
 
-            authenticateUser(telegramId, username)
-              .then((user) => {
-                console.log("Пользователь успешно авторизован:", user.characterId);
-                setCharacter(user.characterId)
-              })
-              .catch((err) => {
-                console.error("Ошибка авторизации пользователя:", err);
-                setError("Не удалось авторизовать пользователя.");
-              });
-          } else {
-            setError("Ошибка при валидации токена. Проверьте ссылку.");
-          }
-        })
-        .catch((err) => {
-          console.error("Ошибка при валидации токена:", err);
-          setError("Ошибка при валидации токена. Попробуйте позже.");
-        });
-      } else {
-        setError("Токен отсутствует. Перейдите по ссылке от бота.");
-      }
-  }, []); // Пустой массив зависимостей, чтобы эффект выполнялся только при монтировании компонента
+    if (!token) {
+      setError("Токен отсутствует. Перейдите по ссылке от бота.");
+      return;
+    }
 
+    // Валидация токена
+    validateToken(token)
+      .then(({ telegramId, username }) => {
+        console.log("Валидный токен. Данные пользователя:", { telegramId, username });
+        setTelegramId(telegramId);
+        setUsername(username);
+
+        // Авторизация пользователя
+        return authenticateUser(telegramId, username);
+      })
+      .then((user) => {
+        console.log("Пользователь успешно авторизован:", user);
+        setCharacterId(user.characterId); // Сохраняем characterId для использования
+      })
+      .catch((err) => {
+        console.error("Ошибка авторизации:", err);
+        setError("Не удалось авторизовать пользователя.");
+      });
+  }, []); // Пустой массив зависимостей
 
   // Отображение ошибок или загрузки
   if (error) return <p>{error}</p>;
-  if (!telegramId|| !username) return <p>Загрузка...</p>;
+  if (!telegramId || !username) return <p>Загрузка...</p>;
 
   return (
     <div className="ollGameBody">
@@ -69,10 +55,10 @@ function App() {
           path="/"
           element={
             <CharacterInfo
-              telegramId={telegramId} 
-              username={username} 
-              characterId={characterId} 
-             />
+              telegramId={telegramId}
+              username={username}
+              characterId={characterId}
+            />
           }
         />
         <Route path="/game" />
