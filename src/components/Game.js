@@ -5,6 +5,7 @@ const Game = ({ character }) => {
     if (!character) {
         return <p>Загрузка игры...</p>;
     }
+    
 
     return (
         <div>
