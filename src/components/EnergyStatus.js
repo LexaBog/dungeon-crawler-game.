@@ -1,4 +1,4 @@
-// EnergyStatus.js
+
 import React, { useState, useEffect } from "react";
 import "./energyStatus.css";
 
@@ -27,6 +27,7 @@ const EnergyStatus = ({ characterId }) => {
         }
       }, 5000); // Восстановление каждые 5 секунд
   
+      console.log(characterId.health)
       return () => clearInterval(healthRegenInterval); // Очистка таймера
     }, [characterId]);
   
