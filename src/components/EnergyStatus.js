@@ -27,7 +27,7 @@ const EnergyStatus = ({ characterId }) => {
         }
       }, 5000); // Восстановление каждые 5 секунд
   
-      console.log(characterId.health)
+      console.log('смотрю хп',characterId.health)
       return () => clearInterval(healthRegenInterval); // Очистка таймера
     }, [characterId]);
   
