@@ -19,32 +19,31 @@ const ProgressBar = ({ label, value, max, color }) => (
 );
 
 const EnergyStatus = ({ characterId }) => {
-  const [health, setHealth] = useState(initialHealth);
-  const [mana, setMana] = useState(initialMana);
-
-  // Логика восстановления здоровья с интервалом
-  useEffect(() => {
-    const healthRegenInterval = setInterval(() => {
-      setHealth((prev) => Math.min(prev + 1, characterId.maxHealth)); // Восстанавливает 1 HP
-    }, 5000); // Восстановление каждые 5 секунд
-
-    return () => clearInterval(healthRegenInterval); // Очистка таймера
-  }, [characterId.maxHealth]);
-
-  // Функция для использования зелья здоровья
-  const useHealthPotion = () => {
-    setHealth((prev) => Math.min(prev + 10, characterId.maxHealth)); // Восстанавливает 20 HP
+    // Логика восстановления здоровья с интервалом
+    useEffect(() => {
+      const healthRegenInterval = setInterval(() => {
+        if (characterId.health < characterId.maxHealth) {
+            characterId.health = Math.min(characterId.health + 1, characterId.maxHealth);
+        }
+      }, 5000); // Восстановление каждые 5 секунд
+  
+      return () => clearInterval(healthRegenInterval); // Очистка таймера
+    }, [characterId]);
+  
+    // Функция для использования зелья здоровья
+    const useHealthPotion = () => {
+        characterId.health = Math.min(characterId.health + 10, characterId.maxHealth); // Восстанавливает 10 HP
+    };
+  
+    return (
+      <div className="energy-status">
+        <ProgressBar label="Здоровье" value={characterId.health} max={characterId.maxHealth} color="#b22222" />
+        <ProgressBar label="Мана" value={characterId.mana} max={characterId.maxMana} color="blue" />
+        <button onClick={useHealthPotion} className="use-potion-button">
+          Использовать зелье здоровья
+        </button>
+      </div>
+    );
   };
-
-  return (
-    <div className="energy-status">
-      <ProgressBar label="Здоровье" value={characterId.health} max={characterId.maxHealth} color="#b22222" />
-      <ProgressBar label="Мана" value={characterId.mana} max={characterId.maxMana} color="blue" />
-      <button onClick={useHealthPotion} className="use-potion-button">
-        Использовать зелье здоровья
-      </button>
-    </div>
-  );
-};
-
-export default EnergyStatus;
+  
+  export default EnergyStatus;
