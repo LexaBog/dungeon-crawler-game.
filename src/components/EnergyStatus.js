@@ -34,7 +34,8 @@ const EnergyStatus = ({ characterId }) => {
     // Функция для использования зелья здоровья
     const useHealthPotion = () => {
         characterId.health = Math.min(characterId.health + 10, characterId.maxHealth); // Восстанавливает 10 HP
-    };
+        console.log("хп", characterId.health );
+      };
   
     return (
       <div className="energy-status">
