@@ -4,8 +4,8 @@ import EnergyStatus from "./EnergyStatus";
 import { authenticateUser, fetchCharacter } from "./authService";
 import './characterInfo.css'
 
-const CharacterInfo = ({ }) => {
-  const [characterId, setCharacterId] = useState(null);
+const CharacterInfo = ({ characterId}) => {
+  // const [characterId, setCharacterId] = useState(null);
   
   // useEffect(() => {
   //   // Мокированные данные персонажа для тестирования
