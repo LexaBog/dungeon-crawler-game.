@@ -40,7 +40,7 @@ const EnergyStatus = ({ characterId, setCharacterId }) => {
   }, [characterId, setCharacterId]);
 
   const useHealthPotion = () => {
-    const newHealth = Math.min(characterId.health + 10, characterId.maxHealth);
+    const newHealth = Math.min(characterId.health - 10, characterId.maxHealth);
     saveUpdates({ health: newHealth });
   };
 
