@@ -67,6 +67,8 @@ const EnergyStatus = ({ characterId, setCharacterId }) => {
       <button onClick={useHealthPotion} className="use-potion-button">
         Использовать зелье здоровья
       </button>
+      
+      {console.log("Рендер компонента EnergyStatus")}
       <button onClick={useExperiencePotion} className="use-potion-button1">
         Использовать зелье опыта
       </button>
