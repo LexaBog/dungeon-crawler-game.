@@ -43,14 +43,9 @@ const EnergyStatus = ({ characterId, setCharacterId }) => {
   }, [characterId, setCharacterId]);
 
   const useHealthPotion = () => {
-    const newHealth = Math.min(localCharacter.health + 50, localCharacter.maxHealth);
+    const newHealth = Math.min(localCharacter.health - 50, localCharacter.maxHealth);
     setLocalCharacter((prev) => ({ ...prev, health: newHealth }));
     saveUpdates({ health: newHealth });
-  };
-
-  const useExperiencePotion = () => {
-    const experienceFromPotion = 50;
-    saveUpdates({ experience: localCharacter.experience + experienceFromPotion });
   };
 
   return (
@@ -59,9 +54,6 @@ const EnergyStatus = ({ characterId, setCharacterId }) => {
       <ProgressBar label="Mana" value={localCharacter.mana} max={localCharacter.maxMana} color="blue" />
       <button onClick={useHealthPotion} className="use-potion-button">
         Use Health Potion
-      </button>
-      <button onClick={useExperiencePotion} className="use-potion-button">
-        Use Experience Potion
       </button>
     </div>
   );
