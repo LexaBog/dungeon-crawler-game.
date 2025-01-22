@@ -43,6 +43,21 @@ export const authenticateUser = async (telegramId, username) => {
 //   }
 // }
 
+export const updateCharacter = async (telegramId, updates) => {
+  try {
+    const response = await axios.post("http://localhost:5021/api/characters/update", {
+      telegramId,
+      updates,
+    });
+    console.log("Персонаж успешно обновлён:", response.data.character);
+    return response.data.character;
+  } catch (error) {
+    console.error("Ошибка при обновлении персонажа:", error.message);
+    throw error;
+  }
+};
+
+
 
 // Используйте токен из URL
 const urlParams = new URLSearchParams(window.location.search);
