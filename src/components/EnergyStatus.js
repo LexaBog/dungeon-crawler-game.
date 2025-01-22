@@ -19,7 +19,7 @@ const ProgressBar = ({ label, value, max, color }) => (
 );
 
 const EnergyStatus = ({ characterId, setCharacterId }) => {
-  const [localCharacter, setLocalCharacter] = useState(character);
+  const [localCharacter, setLocalCharacter] = useState(characterId);
   const saveUpdates = async (updates) => {
     try {
       const updatedCharacter = await updateCharacter(characterId.telegramId, updates);
