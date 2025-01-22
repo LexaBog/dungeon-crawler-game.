@@ -19,6 +19,7 @@ const ProgressBar = ({ label, value, max, color }) => (
 );
 
 const EnergyStatus = ({ characterId, setCharacterId }) => {
+  const [localCharacter, setLocalCharacter] = useState(character);
   const saveUpdates = async (updates) => {
     try {
       const updatedCharacter = await updateCharacter(characterId.telegramId, updates);
@@ -30,12 +31,14 @@ const EnergyStatus = ({ characterId, setCharacterId }) => {
 
   useEffect(() => {
     const healthRegenInterval = setInterval(() => {
-      if (characterId.health < characterId.maxHealth) {
-        const newHealth = Math.min(characterId.health + 1, characterId.maxHealth);
-        setCharacterId((prev) => ({ ...prev, health: newHealth })); // Локальное обновление
-        saveUpdates({ health: newHealth }); // Отправляем на сервер
+      if (localCharacter.health < characterId.maxHealth) {
+        const newHealth = Math.min(localCharacter.health + 1, characterId.maxHealth);
+        setLocalCharacter((prev) => ({ ...prev, health: newHealth }));
+
+        // Отправляем данные только если здоровье изменилось
+        updateCharacter(characterId.telegramId, { health: newHealth });
       }
-    }, 5000);
+    }, 5000); // Обновляем каждые 5 секунд
 
     return () => clearInterval(healthRegenInterval);
   }, [characterId, setCharacterId]);
