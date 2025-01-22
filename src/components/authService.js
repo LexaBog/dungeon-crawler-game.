@@ -41,38 +41,7 @@ export const authenticateUser = async (telegramId, username) => {
 //     console.error("Ошибка при запросе персонажа:", error.response?.data || error.message);
 //     throw error;
 //   }
-// };
-
-
-// Функция обновления
-router.post('/api/characters/update', async (req, res) => {
-  const { telegramId, updates } = req.body;
-
-  if (!telegramId || !updates) {
-    return res.status(400).json({ error: 'Telegram ID и изменения обязательны.' });
-  }
-
-  try {
-    // Ищем персонажа по Telegram ID
-    const characterId = await telegramId.findOneAndUpdate(
-      { telegramId },
-      { $set: updates },
-      { new: true, runValidators: true }
-    );
-
-    if (!characterId) {
-      return res.status(404).json({ error: 'Персонаж с таким Telegram ID не найден.' });
-    }
-
-    console.log('Обновленный персонаж:', characterId);
-    res.status(200).json({ message: 'Персонаж успешно обновлен.', characterId });
-  } catch (error) {
-    console.error('Ошибка при обновлении персонажа:', error);
-    res.status(500).json({ error: 'Ошибка сервера при обновлении персонажа.' });
-  }
-});
-
-
+// }
 
 
 // Используйте токен из URL

@@ -1,7 +1,7 @@
 // import { useState } from 'react';
-import React, {useState, useEffect} from "react";
+import React from "react";
 import EnergyStatus from "./EnergyStatus";
-import { authenticateUser, fetchCharacter } from "./authService";
+// import { authenticateUser, fetchCharacter } from "./authService";
 import './characterInfo.css'
 
 const CharacterInfo = ({ characterId, setCharacterId }) => {
