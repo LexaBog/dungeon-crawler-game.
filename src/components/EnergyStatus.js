@@ -20,6 +20,7 @@ const ProgressBar = ({ label, value, max, color }) => (
 
 const EnergyStatus = ({ characterId, setCharacterId }) => {
   const [localCharacter, setLocalCharacter] = useState(characterId);
+
   const saveUpdates = async (updates) => {
     try {
       const updatedCharacter = await updateCharacter(characterId.telegramId, updates);
@@ -41,25 +42,25 @@ const EnergyStatus = ({ characterId, setCharacterId }) => {
     }, 5000); // Обновляем каждые 5 секунд
 
     return () => clearInterval(healthRegenInterval);
-  }, [characterId, setCharacterId]);
+  }, [characterId]);
 
   const useHealthPotion = () => {
     const newHealth = Math.min(characterId.health - 10, characterId.maxHealth);
     saveUpdates({ health: newHealth });
   };
 
-  const useExperiencePotion = (characterId) => {
+  const useExperiencePotion = () => {
     const experienceFromPotion = 50; // Опыт, полученный от зелья
-    updateCharacter(telegramId, { experience: experienceFromPotion })
+    updateCharacter(characterId.telegramId, { experience: experienceFromPotion })
       .then((updatedCharacter) => {
         console.log("Персонаж обновлён после использования зелья:", updatedCharacter);
-        setCharacterId(updatedCharacter);
+        setCharacterId((prev) => ({ ...prev, ...updatedCharacter })); // Обновляем состояние
       })
       .catch((error) => {
         console.error("Ошибка обновления персонажа после использования зелья:", error);
       });
   };
-  
+
   return (
     <div className="energy-status">
       <ProgressBar label="Здоровье" value={characterId.health} max={characterId.maxHealth} color="#b22222" />
@@ -68,7 +69,6 @@ const EnergyStatus = ({ characterId, setCharacterId }) => {
       <button onClick={useHealthPotion} className="use-potion-button">
         Использовать зелье здоровья
       </button>
-      
       <button onClick={useExperiencePotion} className="use-potion-button1">
         Использовать зелье опыта
       </button>
