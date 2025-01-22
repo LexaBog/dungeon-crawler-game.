@@ -44,7 +44,7 @@ const EnergyStatus = ({ characterId, setCharacterId }) => {
   }, [characterId, setCharacterId]);
 
   const useHealthPotion = () => {
-    const newHealth = Math.min(localCharacter.health + 10, localCharacter.maxHealth);
+    const newHealth = Math.min(localCharacter.health - 10, localCharacter.maxHealth);
     saveUpdates({ health: newHealth });
     setLocalCharacter((prev) => ({ ...prev, health: newHealth }));
 
@@ -54,7 +54,7 @@ const EnergyStatus = ({ characterId, setCharacterId }) => {
 
   const useExperiencePotion = () => {
     const experienceFromPotion = 50; // Опыт, полученный от зелья
-    updateCharacter(localCharacter, { experience: characterId.experience + experienceFromPotion })
+    updateCharacter(localCharacter, { experience: localCharacter.experience + experienceFromPotion })
       .then((updatedCharacter) => {
         console.log("Персонаж обновлён после использования зелья:", updatedCharacter);
         setCharacterId(updatedCharacter); // Обновление состояния
