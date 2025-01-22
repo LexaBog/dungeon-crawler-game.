@@ -68,7 +68,10 @@ function App() {
           path="/" 
           element={
             <Game
-              telegramId={telegramId}
+            telegramId={telegramId}
+            username={username}
+            characterId={characterId}
+            setCharacterId={setCharacterId}
             />
           }
         />
