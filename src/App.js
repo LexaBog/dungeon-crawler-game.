@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import CharacterInfo from "./components/CharacterInfo.js";
+import Game from "./components/Game.js";
+import './components/characterInfo.css';
 import { authenticateUser, validateToken,} from "./components/authService.js";
 import "./App.css";
 
@@ -50,6 +52,12 @@ function App() {
       <div className="header">
         <h1 className="headerText">Dungeons s Heroes</h1>
       </div>
+      <div className="boxNameUndLavel">
+        <p>{characterId.name}</p>
+        <p className="texStyleHeader">{characterId.level} level </p>
+        <p className="texStyleHeader"> Опыт: {characterId.experience}</p>
+        {/* {console.log(character.name,)} */}
+      </div>
 
       <Routes>
         <Route
@@ -63,7 +71,14 @@ function App() {
             />
           }
         />
-        <Route path="/" />
+        <Route 
+          path="/" 
+          element={
+            <Game
+              telegramId={telegramId}
+            />
+          }
+        />
       </Routes>
 
       <div className="futer"></div>
