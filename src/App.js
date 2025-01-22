@@ -13,7 +13,7 @@ function App() {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get("token");
-    console.log("Токен из URL:", token);
+    // console.log("Токен из URL:", token);
 
     if (!token) {
       setError("Токен отсутствует. Перейдите по ссылке от бота.");
@@ -23,7 +23,7 @@ function App() {
     // Валидация токена
     validateToken(token)
       .then(({ telegramId, username }) => {
-        console.log("Валидный токен. Данные пользователя:", { telegramId, username });
+        // console.log("Валидный токен. Данные пользователя:", { telegramId, username });
         setTelegramId(telegramId);
         setUsername(username);
 
@@ -31,7 +31,7 @@ function App() {
         return authenticateUser(telegramId, username);
       })
       .then((user) => {
-        console.log("Пользователь успешно авторизован:", user);
+        // console.log("Пользователь успешно авторизован:", user);
         setCharacterId(user.characterId); // Сохраняем characterId для использования
       })
       .catch((err) => {

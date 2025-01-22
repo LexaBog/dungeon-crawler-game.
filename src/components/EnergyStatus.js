@@ -47,6 +47,21 @@ const EnergyStatus = ({ characterId, setCharacterId }) => {
     const newHealth = Math.min(characterId.health - 10, characterId.maxHealth);
     saveUpdates({ health: newHealth });
   };
+
+  console.log( characterId, setCharacterId)
+
+  const useExperiencePotion = () => {
+    console.log('сука')
+    const experienceFromPotion = 50; // Опыт, полученный от зелья
+    updateCharacter(characterId.telegramId, { experience: experienceFromPotion })
+      .then((updatedCharacter) => {
+        console.log("Персонаж обновлён после использования зелья:", updatedCharacter);
+        setCharacterId((prev) => ({ ...prev, ...updatedCharacter })); // Обновляем состояние
+      })
+      .catch((error) => {
+        console.error("Ошибка обновления персонажа после использования зелья:", error);
+      });
+  };
   
   return (
     <div className="energy-status">
@@ -59,7 +74,7 @@ const EnergyStatus = ({ characterId, setCharacterId }) => {
         Использовать зелье здоровья
       </button>
       {console.log('работае')}
-      <button onClick={useHealthPotion} className="use-potion-button">
+      <button onClick={useExperiencePotion} className="use-potion-button">
         Использовать зелье ijnj nfv
       </button>
     </div>
