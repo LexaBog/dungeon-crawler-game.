@@ -1,12 +1,8 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 
-
-const Game = ({ characterId }) => {
-    console.log(characterId)
-    if (!characterId) {
-        return <p>Загрузка игры...</p>;
-    }
-    
+const Game = (characterId) => {
+    const navigate = useNavigate();
 
     return (
         <div>
@@ -15,7 +11,15 @@ const Game = ({ characterId }) => {
                 <p className="texStyleHeader">{characterId.level} level </p>
                 <p className="texStyleHeader"> Опыт: {characterId.experience}</p>
             </div>
-           
+            <button onClick={() => navigate("/dangeon")}>
+                Прокачка
+            </button>
+            <button onClick={() => navigate("/character")}>
+                Персонаж
+            </button>
+            <button>
+                Магазик
+            </button>
         </div>
     );
 };
