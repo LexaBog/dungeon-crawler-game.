@@ -64,11 +64,11 @@ const EnergyStatus = ({ characterId, setCharacterId }) => {
     <div className="energy-status">
       <ProgressBar label="Здоровье" value={characterId.health} max={characterId.maxHealth} color="#b22222" />
       <ProgressBar label="Мана" value={characterId.mana} max={characterId.maxMana} color="blue" />
+      {console.log("Рендер компонента EnergyStatus")}
       <button onClick={useHealthPotion} className="use-potion-button">
         Использовать зелье здоровья
       </button>
       
-      {console.log("Рендер компонента EnergyStatus")}
       <button onClick={useExperiencePotion} className="use-potion-button1">
         Использовать зелье опыта
       </button>
