@@ -25,12 +25,12 @@ const CharacterInfo = ({ characterId, setCharacterId }) => {
   if (!characterId) return <p>Персонаж не найден</p>;
   return (
     <div >
-        {/* <div className="boxNameUndLavel">
+        <div className="boxNameUndLavel">
          <p>{characterId.name}</p>
         <p className="texStyleHeader">{characterId.level} level </p>
         <p className="texStyleHeader"> Опыт: {characterId.experience}</p>
         
-        </div> */}
+        </div>
       <div>
         {/* <h1>Ваш персонаж</h1> */}
         <EnergyStatus
