@@ -20,12 +20,13 @@ const ProgressBar = ({ label, value, max, color }) => (
 
 const EnergyStatus = ({ characterId, setCharacterId }) => {
   const [localCharacter, setLocalCharacter] = useState(characterId);
+
   const saveUpdates = async (updates) => {
     try {
       const updatedCharacter = await updateCharacter(characterId.telegramId, updates);
-      setCharacterId((prev) => ({ ...prev, ...updatedCharacter })); // Обновляем состояние
+      setCharacterId((prev) => ({ ...prev, ...updatedCharacter }));
     } catch (error) {
-      console.error("Ошибка сохранения данных персонажа:", error);
+      console.error("Error updating character:", error);
     }
   };
 
@@ -34,47 +35,33 @@ const EnergyStatus = ({ characterId, setCharacterId }) => {
       if (localCharacter.health < characterId.maxHealth) {
         const newHealth = Math.min(localCharacter.health + 1, characterId.maxHealth);
         setLocalCharacter((prev) => ({ ...prev, health: newHealth }));
-
-        // Отправляем данные только если здоровье изменилось
         updateCharacter(characterId.telegramId, { health: newHealth });
       }
-    }, 5000); // Обновляем каждые 5 секунд
+    }, 5000);
 
     return () => clearInterval(healthRegenInterval);
   }, [characterId, setCharacterId]);
 
   const useHealthPotion = () => {
-    const newHealth = Math.min(localCharacter.health - 10, localCharacter.maxHealth);
-    saveUpdates({ health: newHealth });
+    const newHealth = Math.min(localCharacter.health + 50, localCharacter.maxHealth);
     setLocalCharacter((prev) => ({ ...prev, health: newHealth }));
-
+    saveUpdates({ health: newHealth });
   };
-
-  console.log( characterId, setCharacterId)
 
   const useExperiencePotion = () => {
-    const experienceFromPotion = 50; // Опыт, полученный от зелья
-    updateCharacter(localCharacter, { experience: localCharacter.experience + experienceFromPotion })
-      .then((updatedCharacter) => {
-        console.log("Персонаж обновлён после использования зелья:", updatedCharacter);
-        setCharacterId(updatedCharacter); // Обновление состояния
-      })
-      .catch((error) => {
-        console.error("Ошибка обновления персонажа после использования зелья:", error);
-      });
+    const experienceFromPotion = 50;
+    saveUpdates({ experience: localCharacter.experience + experienceFromPotion });
   };
-  
-  
+
   return (
     <div className="energy-status">
-      <ProgressBar label="Здоровье" value={characterId.health} max={characterId.maxHealth} color="#b22222" />
-      <ProgressBar label="Мана" value={characterId.mana} max={characterId.maxMana} color="blue" />
+      <ProgressBar label="Health" value={localCharacter.health} max={localCharacter.maxHealth} color="#b22222" />
+      <ProgressBar label="Mana" value={localCharacter.mana} max={localCharacter.maxMana} color="blue" />
       <button onClick={useHealthPotion} className="use-potion-button">
-        Использовать зелье здоровья
+        Use Health Potion
       </button>
-      {console.log('работае')}
       <button onClick={useExperiencePotion} className="use-potion-button">
-        Использовать зелье опыта
+        Use Experience Potion
       </button>
     </div>
   );
