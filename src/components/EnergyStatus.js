@@ -32,15 +32,20 @@ const EnergyStatus = ({ characterId, setCharacterId }) => {
 
   useEffect(() => {
     const healthRegenInterval = setInterval(() => {
-      if (localCharacter.health < characterId.maxHealth) {
-        const newHealth = Math.min(localCharacter.health + 1, characterId.maxHealth);
+      if (localCharacter.health < localCharacter.maxHealth) {
+        const newHealth = Math.min(localCharacter.health + 1, localCharacter.maxHealth);
         setLocalCharacter((prev) => ({ ...prev, health: newHealth }));
-        updateCharacter(characterId.telegramId, { health: newHealth });
+  
+        // Сохранение изменений на сервере
+        updateCharacter(characterId.telegramId, { health: newHealth })
+          .then(() => console.log("Health updated on server:", newHealth))
+          .catch((error) => console.error("Error updating health:", error));
       }
     }, 5000);
-
+  
     return () => clearInterval(healthRegenInterval);
-  }, [characterId, setCharacterId]);
+  }, [localCharacter, characterId]);
+  
 
   const useHealthPotion = () => {
     const newHealth = Math.min(localCharacter.health - 50, localCharacter.maxHealth);
