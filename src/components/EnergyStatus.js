@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./energyStatus.css";
 import { updateCharacter } from "./authService";
 
