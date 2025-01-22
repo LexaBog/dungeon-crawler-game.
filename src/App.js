@@ -63,7 +63,7 @@ function App() {
             />
           }
         />
-        <Route path="/game" />
+        <Route path="/" />
       </Routes>
 
       <div className="futer"></div>
