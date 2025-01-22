@@ -49,7 +49,7 @@ export const updateCharacter = async (telegramId, updates) => {
       telegramId,
       updates,
     });
-    console.log("Персонаж успешно обновлён:", response.data.characterId);
+    console.log("Персонаж успешно обновлён:", response.data.character);
     return response.data.character;
   } catch (error) {
     console.error("Ошибка при обновлении персонажа:", error.message);
