@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./energyStatus.css";
 import { updateCharacter } from "./authService";
 
@@ -59,6 +59,9 @@ const EnergyStatus = ({ characterId, setCharacterId }) => {
         Использовать зелье здоровья
       </button>
       {console.log('работае')}
+      <button onClick={useHealthPotion} className="use-potion-button">
+        Использовать зелье ijnj nfv
+      </button>
     </div>
   );
 };
