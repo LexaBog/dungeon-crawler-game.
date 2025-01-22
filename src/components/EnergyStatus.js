@@ -44,24 +44,26 @@ const EnergyStatus = ({ characterId, setCharacterId }) => {
   }, [characterId, setCharacterId]);
 
   const useHealthPotion = () => {
-    const newHealth = Math.min(characterId.health - 10, characterId.maxHealth);
+    const newHealth = Math.min(localCharacter.health + 10, localCharacter.maxHealth);
     saveUpdates({ health: newHealth });
+    setLocalCharacter((prev) => ({ ...prev, health: newHealth }));
+
   };
 
   console.log( characterId, setCharacterId)
 
   const useExperiencePotion = () => {
-    console.log('сука')
     const experienceFromPotion = 50; // Опыт, полученный от зелья
-    updateCharacter(characterId.telegramId, { experience: experienceFromPotion })
+    updateCharacter(localCharacter, { experience: characterId.experience + experienceFromPotion })
       .then((updatedCharacter) => {
         console.log("Персонаж обновлён после использования зелья:", updatedCharacter);
-        setCharacterId((prev) => ({ ...prev, ...updatedCharacter })); // Обновляем состояние
+        setCharacterId(updatedCharacter); // Обновление состояния
       })
       .catch((error) => {
         console.error("Ошибка обновления персонажа после использования зелья:", error);
       });
   };
+  
   
   return (
     <div className="energy-status">
@@ -70,12 +72,9 @@ const EnergyStatus = ({ characterId, setCharacterId }) => {
       <button onClick={useHealthPotion} className="use-potion-button">
         Использовать зелье здоровья
       </button>
-      <button onClick={useHealthPotion} className="use-potion-button">
-        Использовать зелье здоровья
-      </button>
       {console.log('работае')}
       <button onClick={useExperiencePotion} className="use-potion-button">
-        Использовать зелье ijnj nfv
+        Использовать зелье опыта
       </button>
     </div>
   );
