@@ -53,7 +53,7 @@ function App() {
 
       <Routes>
         <Route
-          path="/"
+          path="/character"
           element={
             <CharacterInfo
               telegramId={telegramId}

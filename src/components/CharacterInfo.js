@@ -50,10 +50,9 @@ const CharacterInfo = ({ characterId, setCharacterId }) => {
         <p>Сила: {characterId.strength}</p>
         <p>Ловкость: {characterId.agility}</p>
         <p>Интеллект: {characterId.intelligence}</p>
-        <p>Базовая броня: {characterId.baseArmor}</p>
-        <p>Базовое уклонение: {characterId.baseEvasion}</p>
-        <p>Базовая атака: {characterId.baseAttack}</p>
-        <h3>Экипированные предметы:</h3>
+        <p>броня: {characterId.baseArmor}</p>
+        <p>уклонение: {characterId.baseEvasion}</p>
+        <p>атака: {characterId.baseAttack}</p>
       </div>
       <div className="equipped-items">
         <h3>Экипированные предметы:</h3>
