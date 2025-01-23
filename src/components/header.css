@@ -51,10 +51,15 @@
     transition: 0.5s;
 }
 
-/* .Img-houm {
+.Img-houm {
+    position: absolute;
     width: 30px;
     height: 30px;
-} */
+    top: 0px;
+    left: 0px;
+    box-shadow: 0 5px 15px 0 rgba(11, 99, 246, 1);
+    transition: 0.5s;
+}
 
 /* .navigate-button {
     padding: 10px 20px;
