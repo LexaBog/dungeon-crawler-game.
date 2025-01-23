@@ -153,7 +153,8 @@ h3 {
 } 
 
 .stats-numer {
-  margin-left: 20px;
-  font-size: 24px;
+  text-indent: 20px;
+  margin-left: 10px;
+  /* font-size: 24px; */
   font-weight: 700;
 }

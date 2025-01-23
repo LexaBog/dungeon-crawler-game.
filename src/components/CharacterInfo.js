@@ -42,7 +42,7 @@ const CharacterInfo = ({ characterId, setCharacterId }) => {
           {characterId.baseArmor}
         </p>
         <p className="stats-numer">
-          <img  className="stats-Icon" src="/img/icon/evaigion.png" alt="evaigion" />
+          <img  className="stats-Icon" src="/img/icon/evaigion.webp" alt="evaigion" />
           {characterId.baseEvasion}
         </p>
         <p className="stats-numer">
