@@ -151,3 +151,9 @@ h3 {
   height: 30px;
   border-radius: 5px;
 } 
+
+.stats-numer {
+  margin-left: 5px;
+  font-size: 18px;
+  font-weight: 700;
+}
