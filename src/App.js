@@ -53,10 +53,10 @@ function App() {
         <h1 className="headerText">Dungeons s Heroes</h1>
       </div> */}
 
-      <Routes>
         <Header
           characterId={characterId}
         />
+      <Routes>
         <Route
           path="/character"
           element={
