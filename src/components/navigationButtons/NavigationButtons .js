@@ -8,7 +8,7 @@ const NavigationButtons  = () => {
     const navigate = useNavigate();
 
     return (
-        <Routes>
+        <>
             {/* <div className="boxNameUndLavel">
                 <p>{characterId.name}</p>
                 <p className="texStyleHeader">{characterId.level} level </p>
@@ -24,7 +24,7 @@ const NavigationButtons  = () => {
             <button onClick={() => navigate("/")}>
                 Магазик
             </button>
-        </Routes>
+        </>
     );
 };
 
