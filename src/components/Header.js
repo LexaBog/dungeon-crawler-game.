@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 import './header.css'
 
 const Game = ({characterId}) => {
@@ -15,6 +16,10 @@ const Game = ({characterId}) => {
             <p className="texStyleHeader">{characterId.level} level </p>
             <p className="texStyleHeader"> Опыт: {characterId.experience}</p>
         </div>
+        <button className="navigate-button-houm" onClick={() => navigate("/")}>
+                <img src="/button-Houm.webp" alt="Home" />
+                {/* Дом */}
+        </button>
     </>
  );
 };

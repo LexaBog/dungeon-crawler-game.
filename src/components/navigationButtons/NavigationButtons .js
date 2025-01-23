@@ -24,10 +24,6 @@ const NavigationButtons  = () => {
             <button className="navigate-button" onClick={() => navigate("/")}>
                 Магазик
             </button>
-            <button className="navigate-button-houm" onClick={() => navigate("/")}>
-                <img src="/button-Houm.webp" alt="Home" />
-                {/* Дом */}
-            </button>
         </>
     );
 };

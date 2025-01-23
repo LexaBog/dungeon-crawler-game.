@@ -41,6 +41,14 @@
     color: #fff; 
 }
 
+.navigate-button-houm {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 10px;
+    left: 10px;
+}
+
 /* .navigate-button {
     padding: 10px 20px;
     margin: 10px;
