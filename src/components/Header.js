@@ -1,7 +1,7 @@
 import React from 'react';
 import './header.css'
 
-const Game = (characterId) => {
+const Game = ({characterId}) => {
  return (
     <>
         <div className="header">
