@@ -1,4 +1,6 @@
+import React from "react";
 import { useNavigate } from "react-router-dom";
+
 
 
 const NavigationButtons  = () => {
@@ -18,7 +20,7 @@ const NavigationButtons  = () => {
             <button onClick={() => navigate("/character")}>
                 Персонаж
             </button>
-            <button onClick={() => navigate("/shop")}>
+            <button onClick={() => navigate("/")}>
                 Магазик
             </button>
         </div>
