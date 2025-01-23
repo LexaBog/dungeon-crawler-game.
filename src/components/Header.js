@@ -2,6 +2,9 @@ import React from 'react';
 import './header.css'
 
 const Game = ({characterId}) => {
+    if (!characterId) {
+        return <div className="header">Loading...</div>; // Показываем что-то, пока данные не загрузятся
+      }
  return (
     <>
         <div className="header">
