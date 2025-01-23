@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import './header.css'
 
 const Game = ({characterId}) => {
+    const navigate = useNavigate();
     if (!characterId) {
         return <div className="header">Loading...</div>; // Показываем что-то, пока данные не загрузятся
       }
