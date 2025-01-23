@@ -6,7 +6,7 @@ import "./NavigationButtons.css"
 
 const NavigationButtons  = () => {
     const navigate = useNavigate();
-
+    
     return (
         <>
             {/* <div className="boxNameUndLavel">
@@ -15,16 +15,16 @@ const NavigationButtons  = () => {
                 <p className="texStyleHeader"> Опыт: {characterId.experience}</p>
             </div> */}
           
-            <button onClick={() => navigate("/")}>
+            <button className="navigate-button" onClick={() => navigate("/")}>
                 Прокачка
             </button>
-            <button onClick={() => navigate("/character")}>
+            <button className="navigate-button" onClick={() => navigate("/character")}>
                 Персонаж
             </button>
-            <button onClick={() => navigate("/")}>
+            <button className="navigate-button" onClick={() => navigate("/")}>
                 Магазик
             </button>
-            <button onClick={() => navigate("/")}>
+            <button className="navigate-button" onClick={() => navigate("/")}>
                 Дом
             </button>
         </>
