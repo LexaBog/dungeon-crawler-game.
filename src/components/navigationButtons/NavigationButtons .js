@@ -10,7 +10,7 @@ const NavigationButtons  = () => {
     return (
         <div className="navigate-button-box">        
             <button className="display-button-Dangeon" onClick={() => navigate("/")}>
-            <img  className="button-Dangeon" src="/button-Dangeon.webp" alt="Dangeon" />    
+                <img  className="button-Dangeon" src="/button-Dangeon.webp" alt="Dangeon" />    
             </button>
             <button className="display-button-Haracteristic" onClick={() => navigate("/character")}>
                 <img  className="button-Haracteristic" src="/button-Haracteristic.webp" alt="Character" />    

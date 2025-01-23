@@ -25,7 +25,10 @@ const CharacterInfo = ({ characterId, setCharacterId }) => {
         />
       </div>
       <div className="character-stats">
-        <p>Сила: {characterId.strength}</p>
+        <p>
+        <img  className="stats" src="/icon/strenght.png.webp" alt="strenght" />
+          {characterId.strength}
+        </p>
         <p>Ловкость: {characterId.agility}</p>
         <p>Интеллект: {characterId.intelligence}</p>
         <p>броня: {characterId.baseArmor}</p>
