@@ -1,5 +1,5 @@
 import React from 'react';
-import './game.css'
+import './header.css'
 
 const Game = (characterId) => {
  return (
