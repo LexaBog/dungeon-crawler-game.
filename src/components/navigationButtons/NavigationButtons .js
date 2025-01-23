@@ -1,6 +1,6 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -15,15 +15,15 @@ const NavigationButtons  = () => {
                 <p className="texStyleHeader"> Опыт: {characterId.experience}</p>
             </div> */}
           
-            <Routes onClick={() => navigate("/")}/>
+            <button onClick={() => navigate("/")}>
                 Прокачка
-            
-            <Routes onClick={() => navigate("/character")}/>
+            </button>
+            <button onClick={() => navigate("/character")}>
                 Персонаж
-            
-            <Routes onClick={() => navigate("/")}/>
+            </button>
+            <button onClick={() => navigate("/")}>
                 Магазик
-            
+            </button>
         </Routes>
     );
 };
