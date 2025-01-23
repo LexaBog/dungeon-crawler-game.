@@ -18,7 +18,7 @@ const Game = ({characterId}) => {
             <p className="texStyleHeader"> Опыт: {characterId.experience}</p>
         </div>
         <button className="navigate-button-houm" onClick={() => navigate("/")}>
-                <img className="navigate-button-houm" src="/button-Houm.webp" alt="Home" />
+                <img className="Img-houm" src="/button-Houm.webp" alt="Home" />
                 {/* Дом */}
         </button>
     </>
