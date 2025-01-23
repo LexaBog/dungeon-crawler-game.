@@ -9,15 +9,14 @@ const NavigationButtons  = () => {
     
     return (
         <div className="navigate-button-box">        
-            <button className="" onClick={() => navigate("/")}>
+            <button className="display-button-Dangeon" onClick={() => navigate("/")}>
             <img  className="button-Dangeon" src="/button-Dangeon.webp" alt="Dangeon" />    
-                П
             </button>
             <button className="display-button-Haracteristic" onClick={() => navigate("/character")}>
                 <img  className="button-Haracteristic" src="/button-Haracteristic.webp" alt="Character" />    
             </button>
-            <button className="" onClick={() => navigate("/")}>
-                Магазик
+            <button className="display-button-Shop" onClick={() => navigate("/")}>
+                <img  className="button-Shop" src="/button-Shop.webp" alt="Shop" />    
             </button>
         </div>
     );

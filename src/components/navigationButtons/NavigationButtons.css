@@ -44,3 +44,17 @@
     border-radius: 5px;
 }
 
+.display-button-Dangeon {
+    background: linear-gradient(to top, black, transparent);
+}
+
+.button-Shop {
+    width: 60px;
+    height: 40px;
+    margin-left: 20px;
+    border-radius: 5px;
+}
+
+.display-button-Shop {
+    background: linear-gradient(to top, black, transparent);
+}
