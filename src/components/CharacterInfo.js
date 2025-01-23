@@ -30,14 +30,14 @@ const CharacterInfo = ({ characterId, setCharacterId }) => {
           {characterId.strength}
         </p>
         <p>
-          <img  className="stats" src="/img/icon/agiliti.png" alt="agiliti" />
+          <img  className="tats-Icon" src="/img/icon/agiliti.png" alt="agiliti" />
             {characterId.agility}
         </p>
         <p>Интеллект: {characterId.intelligence}</p>
         <p>броня: {characterId.baseArmor}</p>
         <p>уклонение: {characterId.baseEvasion}</p>
         <p> 
-           <img  className="stats" src="/img/icon/ataks.png" alt="ataks" />
+           <img  className="tats-Icon" src="/img/icon/ataks.png" alt="ataks" />
             {characterId.baseAttack}
         </p>
       </div>
