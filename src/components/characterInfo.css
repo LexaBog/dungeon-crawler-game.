@@ -1,35 +1,35 @@
 
 /* Добавляем полупрозрачный фон для текста */
 .boxNameUndLavel {
-    background: linear-gradient(to top, black, transparent);
-    padding: 5px 15px;
-    /* border-radius: 8px; */
-    text-align: center;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    padding-top: 70px;
+  background: linear-gradient(to top, black, transparent);
+  padding: 5px 15px;
+  /* border-radius: 8px; */
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  padding-top: 70px;
 }
   
-  /* Стили для имени и уровня */
+/* Стили для имени и уровня */
 .boxNameUndLavel p {
-    color: #FFD700; /* Золотистый цвет для имени */
-    font-size: 20px;
-    margin: 5px 0;
+  color: #FFD700; /* Золотистый цвет для имени */
+  font-size: 20px;
+  margin: 5px 0;
 }
   
 .boxNameUndLavel .texStyleHeader {
-    color: #fff; 
-    /* font-size: 18px; */
-    /* margin-top: 10px; */
+  color: #fff; 
+  /* font-size: 18px; */
+  /* margin-top: 10px; */
 }
   
   /* Стили для характеристик */
 .character-stats {
-    background-color: rgba(50, 50, 50, 0.8); 
-    padding: 15px;
-    border-radius: 8px;
-    margin: 20px 0;
+  background-color: rgba(50, 50, 50, 0.8); 
+  padding: 15px;
+  border-radius: 8px;
+  margin: 20px 0;
 }
   
 .character-stats p {
@@ -147,7 +147,7 @@ h3 {
 }
   
 .stats-Icon {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   border-radius: 5px;
 } 
