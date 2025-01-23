@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import CharacterInfo from "./components/CharacterInfo.js";
+import Header from './components/Header.js';
 import Game from "./components/Game.js";
 import { authenticateUser, validateToken,} from "./components/authService.js";
 import "./App.css";
@@ -48,11 +49,14 @@ function App() {
 
   return (
     <div className="ollGameBody">
-      <div className="header">
+      {/* <div className="header">
         <h1 className="headerText">Dungeons s Heroes</h1>
-      </div>
+      </div> */}
 
       <Routes>
+        <Header
+          characterId={characterId}
+        />
         <Route
           path="/character"
           element={

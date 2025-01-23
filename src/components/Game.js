@@ -1,23 +1,24 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
+import './game.css'
 
 const Game = (characterId) => {
     const navigate = useNavigate();
 
     return (
         <div>
-            <div className="boxNameUndLavel">
+            {/* <div className="boxNameUndLavel">
                 <p>{characterId.name}</p>
                 <p className="texStyleHeader">{characterId.level} level </p>
                 <p className="texStyleHeader"> Опыт: {characterId.experience}</p>
-            </div>
+            </div> */}
             <button onClick={() => navigate("/dangeon")}>
                 Прокачка
             </button>
             <button onClick={() => navigate("/character")}>
                 Персонаж
             </button>
-            <button>
+            <button onClick={() => navigate("/shop")}>
                 Магазик
             </button>
         </div>

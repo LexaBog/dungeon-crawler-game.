@@ -1,26 +1,26 @@
-.boxNameUndLavel {
+/* .boxNameUndLavel {
     background: linear-gradient(to top, black, transparent);
     padding: 5px 15px;
     /* border-radius: 8px; */
-    text-align: center;
+    /* text-align: center;
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    padding-top: 70px;
-}
+    padding-top: 70px; */
+/* } */ */
 
 /* Стили для имени и уровня */
-.boxNameUndLavel p {
+/* .boxNameUndLavel p {
     color: #FFD700; /* Золотистый цвет для имени */
-    font-size: 20px;
-    margin: 5px 0;
-}
+    /* font-size: 20px; */
+    /* margin: 5px 0; */ */
+/* } */
 
-.boxNameUndLavel .texStyleHeader {
+/* .boxNameUndLavel .texStyleHeader {
     color: #fff; 
-}
+} */
 
-.navigate-button {
+/* .navigate-button {
     padding: 10px 20px;
     margin: 10px;
     background-color: #007bff;
@@ -28,8 +28,8 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
+} */
   
-  .navigate-button:hover {
+/* .navigate-button:hover {
     background-color: #0056b3;
-  }
+}
