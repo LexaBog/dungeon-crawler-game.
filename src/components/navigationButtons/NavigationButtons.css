@@ -11,3 +11,9 @@
 .navigate-button:hover {
     background-color: #0056b3;
 }
+
+.button-Haracteristic {
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+}

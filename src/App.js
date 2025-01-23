@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import CharacterInfo from "./components/CharacterInfo.js";
 import Game from "./components/Game.js";
 import Header from "./components/Header.js";
+import NavigationButtons from "./components/navigationButtons/NavigationButtons .js"
 import { authenticateUser, validateToken } from "./components/authService.js";
 import "./App.css";
 
@@ -84,7 +85,9 @@ function App() {
         />
       </Routes>
 
-      <div className="futer"></div>
+      <div className="futer">
+        <NavigationButtons/>
+      </div>
     </div>
   );
 }

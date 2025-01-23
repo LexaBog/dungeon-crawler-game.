@@ -1,5 +1,5 @@
 import React from 'react';
-import NavigationButtons from './navigationButtons/NavigationButtons ';
+
 
 import './game.css'
 
@@ -13,8 +13,7 @@ const Game = (characterId) => {
                 <p className="texStyleHeader">{characterId.level} level </p>
                 <p className="texStyleHeader"> Опыт: {characterId.experience}</p>
             </div> */}
-            <NavigationButtons/>
-          
+             
         </div>
     );
 };

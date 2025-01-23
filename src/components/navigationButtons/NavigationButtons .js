@@ -19,7 +19,7 @@ const NavigationButtons  = () => {
                 Прокачка
             </button>
             <button className="navigate-button" onClick={() => navigate("/character")}>
-                Персонаж
+                <img  className="button-Haracteristic" src="/button-Haracteristic.webp" alt="Character" />    
             </button>
             <button className="navigate-button" onClick={() => navigate("/")}>
                 Магазик
