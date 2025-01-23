@@ -26,11 +26,11 @@ const CharacterInfo = ({ characterId, setCharacterId }) => {
       </div>
       <div className="character-stats">
         <p>
-          <img  className="stats" src="/img/icon/strenght.png" alt="strenght" />
+          <img  className="stats-Icon" src="/img/icon/strenght.png" alt="strenght" />
           {characterId.strength}
         </p>
         <p>
-          <img  className="stats" src="../public/img/icon/agiliti.png" alt="agiliti" />
+          <img  className="stats" src="/img/icon/agiliti.png" alt="agiliti" />
             {characterId.agility}
         </p>
         <p>Интеллект: {characterId.intelligence}</p>
