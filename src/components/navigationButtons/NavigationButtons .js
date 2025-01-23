@@ -14,7 +14,7 @@ const NavigationButtons  = () => {
                 <p className="texStyleHeader"> Опыт: {characterId.experience}</p>
             </div> */}
           
-            <button onClick={() => navigate("/dangeon")}>
+            <button onClick={() => navigate("/")}>
                 Прокачка
             </button>
             <button onClick={() => navigate("/character")}>
