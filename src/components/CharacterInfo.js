@@ -6,22 +6,6 @@ import './characterInfo.css'
 
 const CharacterInfo = ({ characterId, setCharacterId }) => {
 
-  // useEffect(() => {
-  //   const loadCharacter = async () => {
-  //     try {
-  //       const fetchedCharacter = await fetchCharacter(characterId);
-  //       setCharacterId(fetchedCharacter); // Обновляем состояние персонажа
-  //     } catch (error) {
-  //       console.error("Ошибка загрузки персонажа:", error);
-  //     }
-  //   };
-
-  //   if (characterId) {
-  //     loadCharacter();
-  //   }
-  // }, [characterId, setCharacterId]);
-
-
   if (!characterId) return <p>Персонаж не найден</p>;
   return (
     <div >

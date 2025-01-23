@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import "./NavigationButtons.css"
 
 
 
@@ -22,6 +23,9 @@ const NavigationButtons  = () => {
             </button>
             <button onClick={() => navigate("/")}>
                 Магазик
+            </button>
+            <button onClick={() => navigate("/")}>
+                Дом
             </button>
         </>
     );
