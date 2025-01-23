@@ -1,9 +1,10 @@
 import React from 'react';
-import { useNavigate } from "react-router-dom";
+import NavigationButtons from './navigationButtons/NavigationButtons ';
+
 import './game.css'
 
 const Game = (characterId) => {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     return (
         <div>
@@ -12,15 +13,8 @@ const Game = (characterId) => {
                 <p className="texStyleHeader">{characterId.level} level </p>
                 <p className="texStyleHeader"> Опыт: {characterId.experience}</p>
             </div> */}
-            <button onClick={() => navigate("/dangeon")}>
-                Прокачка
-            </button>
-            <button onClick={() => navigate("/character")}>
-                Персонаж
-            </button>
-            <button onClick={() => navigate("/shop")}>
-                Магазик
-            </button>
+            <NavigationButtons/>
+          
         </div>
     );
 };
