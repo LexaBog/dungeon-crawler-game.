@@ -48,8 +48,8 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
+}
   
-  .navigate-button:hover {
+.navigate-button:hover {
     background-color: #0056b3;
-  }
+}
