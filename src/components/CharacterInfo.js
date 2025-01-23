@@ -36,7 +36,10 @@ const CharacterInfo = ({ characterId, setCharacterId }) => {
         <p>Интеллект: {characterId.intelligence}</p>
         <p>броня: {characterId.baseArmor}</p>
         <p>уклонение: {characterId.baseEvasion}</p>
-        <p>атака: {characterId.baseAttack}</p>
+        <p> 
+           <img  className="stats" src="/icon/ataks.png" alt="ataks" />
+            {characterId.baseAttack}
+        </p>
       </div>
       <div className="equipped-items">
         <h3>Экипированные предметы:</h3>
