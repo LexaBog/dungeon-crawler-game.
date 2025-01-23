@@ -15,3 +15,5 @@ const Game = (characterId) => {
     </>
  );
 };
+
+export default Game
