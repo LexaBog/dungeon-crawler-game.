@@ -7,3 +7,9 @@
     background-color: rgba(0, 0, 0, 0.377);
     margin-top: 40px;
 }
+
+.dungeon-list {
+    width: 80%;
+    display: flex;
+    align-items: center;
+}
