@@ -3,6 +3,10 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    max-height: 80vh; /* Максимальная высота списка, ограничена высотой экрана */
+    overflow-y: auto; /* Включаем вертикальную прокрутку */
+    scrollbar-width: none; /* Убираем скроллбар (для Firefox) */
+    -ms-overflow-style: none; /* Убираем скроллбар (для IE и Edge) */
 }
 
 
