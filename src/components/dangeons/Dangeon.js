@@ -40,6 +40,7 @@ const DungeonList = () => {
           {dungeons.map((dungeon) => (
             <li key={dungeon._id}>
               {dungeon.name} (Уровень: {dungeon.level})
+              {concole.log(dungeon)}
             </li>
           ))}
         </ul>
