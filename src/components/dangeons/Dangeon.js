@@ -19,7 +19,7 @@ const DungeonList  = () => {
         }
         loadDungeon()
     }, [])
-
+    console.log(dungeon)
     if (error) return <p>{error}</p>
    
     return (
