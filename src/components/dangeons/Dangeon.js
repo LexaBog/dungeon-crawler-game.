@@ -31,7 +31,7 @@ const DungeonList = () => {
     <div className="fulBodiDungeons">
       <div className="buttonDunght-1-10">
         <h2>Сбор душ 1-10 уровень</h2>
-        <button onClick={toggleDungeonList}>
+        <button className="butonOnDungeon" onClick={toggleDungeonList}>
           {isOpen ? "Скрыть" : "Открыть"}
         </button>
       </div>
