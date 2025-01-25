@@ -21,14 +21,13 @@ const DungeonList = () => {
                 console.error(err); // Для отладки
                 setError("Не удалось загрузить данные о подземельях");
             }
-            concol.log(dungeons)
-    };
-    loadDungeon();
-  }, []);
-
-  if (error) return <p>{error}</p>;
-
-  return (
+        };
+        loadDungeon();
+    }, []);
+    
+    if (error) return <p>{error}</p>;
+    
+    return (
     <div>
       <div className="buttonDunght-1-10">
         <h2>Сбор душ 1-10 уровень</h2>
@@ -41,7 +40,7 @@ const DungeonList = () => {
           {dungeons.map((dungeon) => (
             <li key={dungeon._id}>
               {dungeon.name} (Уровень: {dungeon.level})
-              
+              {dungeon.duration} {dungeon.experience} {dungeon.cardDropChance}
             </li>
           ))}
         </ul>
