@@ -38,13 +38,13 @@ const DungeonList = () => {
       {isOpen && (
         <ul className="dungeon-list">
           {dungeons.map((dungeon) => (
-            <li key={dungeon._id}>
-                <p2>
-                    {dungeon.name} 
-                </p2>
+            <div key={dungeon._id}>
+                <div className="dangeonName">{dungeon.name} </div>
               Уровень: {dungeon.level}
-              длительность {dungeon.duration} уровень {dungeon.experience} шанс выпадение карты героя{dungeon.cardDropChance}
-            </li>
+              длительность {dungeon.duration} 
+              уровень {dungeon.experience} 
+              шанс выпадение карты героя{dungeon.cardDropChance}
+            </div>
           ))}
         </ul>
       )}

@@ -21,3 +21,8 @@
     align-items: center;
     background-color: rgba(0, 0, 0, 0.425);
 }
+
+.dangeonName {
+    color: rgb(214, 86, 35);
+    font-size: 18px;
+}
