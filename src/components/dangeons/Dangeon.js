@@ -53,7 +53,7 @@ const DungeonList = () => {
                     уровень {dungeon.experience} 
                 </p>
                 <p>
-                     картf героя{dungeon.cardDropChance} %
+                     карта героя{dungeon.cardDropChance} %
                 </p>
             </div>
           ))}
