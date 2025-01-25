@@ -12,15 +12,16 @@ const DungeonList = () => {
   };
 
   useEffect(() => {
-    const loadDungeon = async () => {
-      try {
-        setError(null);
-        const data = await fetchDungeons();
-        setDungeons(data);
-      } catch (err) {
-        console.error(err); // Для отладки
-        setError("Не удалось загрузить данные о подземельях");
-      }
+      const loadDungeon = async () => {
+          try {
+              setError(null);
+              const data = await fetchDungeons();
+              setDungeons(data);
+            } catch (err) {
+                console.error(err); // Для отладки
+                setError("Не удалось загрузить данные о подземельях");
+            }
+            concole.log(dungeons)
     };
     loadDungeon();
   }, []);
@@ -40,7 +41,7 @@ const DungeonList = () => {
           {dungeons.map((dungeon) => (
             <li key={dungeon._id}>
               {dungeon.name} (Уровень: {dungeon.level})
-              {concole.log(dungeon)}
+              
             </li>
           ))}
         </ul>
