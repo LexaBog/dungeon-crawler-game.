@@ -44,13 +44,13 @@ const DungeonList = () => {
                     Уровень: {dungeon.level}
                 </p>
                 <p>
-                    длительность {dungeon.duration} 
+                    длительность {dungeon.duration} c
                 </p>
                 <p>
                     уровень {dungeon.experience} 
                 </p>
                 <p>
-                    шанс выпадение карты героя{dungeon.cardDropChance} 
+                     картf героя{dungeon.cardDropChance} %
                 </p>
             </div>
           ))}
