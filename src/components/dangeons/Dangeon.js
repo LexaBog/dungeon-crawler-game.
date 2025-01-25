@@ -55,6 +55,7 @@ const DungeonList = () => {
                 <p>
                      карта героя{dungeon.cardDropChance} %
                 </p>
+                <button>start</button>
             </div>
           ))}
         </ul>
