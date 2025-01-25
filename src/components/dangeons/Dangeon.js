@@ -39,7 +39,6 @@ const DungeonList = () => {
         <ul className="dungeon-list">
           {dungeons.map((dungeon) => (
             <div key={dungeon._id}>
-                {/* <div className="dangeonName">{dungeon.name} </div> */}
                 <p>
                     Уровень: {dungeon.level}
                 </p>
@@ -47,7 +46,7 @@ const DungeonList = () => {
                     длительность {dungeon.duration} c
                 </p>
                 <p>
-                    Уровень: {dungeon.gold}
+                    золото: {dungeon.gold}
                 </p>
                 <p>
                     уровень {dungeon.experience} 
