@@ -62,6 +62,12 @@ function App() {
         />
       <Routes>
         <Route
+        path="/dangeon"
+          element={
+            <DungeonList/>
+          }
+        />
+        <Route
           path="/character"
           element={
             <CharacterInfo
