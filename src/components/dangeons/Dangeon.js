@@ -2,16 +2,18 @@
 import React, {useEffect, useState} from "react";
 import fetchDungeons from "./fetchDungeons";
 
-const DungeonList  = async () => {
+const DungeonList  = () => {
     const [dungeons, setDungeons] = useState([]);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         const loadDungeon = async () => {
             try {
+                setError(null);
                 const data = await fetchDungeons();
                 setDungeons(data);
             } catch (err) {
+                console.error(err); // Для отладки
                 setError("Не удалось загрузить данные о подземельях");
             }
         }
