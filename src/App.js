@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import CharacterInfo from "./components/CharacterInfo.js";
 import Game from "./components/Game.js";
 import Header from "./components/Header.js";
+import DungeonList from "./components/dangeons/Dangeon.js";
 import NavigationButtons from "./components/navigationButtons/NavigationButtons .js"
 import { authenticateUser, validateToken } from "./components/authService.js";
 import "./App.css";
@@ -12,6 +13,17 @@ function App() {
   const [username, setUsername] = useState(null);
   const [characterId, setCharacterId] = useState(null);
   const [error, setError] = useState(null);
+  // const [telegramId, setTelegramId] = useState("123456789"); // Статичный Telegram ID
+  // const [username, setUsername] = useState("TestUser"); // Статичное имя пользователя
+  // const [characterId, setCharacterId] = useState({
+  //   name: "Test Character",
+  //   level: 1,
+  //   experience: 100,
+  //   health: 50,
+  //   maxHealth: 100,
+  //   mana: 30,
+  //   maxMana: 30,
+  // });
 
   useEffect(() => {
     // Получение токена из URL или localStorage

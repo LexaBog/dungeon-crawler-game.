@@ -1,10 +1,10 @@
 
-import React, {useEffect, useState, useState} from "react";
+import React, {useEffect, useState} from "react";
 import fetchDungeons from "./fetchDungeons";
 
 const DungeonList  = async () => {
-    console [dungeons, setDungeons] = useState([]);
-    const [error, setError] = useState([]);
+    const [dungeons, setDungeons] = useState([]);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const loadDungeon = async () => {
