@@ -49,7 +49,7 @@ const DungeonList = () => {
                     золото: {dungeon.gold}
                 </p>
                 <p>
-                    уровень {dungeon.experience} 
+                    опыт {dungeon.experience} 
                 </p>
                 <p>
                      карта героя{dungeon.cardDropChance} %
