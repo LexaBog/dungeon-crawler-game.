@@ -21,7 +21,7 @@ const DungeonList = () => {
                 console.error(err); // Для отладки
                 setError("Не удалось загрузить данные о подземельях");
             }
-            concole.log(dungeons)
+            concol.log(dungeons)
     };
     loadDungeon();
   }, []);
