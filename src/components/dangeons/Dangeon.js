@@ -39,7 +39,10 @@ const DungeonList = () => {
         <ul className="dungeon-list">
           {dungeons.map((dungeon) => (
             <li key={dungeon._id}>
-              {dungeon.name} Уровень: {dungeon.level}
+                <p2>
+                    {dungeon.name} 
+                </p2>
+              Уровень: {dungeon.level}
               длительность {dungeon.duration} уровень {dungeon.experience} шанс выпадение карты героя{dungeon.cardDropChance}
             </li>
           ))}
