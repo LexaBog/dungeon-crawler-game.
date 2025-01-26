@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import fetchDungeons from "./fetchDungeons";
 import "./dungeon.css";
 import axios from "axios";
+import Awards from "../awards/Awards1-10";
 
 const DungeonList = ({ telegramId }) => {
   const [dungeons, setDungeons] = useState([]);
   const [activeDungeons, setActiveDungeons] = useState([]);
   const [error, setError] = useState(null);
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [rewards, setRewards] = useState(null);
 
   useEffect(() => {
     const loadDungeons = async () => {
@@ -64,7 +67,9 @@ const DungeonList = ({ telegramId }) => {
         dungeonId,
       });
 
-      alert(`Подземелье завершено! Награды: ${response.data.rewards.gold} золота, ${response.data.rewards.experience} опыта`);
+      // Показываем награды в модальном окне
+      setRewards(response.data.rewards);
+      setModalVisible(true);
 
       // Обновляем список активных подземелий
       setActiveDungeons((prev) =>
@@ -76,11 +81,21 @@ const DungeonList = ({ telegramId }) => {
     }
   };
 
+  const closeModal = () => {
+    setModalVisible(false);
+    setRewards(null);
+  };
 
   if (error) return <p>{error}</p>;
 
   return (
     <div className="fulBodiDungeons">
+      {/* Модальное окно для наград */}
+      <Awards
+        isVisible={isModalVisible}
+        onClose={closeModal}
+        rewards={rewards || { gold: 0, experience: 0 }}
+      />
       <div className="buttonDunght-1-10">
         <h2>Сбор душ 1-10 уровень</h2>
       </div>
@@ -111,5 +126,5 @@ const DungeonList = ({ telegramId }) => {
   );
 };
 
-export default DungeonList
+export default DungeonList;
 
