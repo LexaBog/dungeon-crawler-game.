@@ -6,11 +6,11 @@ import axios from "axios";
 const DungeonList = ({ telegramId }) => {
   const [dungeons, setDungeons] = useState([]);
   const [error, setError] = useState(null);
-  const [isOpen, setIsOpen] = useState(false); // Управление отображением списка
+  const [isOpen, setIsOpen] = useState(false);
   const [timeLeft, setTimeLeft] = useState(null);
 
   const toggleDungeonList = () => {
-    setIsOpen((prev) => !prev); // Переключение состояния
+    setIsOpen((prev) => !prev);
   };
 
   const startDungeon = async (dungeonId, telegramId) => {
@@ -24,19 +24,13 @@ const DungeonList = ({ telegramId }) => {
       console.log("Ответ от сервера:", response.data);
 
       const endTime = new Date(response.data.dungeon.endTime);
+      const now = new Date();
+      const remainingTime = Math.max(0, (endTime - now) / 1000);
 
-      const updateTimer = () => {
-        const now = new Date();
-        const remainingTime = Math.max(0, (endTime - now) / 1000); // Время в секундах
-        setTimeLeft(remainingTime);
+      setTimeLeft(remainingTime);
 
-        if (remainingTime === 0) {
-          clearInterval(timer);
-        }
-      };
+      console.log(`Оставшееся время: ${remainingTime} секунд`);
 
-      const timer = setInterval(updateTimer, 1000);
-      updateTimer();
       alert(`Подземелье "${response.data.dungeon.name}" начато!`);
     } catch (error) {
       console.error("Ошибка запуска подземелья:", error.response?.data || error.message);
@@ -58,17 +52,16 @@ const DungeonList = ({ telegramId }) => {
     loadDungeon();
   }, []);
 
-  useEffect((dungeon) => {
-    let timer = dungeon.duration ;
+  useEffect(() => {
+    let timer;
     if (timeLeft > 0) {
       timer = setInterval(() => {
         setTimeLeft((prev) => Math.max(0, prev - 1));
       }, 1000);
     }
-    console.log('смотрю цыфры таймера', timer)
-    return () => clearInterval(timer); // Очищаем таймер при размонтировании
+
+    return () => clearInterval(timer);
   }, [timeLeft]);
-  
 
   if (error) return <p>{error}</p>;
 
@@ -91,7 +84,7 @@ const DungeonList = ({ telegramId }) => {
               <p>карта героя {dungeon.cardDropChance} %</p>
               <button
                 onClick={() => startDungeon(dungeon._id, telegramId)}
-                disabled={timeLeft > 0} // Блокируем кнопку, если подземелье активно
+                disabled={timeLeft > 0}
               >
                 start
               </button>
@@ -100,11 +93,11 @@ const DungeonList = ({ telegramId }) => {
         </ul>
       )}
       <div>
-        {/* {timeLeft !== null && timeLeft > 0 ? ( */}
+        {timeLeft !== null && timeLeft > 0 ? (
           <p>До завершения подземелья осталось: {Math.ceil(timeLeft)} секунд</p>
-        {/* ) : ( */}
+        ) : (
           <p>Подземелье не запущено</p>
-        {/* )} */}
+        )}
       </div>
     </div>
   );
