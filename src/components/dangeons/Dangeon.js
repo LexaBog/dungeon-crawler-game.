@@ -99,11 +99,11 @@ const DungeonList = ({ telegramId }) => {
         </ul>
       )}
       <div>
-        {timeLeft !== null && timeLeft > 0 ? (
+        {/* {timeLeft !== null && timeLeft > 0 ? ( */}
           <p>До завершения подземелья осталось: {Math.ceil(timeLeft)} секунд</p>
-        ) : (
+        {/* ) : ( */}
           <p>Подземелье не запущено</p>
-        )}
+        {/* )} */}
       </div>
     </div>
   );
