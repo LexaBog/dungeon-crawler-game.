@@ -18,6 +18,7 @@ const DungeonList = ({userId}) => {
         userId,
         dungeonId,
       });
+      console.log("user", userId, "dangeon", dungeonId)
       alert(`Подземелье "${response.data.dungeon.name}" начато!`);
     } catch (error) {
       console.error("Ошибка запуска подземелья:", error.response?.data || error.message);
