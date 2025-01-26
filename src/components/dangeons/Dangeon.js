@@ -15,6 +15,7 @@ const DungeonList = ({telegramId}) => {
   const [timeLeft, setTimeLeft] = useState(null);
 
   const startDungeon = async (dungeonId, telegramId) => {
+    console.log('кнопка стар нажата')
     try {
       const response = await axios.post("http://localhost:5021/api/dungeons/start", {
         telegramId,
