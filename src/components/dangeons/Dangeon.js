@@ -69,7 +69,7 @@ const DungeonList = ({telegramId}) => {
                 <p>
                      карта героя{dungeon.cardDropChance} %
                 </p>
-                <button onClick={() => startDungeon(dungeon._id)}>start</button>
+                <button onClick={() => startDungeon(dungeon._id, telegramId)}>start</button>
             </div>
           ))}
         </ul>

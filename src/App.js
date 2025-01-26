@@ -77,7 +77,7 @@ function App() {
         path="/dangeon"
           element={
             <DungeonList
-            telegramId={telegramId}
+              telegramId={telegramId}
             />
           }
         />
