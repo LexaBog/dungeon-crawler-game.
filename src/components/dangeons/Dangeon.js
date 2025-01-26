@@ -20,25 +20,19 @@ const DungeonList = ({ telegramId }) => {
         telegramId,
         dungeonId,
       });
-
       console.log("Ответ от сервера:", response.data);
-
-      // Получаем длительность подземелья (в секундах)
+  
       const duration = response.data.dungeon.duration;
-
       console.log("Длительность подземелья:", duration);
-
-      // Устанавливаем начальное состояние таймера
+  
       setTimeLeft(duration);
-
-      console.log(`Длительность подземелья: ${duration} секунд`);
-
-      alert(`Подземелье "${response.data.dungeon.name}" начато!`);
+      console.log("Установлено значение timeLeft:", duration);
     } catch (error) {
       console.error("Ошибка запуска подземелья:", error.response?.data || error.message);
       alert("Не удалось запустить подземелье.");
     }
   };
+  
 
   useEffect(() => {
     const loadDungeon = async () => {
@@ -55,6 +49,8 @@ const DungeonList = ({ telegramId }) => {
   }, []);
 
   useEffect(() => {
+    console.log("timeLeft изменился:", timeLeft);
+
     let timer;
     if (timeLeft > 0) {
       timer = setInterval(() => {
@@ -101,8 +97,10 @@ const DungeonList = ({ telegramId }) => {
         {/* {timeLeft !== null && timeLeft > 0 ? ( */}
           <p>До завершения подземелья осталось: {Math.ceil(timeLeft)} секунд</p>
           {console.log(timeLeft)}
+          {console.log("Таймер отображается:", timeLeft)}
         {/* ) : ( */}
           <p>Подземелье не запущено</p>
+          {console.log("Подземелье не запущено")}
         {/* )} */}
       </div>
     </div>
