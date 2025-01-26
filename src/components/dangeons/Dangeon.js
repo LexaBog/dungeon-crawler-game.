@@ -13,48 +13,27 @@ const DungeonList = ({ telegramId }) => {
     setIsOpen((prev) => !prev);
   };
 
-  const startDungeon = async (telegramId, dungeonId) => {
-    console.log("startDungeon вызван с параметрами:", { telegramId, dungeonId });
-  
+  const startDungeon = async (dungeonId, telegramId) => {
+    console.log("Запуск подземелья с параметрами:", { dungeonId, telegramId });
     try {
-      console.log("Ищем подземелье с ID:", dungeonId);
-      const dungeon = await Dungeon.findById(dungeonId);
-      if (!dungeon) {
-        console.error("Подземелье не найдено");
-        throw new Error("Подземелье не найдено");
+      const response = await axios.post("http://localhost:5021/api/dungeons/start", {
+        telegramId,
+        dungeonId,
+      });
+  
+      console.log("Ответ от сервера:", response.data);
+      const { duration } = response.data.dungeon;
+  
+      if (!duration) {
+        console.error("Длительность подземелья не вернулась с сервера");
+        return;
       }
-      console.log("Подземелье найдено:", dungeon);
   
-      console.log("Ищем пользователя с telegramId:", telegramId);
-      const user = await User.findOne({ telegramId });
-      if (!user) {
-        console.error("Пользователь не найден");
-        throw new Error("Пользователь не найден");
-      }
-      console.log("Пользователь найден:", user);
-  
-      console.log("Обновляем состояние текущего подземелья пользователя...");
-      user.currentDungeon = {
-        dungeonId: dungeon._id,
-        startTime: new Date(),
-        duration: dungeon.duration,
-      };
-      await user.save();
-      console.log("Состояние пользователя обновлено");
-  
-      return {
-        message: "Подземелье успешно запущено",
-        dungeon: {
-          id: dungeon._id,
-          name: dungeon.name,
-          duration: dungeon.duration,
-          experience: dungeon.experience,
-          gold: dungeon.gold,
-        },
-      };
+      setTimeLeft(duration);
+      console.log("Установлено значение timeLeft:", duration);
     } catch (error) {
-      console.error("Ошибка в startDungeon:", error.message);
-      throw error;
+      console.error("Ошибка запуска подземелья:", error.response?.data || error.message);
+      alert("Не удалось запустить подземелье.");
     }
   };
   
