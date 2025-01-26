@@ -26,6 +26,8 @@ const DungeonList = ({ telegramId }) => {
       // Получаем длительность подземелья (в секундах)
       const duration = response.data.dungeon.duration;
 
+      console.log("Длительность подземелья:", duration);
+
       // Устанавливаем начальное состояние таймера
       setTimeLeft(duration);
 
