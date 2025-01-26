@@ -25,15 +25,18 @@ const DungeonList = ({telegramId}) => {
     const endTime = new Date(response.data.dungeon.endTime);
 
     // Обновляем оставшееся время
-    const updateTimer = () => {
-      const now = new Date();
-      const remainingTime = Math.max(0, (endTime - now) / 1000); // Время в секундах
-      setTimeLeft(remainingTime);
-
-      if (remainingTime === 0) {
-        clearInterval(timer);
+    useEffect(() => {
+      let timer;
+      if (timeLeft > 0) {
+        timer = setInterval(() => {
+          setTimeLeft((prev) => Math.max(0, prev - 1));
+        }, 1000);
       }
-    };
+    
+      // Очистка таймера, если `timeLeft` равно 0
+      return () => clearInterval(timer);
+    }, [timeLeft]);
+    
 
     // Устанавливаем интервал для обновления таймера каждую секунду
     const timer = setInterval(updateTimer, 1000);
@@ -92,7 +95,9 @@ const DungeonList = ({telegramId}) => {
                 <p>
                      карта героя{dungeon.cardDropChance} %
                 </p>
-                <button onClick={() => startDungeon(dungeon._id, telegramId)}>start</button>
+                <button onClick={() => startDungeon(dungeon._id, telegramId)}
+                   disabled={timeLeft > 0} // Блокируем, если таймер активен
+                  >start</button>
             </div>
           ))}
         </ul>
