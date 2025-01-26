@@ -12,19 +12,40 @@ const DungeonList = ({telegramId}) => {
     setIsOpen((prev) => !prev); // Переключение состояния
   };
 
+  const [timeLeft, setTimeLeft] = useState(null);
+
   const startDungeon = async (dungeonId, telegramId) => {
-    console.log("user", telegramId, "dangeon", dungeonId)
     try {
       const response = await axios.post("http://localhost:5021/api/dungeons/start", {
         telegramId,
         dungeonId,
       });
-      alert(`Подземелье "${response.data.dungeon.name}" начато!`);
-    } catch (error) {
-      console.error("Ошибка запуска подземелья:", error.response?.data || error.message);
-      alert("Не удалось запустить подземелье.")
-    }
+
+    const endTime = new Date(response.data.dungeon.endTime);
+
+    // Обновляем оставшееся время
+    const updateTimer = () => {
+      const now = new Date();
+      const remainingTime = Math.max(0, (endTime - now) / 1000); // Время в секундах
+      setTimeLeft(remainingTime);
+
+      if (remainingTime === 0) {
+        clearInterval(timer);
+      }
+    };
+
+    // Устанавливаем интервал для обновления таймера каждую секунду
+    const timer = setInterval(updateTimer, 1000);
+
+    updateTimer(); // Первый вызов для мгновенного обновления
+    alert(`Подземелье "${response.data.dungeon.name}" начато!`);
+  } catch (error) {
+    console.error("Ошибка запуска подземелья:", error.response?.data || error.message);
+    alert("Не удалось запустить подземелье.");
   }
+};
+
+  
 
   useEffect(() => {
       const loadDungeon = async () => {
@@ -53,6 +74,7 @@ const DungeonList = ({telegramId}) => {
       {isOpen && (
         <ul className="dungeon-list">
           {dungeons.map((dungeon) => (
+            
             <div key={dungeon._id}>
                 <p>
                     Уровень: {dungeon.level}
@@ -74,6 +96,13 @@ const DungeonList = ({telegramId}) => {
           ))}
         </ul>
       )}
+        <div>
+          {timeLeft !== null ? (
+            <p>До завершения подземелья осталось: {Math.ceil(timeLeft)} секунд</p>
+          ) : (
+            <p>Подземелье не запущено</p>
+          )}
+      </div>
     </div>
   );
 };
