@@ -9,42 +9,42 @@
     align-items: center;
     justify-content: center;
     z-index: 1000;
-  }
+}
   
-  .modal-content {
-    background: #ffffff60;
+.modal-content {
+    background: #0000007a;
     padding: 20px;
     border-radius: 10px;
     width: 300px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
+}
   
-  .modal-content h2 {
-    margin-bottom: 10px;
-  }
+.modal-content h2 {
+      margin-bottom: 10px;
+}
   
-  .modal-content ul {
+.modal-content ul {
     list-style: none;
     padding: 0;
     margin: 10px 0;
-  }
+}
   
-  .modal-content li {
+.modal-content li {
     margin: 5px 0;
-  }
+}
   
-  .modal-content button {
+.modal-content button {
     background: #944504;
-    color: white;
+    color: rgb(255, 255, 255);
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     margin-top: 10px;
-  }
+}
   
-  .modal-content button:hover {
+.modal-content button:hover {
     background: #96490a;
-  }
+}
   
