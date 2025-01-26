@@ -13,12 +13,12 @@ const DungeonList = ({userId}) => {
   };
 
   const startDungeon = async (dungeonId) => {
+    console.log("user", userId, "dangeon", dungeonId)
     try {
       const response = await axios.post("http://localhost:5021/api/dungeons/start", {
         userId,
         dungeonId,
       });
-      console.log("user", userId, "dangeon", dungeonId)
       alert(`Подземелье "${response.data.dungeon.name}" начато!`);
     } catch (error) {
       console.error("Ошибка запуска подземелья:", error.response?.data || error.message);
