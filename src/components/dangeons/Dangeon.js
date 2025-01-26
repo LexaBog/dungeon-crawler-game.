@@ -22,8 +22,15 @@ const DungeonList = ({ telegramId }) => {
       });
       console.log("Ответ от сервера:", response.data);
   
+      // Лог для проверки поля duration
       const duration = response.data.dungeon.duration;
-      console.log("Длительность подземелья:", duration);
+      console.log("Длительность подземелья (duration):", duration);
+  
+      // Если duration отсутствует
+      if (!duration) {
+        console.error("Сервер не вернул длительность подземелья (duration)");
+        return;
+      }
   
       setTimeLeft(duration);
       console.log("Установлено значение timeLeft:", duration);
@@ -32,6 +39,7 @@ const DungeonList = ({ telegramId }) => {
       alert("Не удалось запустить подземелье.");
     }
   };
+  
   
 
   useEffect(() => {
