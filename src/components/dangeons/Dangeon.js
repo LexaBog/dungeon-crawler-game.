@@ -85,10 +85,13 @@ const DungeonList = ({ telegramId }) => {
               <p>опыт {dungeon.experience}</p>
               <p>карта героя {dungeon.cardDropChance} %</p>
               <button
-                onClick={() => startDungeon(dungeon._id, telegramId)}
-                // disabled={timeLeft > 0}
-              >
-                start
+                  onClick={() => {
+                    console.log("Кнопка нажата"); // Проверяем, вызывается ли событие
+                    startDungeon(dungeon._id, telegramId);
+                  }}
+                  disabled={timeLeft > 0} // Кнопка блокируется, если таймер активен
+                >
+                  start
               </button>
             </div>
           ))}
