@@ -65,9 +65,10 @@ const DungeonList = ({ telegramId }) => {
         setTimeLeft((prev) => Math.max(0, prev - 1));
       }, 1000);
     }
-
-    return () => clearInterval(timer);
+    console.log('смотрю цыфры таймера', timer)
+    return () => clearInterval(timer); // Очищаем таймер при размонтировании
   }, [timeLeft]);
+  
 
   if (error) return <p>{error}</p>;
 
