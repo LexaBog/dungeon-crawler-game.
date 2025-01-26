@@ -12,7 +12,7 @@ const DungeonList = ({telegramId}) => {
     setIsOpen((prev) => !prev); // Переключение состояния
   };
 
-  const startDungeon = async (dungeonId) => {
+  const startDungeon = async (dungeonId, telegramId) => {
     console.log("user", telegramId, "dangeon", dungeonId)
     try {
       const response = await axios.post("http://localhost:5021/api/dungeons/start", {
