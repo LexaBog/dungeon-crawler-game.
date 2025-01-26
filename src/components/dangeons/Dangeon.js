@@ -58,8 +58,8 @@ const DungeonList = ({ telegramId }) => {
     loadDungeon();
   }, []);
 
-  useEffect(() => {
-    let timer;
+  useEffect((dungeon) => {
+    let timer = dungeon.duration ;
     if (timeLeft > 0) {
       timer = setInterval(() => {
         setTimeLeft((prev) => Math.max(0, prev - 1));
