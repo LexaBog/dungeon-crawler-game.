@@ -76,7 +76,9 @@ function App() {
         <Route
         path="/dangeon"
           element={
-            <DungeonList/>
+            <DungeonList
+            telegramId={telegramId}
+            />
           }
         />
         <Route

@@ -3,7 +3,7 @@ import fetchDungeons from "./fetchDungeons";
 import "./dungeon.css";
 import axios from "axios";
 
-const DungeonList = ({userId}) => {
+const DungeonList = ({telegramId}) => {
   const [dungeons, setDungeons] = useState([]);
   const [error, setError] = useState(null);
   const [isOpen, setIsOpen] = useState(false); // Управление отображением списка
@@ -13,10 +13,10 @@ const DungeonList = ({userId}) => {
   };
 
   const startDungeon = async (dungeonId) => {
-    console.log("user", userId, "dangeon", dungeonId)
+    console.log("user", telegramId, "dangeon", dungeonId)
     try {
       const response = await axios.post("http://localhost:5021/api/dungeons/start", {
-        userId,
+        telegramId,
         dungeonId,
       });
       alert(`Подземелье "${response.data.dungeon.name}" начато!`);
