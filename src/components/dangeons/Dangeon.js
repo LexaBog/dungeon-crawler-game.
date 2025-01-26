@@ -20,24 +20,23 @@ const DungeonList = ({ telegramId }) => {
         telegramId,
         dungeonId,
       });
-  
+
       console.log("Ответ от сервера:", response.data);
-  
+
       // Получаем длительность подземелья (в секундах)
       const duration = response.data.dungeon.duration;
-  
+
       // Устанавливаем начальное состояние таймера
       setTimeLeft(duration);
-  
+
       console.log(`Длительность подземелья: ${duration} секунд`);
-  
+
       alert(`Подземелье "${response.data.dungeon.name}" начато!`);
     } catch (error) {
       console.error("Ошибка запуска подземелья:", error.response?.data || error.message);
       alert("Не удалось запустить подземелье.");
     }
   };
-  
 
   useEffect(() => {
     const loadDungeon = async () => {
@@ -60,11 +59,9 @@ const DungeonList = ({ telegramId }) => {
         setTimeLeft((prev) => prev - 1);
       }, 1000);
     }
-  
-    // Очищаем таймер, когда он завершён
+
     return () => clearInterval(timer);
   }, [timeLeft]);
-  
 
   if (error) return <p>{error}</p>;
 
