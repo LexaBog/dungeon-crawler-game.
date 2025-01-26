@@ -1,73 +1,47 @@
-import React, { useEffect, useState } from "react";
-import fetchDungeons from "./fetchDungeons";
-import "./dungeon.css";
-import axios from "axios";
-
 const DungeonList = ({ telegramId }) => {
   const [dungeons, setDungeons] = useState([]);
+  const [activeDungeons, setActiveDungeons] = useState([]);
   const [error, setError] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(null);
 
   const toggleDungeonList = () => {
     setIsOpen((prev) => !prev);
   };
 
-  const startDungeon = async (dungeonId, telegramId) => {
-    console.log("Запуск подземелья с параметрами:", { dungeonId, telegramId });
+  const startDungeon = async (dungeonId) => {
     try {
       const response = await axios.post("http://localhost:5021/api/dungeons/start", {
         telegramId,
         dungeonId,
       });
-  
-      console.log("Ответ от сервера:", response.data);
-      const { duration } = response.data.dungeon;
-  
-      if (!duration) {
-        console.error("Длительность подземелья не вернулась с сервера");
-        return;
-      }
-  
-      setTimeLeft(duration);
-      console.log("Установлено значение timeLeft:", duration);
+      const { dungeon } = response.data;
+
+      // Обновляем список активных подземелий
+      setActiveDungeons((prev) => [...prev, dungeon]);
     } catch (error) {
       console.error("Ошибка запуска подземелья:", error.response?.data || error.message);
       alert("Не удалось запустить подземелье.");
     }
   };
-  
-  
-  
 
-  useEffect(() => {
-    // console.log("timeLeft изменился:", timeLeft);
+  const loadDungeons = async () => {
+    try {
+      setError(null);
+      const data = await fetchDungeons();
+      setDungeons(data);
 
-    const loadDungeon = async () => {
-      try {
-        setError(null);
-        const data = await fetchDungeons();
-        setDungeons(data);
-      } catch (err) {
-        console.error(err);
-        setError("Не удалось загрузить данные о подземельях");
-      }
-    };
-    loadDungeon();
-  }, []);
-
-  useEffect(() => {
-    console.log("timeLeft изменился:", timeLeft);
-
-    let timer;
-    if (timeLeft > 0) {
-      timer = setInterval(() => {
-        setTimeLeft((prev) => prev - 1);
-      }, 1000);
+      // Получаем список активных подземелий
+      const userResponse = await axios.get(`http://localhost:5021/api/user/${telegramId}`);
+      setActiveDungeons(userResponse.data.activeDungeons || []);
+    } catch (err) {
+      console.error(err);
+      setError("Не удалось загрузить данные о подземельях");
     }
+  };
 
-    return () => clearInterval(timer);
-  }, [timeLeft]);
+  useEffect(() => {
+    loadDungeons();
+  }, []);
 
   if (error) return <p>{error}</p>;
 
@@ -81,36 +55,33 @@ const DungeonList = ({ telegramId }) => {
       </div>
       {isOpen && (
         <ul className="dungeon-list">
-          {dungeons.map((dungeon) => (
-            <div key={dungeon._id}>
-              <p>Уровень: {dungeon.level}</p>
-              <p>длительность {dungeon.duration} c</p>
-              <p>золото: {dungeon.gold}</p>
-              <p>опыт {dungeon.experience}</p>
-              <p>карта героя {dungeon.cardDropChance} %</p>
-              <button
-                  onClick={() => {
-                    console.log("Кнопка нажата"); // Проверяем, вызывается ли событие
-                    startDungeon(dungeon._id, telegramId);
-                  }}
-                  disabled={timeLeft > 0} // Кнопка блокируется, если таймер активен
-                >
-                  start
-              </button>
-            </div>
-          ))}
+          {dungeons.map((dungeon) => {
+            const activeDungeon = activeDungeons.find(
+              (active) => active.dungeonId === dungeon._id
+            );
+
+            if (activeDungeon) {
+              const timeLeft = Math.ceil(
+                (new Date(activeDungeon.endTime) - new Date()) / 1000
+              );
+
+              return (
+                <div key={dungeon._id}>
+                  <p>Уровень: {dungeon.level}</p>
+                  <p>Осталось времени: {timeLeft > 0 ? `${timeLeft} секунд` : "Завершено"}</p>
+                </div>
+              );
+            }
+
+            return (
+              <div key={dungeon._id}>
+                <p>Уровень: {dungeon.level}</p>
+                <button onClick={() => startDungeon(dungeon._id)}>Start</button>
+              </div>
+            );
+          })}
         </ul>
       )}
-      <div>
-        {/* {timeLeft !== null && timeLeft > 0 ? ( */}
-          <p>До завершения подземелья осталось: {Math.ceil(timeLeft)} секунд</p>
-          {console.log(dungeons.duration)}
-          {console.log("Таймер отображается:", timeLeft)}
-        {/* ) : ( */}
-          <p>Подземелье не запущено</p>
-          {console.log("Подземелье не запущено")}
-        {/* )} */}
-      </div>
     </div>
   );
 };
