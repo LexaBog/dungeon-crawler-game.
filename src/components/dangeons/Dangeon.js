@@ -19,12 +19,13 @@ const DungeonList = ({ telegramId }) => {
       const response = await axios.post("http://localhost:5021/api/dungeons/start", {
         telegramId,
         dungeonId,
+        dungeons
       });
       console.log("Ответ от сервера:", response.data);
   
       // Лог для проверки поля duration
       const duration = response.data.dungeon.duration;
-      console.log("Длительность подземелья (duration):", duration);
+      console.log("Длительность подземелья (duration):", dungeons.duration);
   
       // Если duration отсутствует
       if (!duration) {
@@ -43,6 +44,8 @@ const DungeonList = ({ telegramId }) => {
   
 
   useEffect(() => {
+    // console.log("timeLeft изменился:", timeLeft);
+
     const loadDungeon = async () => {
       try {
         setError(null);
@@ -104,7 +107,7 @@ const DungeonList = ({ telegramId }) => {
       <div>
         {/* {timeLeft !== null && timeLeft > 0 ? ( */}
           <p>До завершения подземелья осталось: {Math.ceil(timeLeft)} секунд</p>
-          {console.log(timeLeft)}
+          {console.log(dungeons.duration)}
           {console.log("Таймер отображается:", timeLeft)}
         {/* ) : ( */}
           <p>Подземелье не запущено</p>
