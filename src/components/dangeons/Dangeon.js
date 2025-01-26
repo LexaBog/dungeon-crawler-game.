@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import fetchDungeons from "./fetchDungeons";
 import "./dungeon.css";
+import axios from "axios";
 
-const DungeonList = () => {
+const DungeonList = ({userId}) => {
   const [dungeons, setDungeons] = useState([]);
   const [error, setError] = useState(null);
   const [isOpen, setIsOpen] = useState(false); // Управление отображением списка
@@ -10,6 +11,19 @@ const DungeonList = () => {
   const toggleDungeonList = () => {
     setIsOpen((prev) => !prev); // Переключение состояния
   };
+
+  const startDungeon = async (dungeonId) => {
+    try {
+      const response = await axios.post("http://localhost:5021/api/dungeons/start", {
+        userId,
+        dungeonId,
+      });
+      alert(`Подземелье "${response.data.dungeon.name}" начато!`);
+    } catch (error) {
+      console.error("Ошибка запуска подземелья:", error.response?.data || error.message);
+      alert("Не удалось запустить подземелье.")
+    }
+  }
 
   useEffect(() => {
       const loadDungeon = async () => {
@@ -54,7 +68,7 @@ const DungeonList = () => {
                 <p>
                      карта героя{dungeon.cardDropChance} %
                 </p>
-                <button>start</button>
+                <button onClick={() => startDungeon(dungeon._id)}>start</button>
             </div>
           ))}
         </ul>

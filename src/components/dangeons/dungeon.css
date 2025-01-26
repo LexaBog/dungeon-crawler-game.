@@ -33,7 +33,7 @@
     overflow-y: auto; /* Включаем вертикальную прокрутку */
     scrollbar-width: none; /* Убираем скроллбар (для Firefox) */
     -ms-overflow-style: none; /* Убираем скроллбар (для IE и Edge) */
-    border: solid 3px color(srgb rgb(0, 0, 0) rgb(0, 0, 0) rgba(5, 5, 48, 0.562));
+    border: solid 3px color(srgb rgb(206, 84, 14) rgb(0, 0, 0) rgba(5, 5, 48, 0.562));
 }
 
 .dangeonName {
