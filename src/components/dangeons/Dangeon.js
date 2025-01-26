@@ -57,6 +57,26 @@ const DungeonList = ({ telegramId }) => {
     }
   };
 
+  const completeDungeon = async (dungeonId) => {
+    try {
+      const response = await axios.post("http://localhost:5021/api/dungeons/complete", {
+        telegramId,
+        dungeonId,
+      });
+
+      alert(`Подземелье завершено! Награды: ${response.data.rewards.gold} золота, ${response.data.rewards.experience} опыта`);
+
+      // Обновляем список активных подземелий
+      setActiveDungeons((prev) =>
+        prev.filter((dungeon) => dungeon.dungeonId !== dungeonId)
+      );
+    } catch (error) {
+      console.error("Ошибка завершения подземелья:", error.response?.data || error.message);
+      alert("Не удалось завершить подземелье.");
+    }
+  };
+
+
   if (error) return <p>{error}</p>;
 
   return (
@@ -73,7 +93,13 @@ const DungeonList = ({ telegramId }) => {
               <p>Уровень: {dungeon.level}</p>
               <p>Длительность: {dungeon.duration} с</p>
               {activeDungeon ? (
-                <p>До завершения подземелья осталось: {Math.ceil(activeDungeon.timeLeft)} секунд</p>
+                <>
+                  {activeDungeon.timeLeft > 0 ? (
+                    <p>До завершения подземелья осталось: {Math.ceil(activeDungeon.timeLeft)} секунд</p>
+                  ) : (
+                    <button onClick={() => completeDungeon(dungeon._id)}>Завершить</button>
+                  )}
+                </>
               ) : (
                 <button onClick={() => startDungeon(dungeon._id)}>Запустить</button>
               )}
