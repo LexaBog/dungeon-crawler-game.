@@ -7,12 +7,50 @@ import DungeonList from "./components/dangeons/Dangeon.js";
 import NavigationButtons from "./components/navigationButtons/NavigationButtons .js"
 import { authenticateUser, validateToken } from "./components/authService.js";
 import "./App.css";
+import config from "./config.js";
+import axios from "axios";
+
+// експорт для других компонентов используя офлайн версию
+export const fetchCharacter = async (telegramId) => {
+  try {
+    const response = await axios.get(`http://localhost:5021/api/character/${telegramId}`);
+    return response.data;
+  } catch (err) {
+    console.error("Ошибка загрузки персонажа:", err.response?.data || err.message);
+    throw new Error("Не удалось загрузить данные о персонаже");
+  }
+};
 
 function App() {
-  const [telegramId, setTelegramId] = useState(null);
-  const [username, setUsername] = useState(null);
+  const { telegramId, username } = config; // Жестко заданные данные
+  // const [telegramId, setTelegramId] = useState(null);
+  // const [username, setUsername] = useState(null);
   const [characterId, setCharacterId] = useState(null);
   const [error, setError] = useState(null);
+  const [characterData, setCharacterData] = useState(null);
+  
+
+
+   // Загружаем данные о персонаже
+   useEffect(() => {
+    const fetchCharacter = async () => {
+      try {
+        setError(null); // Сбрасываем ошибку перед запросом
+        const response = await axios.get(`http://localhost:5021/api/character/${telegramId}`);
+        setCharacterData(response.data); // Сохраняем данные о персонаже
+        setCharacterId(response.data); // Обновляем родительское состояние (если нужно)
+      } catch (err) {
+        console.error("Ошибка загрузки персонажа:", err.response?.data || err.message);
+        setError("Не удалось загрузить данные о персонаже");
+      }
+    };
+
+    if (!characterId) {
+      fetchCharacter(); // Загружаем данные только если characterId отсутствует
+    }
+  }, [telegramId, characterId, setCharacterId]);
+
+
   // const [telegramId, setTelegramId] = useState("123456789"); // Статичный Telegram ID
   // const [username, setUsername] = useState("TestUser"); // Статичное имя пользователя
   // const [characterId, setCharacterId] = useState({
@@ -27,41 +65,41 @@ function App() {
 
   useEffect(() => {
     // Получение токена из URL или localStorage
-    const storedToken = localStorage.getItem("token");
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get("token") || storedToken;
+    // const storedToken = localStorage.getItem("token");
+    // const urlParams = new URLSearchParams(window.location.search);
+    // const token = urlParams.get("token") || storedToken;
 
-    if (!token) {
-      setError("Токен отсутствует. Перейдите по ссылке от бота.");
-      return;
-    }
+    // if (!token) {
+    //   setError("Токен отсутствует. Перейдите по ссылке от бота.");
+    //   return;
+    // }
 
     // Сохраняем токен в localStorage, если он пришёл из URL
-    if (!storedToken && token) {
-      localStorage.setItem("token", token);
-    }
+    // if (!storedToken && token) {
+    //   localStorage.setItem("token", token);
+    // }
 
     // Валидация токена
-    validateToken(token)
-      .then(({ telegramId, username }) => {
-        setTelegramId(telegramId);
-        setUsername(username);
+  //   validateToken(token)
+  //     .then(({ telegramId, username }) => {
+  //       setTelegramId(telegramId);
+  //       setUsername(username);
 
-        // Авторизация пользователя
-        return authenticateUser(telegramId, username);
-      })
-      .then((user) => {
-        setCharacterId(user.characterId); // Сохраняем characterId для использования
-      })
-      .catch((err) => {
-        console.error("Ошибка авторизации:", err);
-        setError("Не удалось авторизовать пользователя.");
-      });
+  //       // Авторизация пользователя
+  //       return authenticateUser(telegramId, username);
+  //     })
+  //     .then((user) => {
+  //       setCharacterId(user.characterId); // Сохраняем characterId для использования
+  //     })
+  //     .catch((err) => {
+  //       console.error("Ошибка авторизации:", err);
+  //       setError("Не удалось авторизовать пользователя.");
+  //     });
   }, []); // Пустой массив зависимостей
 
   // Отображение ошибок или загрузки
-  if (error) return <p>{error}</p>;
-  if (!telegramId || !username) return <p>Загрузка...</p>;
+  // if (error) return <p>{error}</p>;
+  // if (!telegramId || !username) return <p>Загрузка...</p>;
 
   return (
     <div className="ollGameBody">

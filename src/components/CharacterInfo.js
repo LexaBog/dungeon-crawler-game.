@@ -1,11 +1,10 @@
-// import { useState } from 'react';
+
 import React from "react";
 import EnergyStatus from "./EnergyStatus";
-// import { authenticateUser, fetchCharacter } from "./authService";
 import './characterInfo.css'
 
-const CharacterInfo = ({ characterId, setCharacterId }) => {
-
+const CharacterInfo = ({characterId,  setCharacterId }) => {
+ 
   if (!characterId) return <p>Персонаж не найден</p>;
   return (
     <div >

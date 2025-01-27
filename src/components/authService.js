@@ -47,7 +47,7 @@ export const updateCharacter = async (telegramId, updates) => {
   try {
     const response = await axios.post("http://localhost:5021/api/characters/update", {
       telegramId,
-      updates,
+      ...updates,
     });
     // console.log("Персонаж успешно обновлён:", response.data.character);
     return response.data.character;

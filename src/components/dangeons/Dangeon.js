@@ -4,8 +4,10 @@ import "./dungeon.css";
 import axios from "axios";
 import Awards from "../awards/Awards1-10";
 import TimeFormatter from "../tymeFormatter/TimeFormatter";
+import config from "../../config";
 
-const DungeonList = ({ telegramId }) => {
+const DungeonList = () => {
+  const { telegramId} = config; // Жестко заданные данные
   const [dungeons, setDungeons] = useState([]);
   const [activeDungeons, setActiveDungeons] = useState([]);
   const [error, setError] = useState(null);
@@ -99,6 +101,7 @@ const DungeonList = ({ telegramId }) => {
       />
       <div className="buttonDunght-1-10">
         <h2>Сбор душ 1-10 уровень</h2>
+        <button>закрыть</button>
       </div>
       <ul className="dungeon-list">
         {dungeons.map((dungeon) => {
@@ -114,8 +117,6 @@ const DungeonList = ({ telegramId }) => {
                     <p>
                       До завершения подземелья осталось: 
                       <TimeFormatter seconds={activeDungeon.timeLeft}/>
-                      
-                      {/* {Math.ceil(<TimeFormatter seconds={dungeon.duration}/>)} */}
                       </p>
                   ) : (
                     <button onClick={() => completeDungeon(dungeon._id)}>Завершить</button>
