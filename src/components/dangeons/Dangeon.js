@@ -3,6 +3,7 @@ import fetchDungeons from "./fetchDungeons";
 import "./dungeon.css";
 import axios from "axios";
 import Awards from "../awards/Awards1-10";
+import TimeFormatter from "../tymeFormatter/TimeFormatter";
 
 const DungeonList = ({ telegramId }) => {
   const [dungeons, setDungeons] = useState([]);
