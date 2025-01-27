@@ -1,4 +1,5 @@
 import React from "react";
+import "./timeFormater.css"
 
 const TimeFormatter = ({ seconds }) => {
   if (seconds <= 0) return <span>Завершено</span>;
@@ -11,7 +12,7 @@ const TimeFormatter = ({ seconds }) => {
   seconds = Math.floor(seconds % 60);
 
   return (
-    <span>
+    <span className="timeFormater">
       {days > 0 && `${days}д `}{hours > 0 && `${hours}ч `}
       {minutes > 0 && `${minutes}м `}{seconds}с
     </span>
