@@ -107,11 +107,16 @@ const DungeonList = ({ telegramId }) => {
           return (
             <div key={dungeon._id}>
               <p>Уровень: {dungeon.level}</p>
-              <p>Длительность:<TimeFormatter seconds={dungeon.duration} /> с</p>
+              <p>Длительность:<TimeFormatter seconds={dungeon.duration} /></p>
               {activeDungeon ? (
                 <>
                   {activeDungeon.timeLeft > 0 ? (
-                    <p>До завершения подземелья осталось: {Math.ceil(activeDungeon.timeLeft)} секунд</p>
+                    <p>
+                      До завершения подземелья осталось: 
+                      <TimeFormatter seconds={dungeon.duration}/>
+                      
+                      {/* {Math.ceil(activeDungeon.timeLeft)} */}
+                      </p>
                   ) : (
                     <button onClick={() => completeDungeon(dungeon._id)}>Завершить</button>
                   )}
