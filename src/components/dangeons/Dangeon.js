@@ -106,7 +106,7 @@ const DungeonList = ({ telegramId }) => {
           return (
             <div key={dungeon._id}>
               <p>Уровень: {dungeon.level}</p>
-              <p>Длительность: {dungeon.duration} с</p>
+              <p>Длительность:<TimeFormatter seconds={dungeon.duration} /> с</p>
               {activeDungeon ? (
                 <>
                   {activeDungeon.timeLeft > 0 ? (
