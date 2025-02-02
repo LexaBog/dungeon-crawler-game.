@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import ExperienceBar from './ExperienceBar';
 import './header.css'
 
 const Header = () => {
@@ -31,6 +32,7 @@ const Header = () => {
                 <img className="Img-houm" src="/button-Houm.webp" alt="Home" />
                 {/* Дом */}
         </button>
+        <ExperienceBar/>
     </>
  );
 };

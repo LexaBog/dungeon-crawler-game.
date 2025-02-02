@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import CharacterInfo from "./components/CharacterInfo";
 import Game from "./components/Game";
-import Header from "./components/Header";
+import Header from "./components/header/Header";
 import DungeonList from "./components/dangeons/Dangeon";
 import NavigationButtons from "./components/navigationButtons/NavigationButtons ";
 import { fetchCharacter } from "./redux/sliser/characterSlice";
