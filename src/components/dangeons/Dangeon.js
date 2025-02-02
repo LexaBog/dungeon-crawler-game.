@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchDungeons, startDungeon, completeDungeon, collectRewards } from "../../redux/sliser/dungeonSlice";
+import { fetchDungeons, startDungeon, completeDungeon, collectRewards,} from "../../redux/sliser/dungeonSlice";
 import { fetchActiveDungeons } from "../../redux/sliser/userSlice";
+import {fetchCharacter} from "../../redux/sliser/characterSlice"
 import TimeFormatter from "../tymeFormatter/TimeFormatter";
 import Awards from "../awards/Awards1-10"
 import "./dungeon.css";
@@ -59,33 +60,6 @@ const DungeonList = ({ telegramId }) => {
     return () => clearInterval(interval); // Удаляем интервал при размонтировании
   }, []);
 
-  // useEffect(() => {
-  //   const syncRewardsState = async () => {
-  //     try {
-  //       for (const dungeon of activeDungeons) {
-  //         const now = Date.now();
-  
-  //         // Проверяем, истёк ли таймер и не собраны ли награды
-  //         if (new Date(dungeon.endTime).getTime() <= now && dungeon.isRewardCollected) {
-  //           console.log(`Обновляем состояние наград для подземелья: ${dungeon.dungeonId._id}`);
-  
-  //           // Отправляем запрос для обновления `isRewardCollected` на сервер
-  //           await dispatch(collectRewards({ telegramId, dungeonId: dungeon.dungeonId._id })).unwrap();
-  
-  //           // Обновляем активные подземелья
-  //           await dispatch(fetchActiveDungeons(telegramId)).unwrap();
-  //         }
-  //       }
-  //     } catch (error) {
-  //       console.error("Ошибка при синхронизации состояния наград:", error);
-  //     }
-  //   };
-  
-  //   syncRewardsState();
-  // }, [activeDungeons, dispatch, telegramId]);
-  
-  
-
   // Загружаем список подземелий
   useEffect(() => {
     dispatch(fetchDungeons());
@@ -116,7 +90,9 @@ const DungeonList = ({ telegramId }) => {
   
         // чтобы убедиться, что UI сразу отобразит изменённое состояние.
       await dispatch(fetchActiveDungeons(telegramId)).unwrap();
+      await dispatch(fetchCharacter(telegramId)).unwrap();
       
+
     } catch (error) {
       console.error("Ошибка при сборе наград:", error);
   
@@ -172,24 +148,23 @@ const DungeonList = ({ telegramId }) => {
             <p>Уровень: {dungeon.level}</p>
             <p>Длительность: <TimeFormatter seconds={dungeon.duration} /></p>
             {activeDungeon ? (
-  <>
-    {timer && timer.timeLeft > 0 ? (
-      <p>
-        До завершения подземелья осталось:{" "}
-        <TimeFormatter seconds={Math.floor(timer.timeLeft)} />
-      </p>
-    ) : activeDungeon.isRewardCollected ? (
-      // Если флаг true (награды доступны для сбора), показываем кнопку "Собрать награды"
-      <button onClick={() => handleComplete(dungeon._id)}>Собрать награды</button>
-    ) : (
-      // Если флаг false (награды уже собраны), показываем кнопку "Запустить"
-      <button onClick={() => handleStartDungeon(dungeon._id)}>Запустить</button>
-    )}
-  </>
-) : (
-  <button onClick={() => handleStartDungeon(dungeon._id)}>Запустить</button>
-)}
-
+                <>
+                  {timer && timer.timeLeft > 0 ? (
+                    <p>
+                      До завершения подземелья осталось:{" "}
+                      <TimeFormatter seconds={Math.floor(timer.timeLeft)} />
+                    </p>
+                  ) : activeDungeon.isRewardCollected ? (
+                    // Если флаг true (награды доступны для сбора), показываем кнопку "Собрать награды"
+                    <button onClick={() => handleComplete(dungeon._id)}>Собрать награды</button>
+                  ) : (
+                    // Если флаг false (награды уже собраны), показываем кнопку "Запустить"
+                    <button onClick={() => handleStartDungeon(dungeon._id)}>Запустить</button>
+                  )}
+                </>
+              ) : (
+                <button onClick={() => handleStartDungeon(dungeon._id)}>Запустить</button>
+              )}
             {/* Модальное окно для наград */}
             <Awards
               isVisible={isModalVisible}

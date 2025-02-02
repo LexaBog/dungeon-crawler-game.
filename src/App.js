@@ -1,27 +1,30 @@
 // src/App.js
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import CharacterInfo from "./components/CharacterInfo";
 import Game from "./components/Game";
 import Header from "./components/Header";
 import DungeonList from "./components/dangeons/Dangeon";
 import NavigationButtons from "./components/navigationButtons/NavigationButtons ";
+import { fetchCharacter } from "./redux/sliser/characterSlice";
 import { authenticateUser, validateToken } from "./components/authService";
 import "./App.css";
 import config from "./config";
 import axios from "axios";
 
-export const fetchCharacter = async (telegramId) => {
-  try {
-    const response = await axios.get(`${config.apiUrl}/api/character/${telegramId}`);
-    return response.data;
-  } catch (err) {
-    console.error("Ошибка загрузки персонажа:", err.response?.data || err.message);
-    throw new Error("Не удалось загрузить данные о персонаже");
-  }
-};
+// export const fetchCharacter = async (telegramId) => {
+//   try {
+//     const response = await axios.get(`${config.apiUrl}/api/character/${telegramId}`);
+//     return response.data;
+//   } catch (err) {
+//     console.error("Ошибка загрузки персонажа:", err.response?.data || err.message);
+//     throw new Error("Не удалось загрузить данные о персонаже");
+//   }
+// };
 
 function App() {
+  const dispatch = useDispatch();
   // Используем данные из конфига (если mode === "local", то будут заданы жестко)
   const [telegramId, setTelegramId] = useState(config.telegramId);
   const [username, setUsername] = useState(config.username);
@@ -33,21 +36,17 @@ function App() {
   useEffect(() => {
     const loadCharacter = async () => {
       try {
-        setError(null);
-        const data = await fetchCharacter(telegramId);
-        setCharacterData(data);
-        setCharacterId(data); // если требуется
+        await dispatch(fetchCharacter(telegramId)).unwrap();
       } catch (err) {
+        console.error("Ошибка загрузки персонажа:", err);
         setError("Не удалось загрузить данные о персонаже");
       }
     };
 
-    // Если в режиме local данные уже заданы, можно сразу загружать персонажа,
-    // а если в production, то сначала нужно дождаться валидации токена
     if (telegramId) {
       loadCharacter();
     }
-  }, [telegramId]);
+  }, [telegramId, dispatch]);
 
   // Если в production, раскомментируйте этот блок:
   /*
@@ -85,7 +84,7 @@ function App() {
 
   return (
     <div className="ollGameBody">
-      <Header characterId={characterId} />
+      <Header characterId={characterData} />
       <Routes>
         <Route
           path="/dangeon"
@@ -102,7 +101,7 @@ function App() {
             />
           }
         />
-        <Route
+        {/* <Route
           path="/"
           element={
             <Game
@@ -112,7 +111,7 @@ function App() {
               setCharacterId={setCharacterId}
             />
           }
-        />
+        /> */}
       </Routes>
       <div className="futer">
         <NavigationButtons />

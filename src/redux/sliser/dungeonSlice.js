@@ -65,7 +65,7 @@ export const completeDungeon = createAsyncThunk(
         telegramId,
         dungeonId,
       });
-      return response.data.rewards;
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || "Ошибка завершения подземелья");
     }
@@ -117,11 +117,14 @@ const dungeonSlice = createSlice({
       })
       // Завершение подземелья
       .addCase(completeDungeon.fulfilled, (state, action) => {
-        state.rewards = action.payload;
+        state.rewards = action.payload.rewards;
         // Удаляем завершённое подземелье из активных
         state.activeDungeons = state.activeDungeons.filter(
-          (dungeon) => dungeon.dungeonId !== action.meta.arg.dungeonId
+          (dungeon) => String(dungeon.dungeonId) !== String(action.meta.arg.dungeonId)
         );
+        
+        // Если сервер возвращает updatedCharacter, сохраняем его:
+        state.character = action.payload.updatedCharacter;
       })
       .addCase(completeDungeon.rejected, (state, action) => {
         state.error = action.payload;
