@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { updateCharacter } from "../redux/sliser/characterSlice";
+import { fetchCharacter } from "../redux/sliser/characterSlice";
 import "./energyStatus.css";
-import { updateCharacter } from "./authService";
 
 const ProgressBar = ({ label, value, max, color }) => (
   <div className="progress-bar">
@@ -18,45 +20,43 @@ const ProgressBar = ({ label, value, max, color }) => (
   </div>
 );
 
-const EnergyStatus = ({ characterId, setCharacterId }) => {
-  const [localCharacter, setLocalCharacter] = useState(characterId);
-
-  const saveUpdates = async (updates) => {
-    try {
-      const updatedCharacter = await updateCharacter(characterId.telegramId, updates);
-      setCharacterId((prev) => ({ ...prev, ...updatedCharacter }));
-    } catch (error) {
-      console.error("Error updating character:", error);
-    }
-  };
+const EnergyStatus = () => {
+  const dispatch = useDispatch();
+  const character = useSelector((state) => state.character.data);
+  const [displayedHealth, setDisplayedHealth] = useState(character?.health || 0);
 
   useEffect(() => {
-    const healthRegenInterval = setInterval(() => {
-      if (localCharacter.health < localCharacter.maxHealth) {
-        const newHealth = Math.min(localCharacter.health + 1, localCharacter.maxHealth);
-        setLocalCharacter((prev) => ({ ...prev, health: newHealth }));
-  
-        // Сохранение изменений на сервере
-        updateCharacter(characterId.telegramId, { health: newHealth })
-          .then(() => console.log("Health updated on server:", newHealth))
-          .catch((error) => console.error("Error updating health:", error));
-      }
-    }, 5000);
-  
-    return () => clearInterval(healthRegenInterval);
-  }, [localCharacter, characterId]);
-  
+    if (!character) {
+      dispatch(fetchCharacter(character.telegramId)); // Пример Telegram ID
+    }
+  }, [dispatch, character]);
+
+  useEffect(() => {
+    if (!character) return;
+
+    const interval = setInterval(() => {
+      const now = new Date();
+      const elapsedSeconds = Math.floor((now - new Date(character.lastHealthUpdate)) / 1000);
+      const regenRate = character.regenRate || 1; // Учитываем скорость регенерации с сервера
+      const newHealth = Math.min(character.health + elapsedSeconds * regenRate, character.maxHealth);
+      setDisplayedHealth(newHealth);
+    }, 1000);
+
+    return () => clearInterval(interval); // Очищаем таймер при размонтировании
+  }, [character]);
+
+
 
   const useHealthPotion = () => {
-    const newHealth = Math.min(localCharacter.health - 50, localCharacter.maxHealth);
-    setLocalCharacter((prev) => ({ ...prev, health: newHealth }));
-    saveUpdates({ health: newHealth });
+    const newHealth = Math.min(character.health - 50, character.maxHealth);
+    dispatch(updateCharacter({ telegramId: character.telegramId, updates: { health: newHealth } }));
   };
 
   return (
     <div className="energy-status">
-      <ProgressBar label="Health" value={localCharacter.health} max={localCharacter.maxHealth} color="#b22222" />
-      <ProgressBar label="Mana" value={localCharacter.mana} max={localCharacter.maxMana} color="blue" />
+      <ProgressBar label="Health" value={displayedHealth} max={character?.maxHealth || 100} color="#b22222" />
+      {/* <ProgressBar label="Health" value={character.health} max={character.maxHealth} color="#b22222" /> */}
+      <ProgressBar label="Mana" value={character.mana} max={character.maxMana} color="blue" />
       <button onClick={useHealthPotion} className="use-potion-button">
         Use Health Potion
       </button>

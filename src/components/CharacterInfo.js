@@ -1,19 +1,31 @@
 
-import React from "react";
+import React, { useEffect } from "react";
+import {useDispatch, useSelector} from "react-redux"
+import { fetchCharacter, updateCharacter } from "../redux/sliser/characterSlice";
 import EnergyStatus from "./EnergyStatus";
 import './characterInfo.css'
+// import { useDispatch } from "react-redux";
+import { useSelect } from "@react-three/drei";
+import { update } from "three/examples/jsm/libs/tween.module.js";
 
-const CharacterInfo = ({characterId,  setCharacterId }) => {
- 
-  if (!characterId) return <p>Персонаж не найден</p>;
+const CharacterInfo = ({telegramId}) => {
+
+  const dispatch = useDispatch();
+  const {data: character, loading, error} = useSelector((state) => state.character);
+
+  useEffect(() =>{
+    dispatch(fetchCharacter(telegramId));
+  },[dispatch, telegramId])
+
+  if (!character) return <p>Персонаж не найден</p>;
   return (
     <div >
       <div>
-        {/* <h1>Ваш персонаж</h1> */}
+        
         <EnergyStatus
-          characterId={characterId}  
-          setCharacterId={setCharacterId}
+         
           />
+          {/* <p>Здоровье: {character.health} / {character.maxHealth}</p> */}
       </div>
       <div className="character-avatar">
       {/* Аватар или модель персонажа */}
@@ -26,34 +38,34 @@ const CharacterInfo = ({characterId,  setCharacterId }) => {
       <div className="character-stats">
         <p className="stats-numer">
           <img  className="stats-Icon" src="/img/icon/strenght.png" alt="strenght" />
-          {characterId.strength}
+          {character.strength}
         </p>
         <p className="stats-numer">
           <img  className="stats-Icon" src="/img/icon/agiliti.png" alt="agiliti" />
-            {characterId.agility}
+            {character.agility}
         </p>
         <p className="stats-numer">
           <img  className="stats-Icon" src="/img/icon/inteligenke.png" alt="inteligenke" />
-          {characterId.intelligence}
+          {character.intelligence}
         </p>
         <p className="stats-numer">
           <img  className="stats-Icon" src="/img/icon/armor.png" alt="armor" />
-          {characterId.baseArmor}
+          {character.baseArmor}
         </p>
         <p className="stats-numer">
           <img  className="stats-Icon" src="/img/icon/evaigion.webp" alt="evaigion" />
-          {characterId.baseEvasion}
+          {character.baseEvasion}
         </p>
         <p className="stats-numer">
            <img  className="stats-Icon" src="/img/icon/ataks.png" alt="ataks" />
-            {characterId.baseAttack}
+            {character.baseAttack}
         </p>
       </div>
       <div className="equipped-items">
         <h3>Экипированные предметы:</h3>
-        {characterId.equippedItems && characterId.equippedItems.length > 0 ? (
+        {character.equippedItems && character.equippedItems.length > 0 ? (
           <ul>
-            {characterId.equippedItems.map((item, index) => (
+            {character.equippedItems.map((item, index) => (
               <li key={index}>{item}</li>
             ))}
           </ul>
@@ -63,9 +75,9 @@ const CharacterInfo = ({characterId,  setCharacterId }) => {
       </div>
       <div className="inventory">
         <h3>Инвентарь:</h3>
-        {characterId.inventory && characterId.inventory.length > 0 ? (
+        {character.inventory && character.inventory.length > 0 ? (
           <ul>
-            {characterId.inventory.map((item, index) => (
+            {character.inventory.map((item, index) => (
               <li key={index}>{item}</li>
             ))}
           </ul>

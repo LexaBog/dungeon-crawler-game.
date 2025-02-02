@@ -28,21 +28,6 @@ export const authenticateUser = async (telegramId, username) => {
   }
 };
 
-
-
-// Получение данных персонажа
-// export const fetchCharacter = async (characterId) => {
-//   try {
-//     const response = await axios.post("http://localhost:5021/api/characters", { characterId  });
-//     // const response = await axios.post("https://dangeon-db-beck.onrender.com/api/characters", { characterId });
-//     console.log("Ответ сервера на запрос персонажа:", characterId);
-//     return response.data;
-//   } catch (error) {
-//     console.error("Ошибка при запросе персонажа:", error.response?.data || error.message);
-//     throw error;
-//   }
-// }
-
 export const updateCharacter = async (telegramId, updates) => {
   try {
     const response = await axios.post("http://localhost:5021/api/characters/update", {
