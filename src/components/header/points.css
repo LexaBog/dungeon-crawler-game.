@@ -1,0 +1,72 @@
+.cross-container {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  right: 18%;
+}
+  
+.cross-line {
+  position: absolute;
+  background-color: rgb(255, 255, 255);
+  opacity: 1;
+  animation: blink 1s infinite alternate;
+  border-radius: 5px;
+}
+  
+.cross-line-vertical {
+  width: 5px;
+  height: 20px;
+  left: 40%;
+  top: 0;
+  transform: translateX(-50%);
+}
+  
+.cross-line-horizontal {
+  width: 20px;
+  height: 5px;
+  top: 50%;
+  left: -10%;
+  transform: translateY(-50%);
+}
+  
+@keyframes blink {
+  0% {
+    opacity: 3;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.boxPlusPoint {
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  height: auto;
+  left: 0;
+  background-color: rgb(80, 49, 9);
+}
+
+p.textExpens {
+  font-size: 10px !important;
+  display: flex;
+  align-items: center;
+  /* background-color: black; */
+}
+
+.WanPointContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.minusButon {
+  display: flex;
+  align-items: center;
+}
+
+.minus-indicator {
+  color: rgb(255, 0, 0);
+  font-size: 20px;
+}
+  

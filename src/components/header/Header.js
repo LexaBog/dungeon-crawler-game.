@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ExperienceBar from './ExperienceBar';
+import Points from "./Points.js"
 import './header.css'
 
 const Header = () => {
@@ -9,11 +10,12 @@ const Header = () => {
 
      // Берем данные персонажа из Redux
     const characterId = useSelector((state) => state.character.data);
-
+    
     if (!characterId) {
         return <div className="header">Loading...</div>; // Показываем что-то, пока данные не загрузятся
-      }
-      console.log(" обновляються данные или нет ",characterId)
+    }
+    console.log(" обновляються данные или нет ",characterId)
+   
  return (
     <>
         <div className="header">
@@ -26,6 +28,7 @@ const Header = () => {
         <div className="boxNameUndLavel">
             <p>{characterId.name}</p>
             <p className="texStyleHeader">{characterId.level} level </p>
+            <Points/>
             <p className="texStyleHeader"> Опыт: {characterId.experience}</p>
         </div>
         <button className="navigate-button-houm" onClick={() => navigate("/")}>
